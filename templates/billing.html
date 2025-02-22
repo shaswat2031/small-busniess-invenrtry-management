@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing System</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #1e1e1e; /* Dark container background */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #bb86fc; /* Purple accent color */
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 8px;
+            font-size: 14px;
+            color: #bb86fc; /* Purple accent color */
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #333; /* Dark border */
+            border-radius: 6px;
+            background-color: #2d2d2d; /* Dark input background */
+            color: #e0e0e0; /* Light text color */
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: #bb86fc; /* Purple accent on focus */
+        }
+
+        .product {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #333; /* Dark border */
+            transition: background-color 0.3s ease;
+        }
+
+        .product:hover {
+            background-color: #2d2d2d; /* Darker hover effect */
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-control button {
+            background-color: #bb86fc; /* Purple accent for buttons */
+            border: none;
+            color: #121212; /* Dark text color */
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .quantity-control button:hover {
+            background-color: #9a67ea; /* Slightly darker purple on hover */
+        }
+
+        .quantity-control input {
+            width: 60px;
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #333; /* Dark border */
+            border-radius: 6px;
+            background-color: #2d2d2d; /* Dark input background */
+            color: #e0e0e0; /* Light text color */
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #03dac6; /* Teal accent for submit button */
+            border: none;
+            color: #121212; /* Dark text color */
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #018786; /* Slightly darker teal on hover */
+        }
+
+        .alert {
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .alert-danger {
+            background-color: #cf6679; /* Red for danger alerts */
+            color: #121212; /* Dark text color */
+        }
+
+        .alert-success {
+            background-color: #03dac6; /* Teal for success alerts */
+            color: #121212; /* Dark text color */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .greeting {
+            text-align: center;
+            font-size: 1.2em;
+            color: #bb86fc; /* Purple accent color */
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        function updateTotalPrice() {
+            let totalPrice = 0;
+            document.querySelectorAll('.product').forEach((product) => {
+                let checkbox = product.querySelector('input[type="checkbox"]');
+                let quantityInput = product.querySelector('input[type="number"]');
+                let priceText = product.querySelector('span').textContent;
+
+                // Extract the price using a regular expression
+                let priceMatch = priceText.match(/Price: \$(\d+\.\d+)/);
+                if (priceMatch) {
+                    let price = parseFloat(priceMatch[1]); // Extract the price value
+
+                    if (checkbox.checked) {
+                        let quantity = parseInt(quantityInput.value);
+                        totalPrice += quantity * price;
+                    }
+                }
+            });
+
+            document.getElementById('total-price').textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Enable quantity input when checkbox is checked
+            document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+                checkbox.addEventListener('change', function () {
+                    let quantityInput = this.closest('.product').querySelector('input[type="number"]');
+                    quantityInput.disabled = !this.checked;
+                    updateTotalPrice();
+                });
+            });
+
+            // Add/Delete buttons for quantity
+            document.querySelectorAll('.quantity-control button').forEach((button) => {
+                button.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    let input = this.parentElement.querySelector('input[type="number"]');
+                    let currentValue = parseInt(input.value);
+                    let maxStock = parseInt(input.max);
+
+                    if (this.textContent === "+" && currentValue < maxStock) {
+                        input.value = currentValue + 1;
+                    } else if (this.textContent === "-" && currentValue > 1) {
+                        input.value = currentValue - 1;
+                    }
+
+                    updateTotalPrice();
+                });
+            });
+
+            // Update total price when quantity input changes
+            document.querySelectorAll('input[type="number"]').forEach((input) => {
+                input.addEventListener('input', updateTotalPrice);
+            });
+
+            // Dynamic Greeting
+            const greeting = document.getElementById('greeting');
+            const hour = new Date().getHours();
+            if (hour < 12) {
+                greeting.textContent = "Good Morning! 🌞";
+            } else if (hour < 18) {
+                greeting.textContent = "Good Afternoon! 🌤️";
+            } else {
+                greeting.textContent = "Good Evening! 🌙";
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Billing System</h1>
+
+        <!-- Dynamic Greeting -->
+        <div id="greeting" class="greeting"></div>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Billing Form -->
+        <form method="POST" onsubmit="return validateForm()">
+            <!-- Customer Name -->
+            <label for="customer_name">Customer Name:</label>
+            <input type="text" id="customer_name" name="customer_name" placeholder="Enter customer name" required>
+
+            <!-- Product Selection -->
+            <h3>📦 Select Products:</h3>
+            <div>
+                {% for product in products %}
+                <div class="product">
+                    <input type="checkbox" name="selected_items" value="{{ product._id }}">
+                    <span>{{ product.product_name }} (Stock: {{ product.stock }}, Price: ${{ product.price }})</span>
+                    <div class="quantity-control">
+                        <button type="button">-</button>
+                        <input type="number" name="quantities" min="1" max="{{ product.stock }}" value="1" disabled>
+                        <button type="button">+</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Total Price -->
+            <div id="total-price" class="text-center" style="font-size: 1.2em; margin: 20px 0;">
+                Total Price: $0.00
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">📝 Generate Invoice</button>
+        </form>
+    </div>
+</body>
+</html>

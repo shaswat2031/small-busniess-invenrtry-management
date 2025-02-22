@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Sales - {{ product.product_name }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Dark Theme */
+        body {
+            background-color: #1a1a1a;
+            color: #ddd;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+        }
+        h1, h2 {
+            color: #fff;
+            font-weight: bold;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        table {
+            background-color: #333;
+            color: #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        table thead {
+            background-color: #444;
+        }
+        table th, table td {
+            padding: 12px;
+            text-align: center;
+        }
+        table tbody tr:hover {
+            background-color: rgba(59, 130, 246, 0.3);
+            transition: background-color 0.3s ease;
+        }
+        .btn {
+            transition: all 0.3s ease-in-out;
+            font-weight: bold;
+        }
+        .btn-secondary {
+            background-color: #555;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #666;
+        }
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .chart-wrapper {
+            width: 100%;
+            max-width: 800px; /* Adjust as needed */
+            margin-bottom: 30px;
+        }
+        #salesChart {
+            width: 100% !important;
+            height: 300px !important; /* Adjusted height */
+        }
+        #salesPieChart {
+            width: 300px !important; /* Adjusted width */
+            height: 300px !important; /* Adjusted height */
+        }
+        .text-primary {
+            color: #0d6efd !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="mb-4 text-center">📊 Sales Details for <span class="text-primary">{{ product.product_name }}</span></h1>
+        <a href="{{ url_for('view_products') }}" class="btn btn-secondary mb-4">⬅ Back to Products</a>
+
+        <!-- Sales Table -->
+        <h2>📋 Sales Records</h2>
+        <table class="table table-dark table-bordered">
+            <thead>
+                <tr>
+                    <th>Date Sold</th>
+                    <th>Quantity Sold</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sale in sales %}
+                <tr>
+                    <td>{{ sale.date_sold.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>{{ sale.quantity_sold }}</td>
+                    <td>₹{{ "%.2f"|format(sale.total_price) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Sales Graphs -->
+        <div class="chart-container">
+            <h2 class="mt-4">📈 Sales Trend</h2>
+            <div class="chart-wrapper">
+                <canvas id="salesChart"></canvas>
+            </div>
+            
+            <h2 class="mt-4">📊 Sales Distribution</h2>
+            <div class="chart-wrapper">
+                <canvas id="salesPieChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chart.js Configuration
+        const salesDates = {{ sales_dates | tojson }};
+        const salesQuantities = {{ sales_quantities | tojson }};
+        
+        // Line Chart (Sales Trend)
+        const ctx1 = document.getElementById('salesChart').getContext('2d');
+        const salesChart = new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: salesDates,
+                datasets: [{
+                    label: 'Quantity Sold',
+                    data: salesQuantities,
+                    backgroundColor: 'rgba(0, 150, 255, 0.2)',
+                    borderColor: 'rgba(0, 150, 255, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(0, 150, 255, 1)',
+                    pointBorderColor: '#fff',
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#ddd' } }
+                },
+                scales: {
+                    x: { ticks: { color: '#ddd' } },
+                    y: { ticks: { color: '#ddd' }, beginAtZero: true }
+                }
+            }
+        });
+
+        // Pie Chart (Sales Distribution)
+        const ctx2 = document.getElementById('salesPieChart').getContext('2d');
+        const salesPieChart = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: salesDates,
+                datasets: [{
+                    label: 'Sales Distribution',
+                    data: salesQuantities,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#ddd' } }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>

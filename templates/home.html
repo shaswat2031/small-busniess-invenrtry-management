@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Inventory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f0f;
+            color: #e0e0e0;
+        }
+        .header-title {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass {
+            background: rgba(30, 30, 30, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a1a, #121212);
+        }
+        .hover-scale {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 92, 147, 0.3);
+        }
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-gray-900 p-4 glass">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{{ url_for('home') }}" class="text-2xl font-bold header-title">Inventory Manager</a>
+            <div class="space-x-4">
+                <a href="{{ url_for('login') }}" class="text-gray-300 hover:text-pink-400 transition duration-300">Login</a>
+                <a href="{{ url_for('register') }}" class="text-gray-300 hover:text-pink-400 transition duration-300">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg py-20 parallax" style="background-image: url('https://source.unsplash.com/1920x1080/?technology,dark');">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl font-bold mb-4 header-title">Revolutionize Your Inventory</h1>
+            <p class="text-xl text-gray-400 mb-8">Manage stock, track sales, and grow your business with ease.</p>
+            <a href="{{ url_for('register') }}" class="bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 transition duration-300 hover-scale">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-pink-400">Why Choose Us?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-6 rounded-lg shadow-lg hover-scale">
+                    <h3 class="text-xl font-bold text-pink-500 mb-4">Live Inventory Updates</h3>
+                    <p class="text-gray-400">Track stock levels in real-time and set alerts for low inventory.</p>
+                </div>
+                <div class="glass p-6 rounded-lg shadow-lg hover-scale">
+                    <h3 class="text-xl font-bold text-blue-500 mb-4">Smart Sales Insights</h3>
+                    <p class="text-gray-400">Make data-driven decisions with detailed reports & analytics.</p>
+                </div>
+                <div class="glass p-6 rounded-lg shadow-lg hover-scale">
+                    <h3 class="text-xl font-bold text-green-500 mb-4">Intuitive UI</h3>
+                    <p class="text-gray-400">Simple, clean, and user-friendly design for seamless navigation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 glass text-center">
+        <p class="text-gray-400">&copy; 2025 Inventory Manager. All rights reserved.</p>
+    </footer>
+</body>
+</html>

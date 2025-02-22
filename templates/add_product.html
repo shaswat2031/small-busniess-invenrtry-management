@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product | Inventory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom gradient background */
+        body {
+            background: linear-gradient(135deg, #1e3a8a, #111827);
+        }
+        /* Smooth transitions */
+        .transition-smooth {
+            transition: all 0.3s ease-in-out;
+        }
+        /* Hover effect for buttons */
+        .hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen px-4">
+    
+    <!-- Back Button (Top Left) -->
+    <a href="{{ url_for('dashboard') }}" class="absolute top-6 left-6 bg-gray-700 text-white px-4 py-2 rounded-lg flex items-center hover:bg-gray-600 transition-smooth hover-effect">
+        <i class="fas fa-arrow-left mr-2"></i> Back
+    </a>
+
+    <!-- Main Form Container -->
+    <div class="bg-gray-800 p-8 rounded-lg shadow-2xl w-full max-w-md border border-gray-700 relative transform transition-smooth hover:scale-101">
+        <h2 class="text-3xl font-bold text-center text-white mb-6 flex items-center justify-center">
+            <i class="fas fa-cart-plus mr-2"></i> Add a New Product
+        </h2>
+        <p class="text-gray-400 text-center mb-6">Fill in the details below to add a product to your inventory.</p>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="mb-6">
+            {% for category, message in messages %}
+            <p class="bg-red-700 text-white p-3 rounded text-center">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Form -->
+        <form method="POST" class="space-y-6">
+            <!-- Product Name -->
+            <div>
+                <label class="block text-gray-300 font-semibold mb-2">Product Name:</label>
+                <input 
+                    type="text" 
+                    name="product_name" 
+                    placeholder="Enter product name" 
+                    required 
+                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-smooth"
+                />
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label class="block text-gray-300 font-semibold mb-2">Description:</label>
+                <textarea 
+                    name="description" 
+                    placeholder="Enter product description (optional)" 
+                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-smooth"
+                ></textarea>
+            </div>
+
+            <!-- Price -->
+            <div>
+                <label class="block text-gray-300 font-semibold mb-2">Price (₹):</label>
+                <input 
+                    type="number" 
+                    name="price" 
+                    placeholder="Enter product price" 
+                    required 
+                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-smooth"
+                />
+            </div>
+
+            <!-- Stock Quantity -->
+            <div>
+                <label class="block text-gray-300 font-semibold mb-2">Stock Quantity:</label>
+                <input 
+                    type="number" 
+                    name="stock" 
+                    placeholder="Enter stock quantity" 
+                    required 
+                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-smooth"
+                />
+            </div>
+
+            <!-- Low Stock Alert -->
+            <div>
+                <label class="block text-gray-300 font-semibold mb-2">Low Stock Alert Level:</label>
+                <input 
+                    type="number" 
+                    name="low_stock_threshold" 
+                    placeholder="Set low stock alert threshold" 
+                    required 
+                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-smooth"
+                />
+            </div>
+
+            <!-- Barcode -->
+            <div>
+                <label class="block text-gray-300 font-semibold mb-2">Scan or Enter Barcode:</label>
+                <input 
+                    type="text" 
+                    id="barcode" 
+                    name="barcode"
+                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-smooth"
+                    autofocus 
+                    title="Scan or Enter Barcode"
+                    placeholder="Scan or Enter Barcode"
+                />
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+                type="submit" 
+                class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-smooth hover-effect flex items-center justify-center"
+            >
+                <i class="fas fa-plus mr-2"></i> Add Product
+            </button>
+        </form>
+
+        <!-- View All Products Link -->
+        <p class="text-center mt-6">
+            <a href="{{ url_for('view_products') }}" class="text-blue-400 hover:underline hover:text-blue-300 transition-smooth">
+                <i class="fas fa-search mr-2"></i> View All Products
+            </a>
+        </p>
+    </div>
+
+    <!-- Barcode Auto-Submit Script -->
+    <script>
+        document.getElementById("barcode").addEventListener("change", function () {
+            this.form.submit();
+        });
+    </script>
+
+</body>
+</html>

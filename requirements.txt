@@ -1,0 +1,11 @@
+Flask
+flask-pymongo
+flask-bcrypt
+flask-login
+bson
+datetime
+Config
+scikit-learn
+numpy
+csv
+io

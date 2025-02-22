@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales History</title>
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS -->
+</head>
+<body class="bg-gray-900 text-white">
+
+<div class="container mx-auto p-6">
+    <!-- Page Title -->
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-white">📊 Sales History</h1>
+        <a href="{{ url_for('dashboard') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">
+            ⬅ Back to Dashboard
+        </a>
+    </div>
+
+    <!-- Export and Delete All Sales Buttons -->
+    <div class="flex justify-between mb-4">
+        <a href="{{ url_for('export_sales') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 transition">
+            📥 Download Sales Report
+        </a>
+        <form action="{{ url_for('delete_all_sales') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete ALL sales?')">
+            <button type="submit" class="bg-red-700 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 transition">
+                ❌ Delete All Sales
+            </button>
+        </form>
+    </div>
+
+    {% if sales %}
+    <div class="overflow-x-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+        <table class="min-w-full border border-gray-700 rounded-lg overflow-hidden">
+            <thead>
+                <tr class="bg-gray-900 text-white text-left text-lg">
+                    <th class="border border-gray-700 px-6 py-3">📦 Product Name</th>
+                    <th class="border border-gray-700 px-6 py-3">📊 Quantity Sold</th>
+                    <th class="border border-gray-700 px-6 py-3">💰 Total Price</th>
+                    <th class="border border-gray-700 px-6 py-3">📅 Date Sold</th>
+                    <th class="border border-gray-700 px-6 py-3">⚙️ Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sale in sales %}
+                <tr class="text-gray-300 hover:bg-gray-700 transition">
+                    <td class="border border-gray-700 px-6 py-3">{{ sale.product_name }}</td>
+                    <td class="border border-gray-700 px-6 py-3 text-center">{{ sale.quantity_sold }}</td>
+                    <td class="border border-gray-700 px-6 py-3 text-green-400 font-semibold">₹{{ sale.total_price }}</td>
+                    <td class="border border-gray-700 px-6 py-3 text-yellow-300">
+                        {{ sale.date_sold.strftime('%Y-%m-%d %H:%M') if sale.date_sold else 'N/A' }}
+                    </td>
+                    <td class="border border-gray-700 px-6 py-3 text-center">
+                        <form action="{{ url_for('delete_sale', sale_id=sale._id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition shadow">
+                                🗑 Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-gray-400 text-center mt-6 text-lg">No sales recorded yet.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

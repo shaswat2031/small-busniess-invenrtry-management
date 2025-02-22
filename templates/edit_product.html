@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product | Inventory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Neon Glow Effects */
+        .neon-border {
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.3s ease-in-out;
+        }
+        .neon-border:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px #38bdf8;
+        }
+        /* Hover Effect */
+        .btn-hover:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-950 text-gray-200">
+
+    <div class="bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-lg border border-gray-800">
+        <h2 class="text-3xl font-bold text-center mb-6 text-blue-400">✏️ Edit Product</h2>
+
+        <form method="POST" class="space-y-5">
+            <!-- Product Name -->
+            <div>
+                <label for="product_name" class="block text-gray-300 font-medium">Product Name:</label>
+                <input type="text" id="product_name" name="product_name" value="{{ product.product_name }}" required 
+                    class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-400 neon-border">
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label for="description" class="block text-gray-300 font-medium">Description:</label>
+                <textarea id="description" name="description" required 
+                    class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-400 neon-border">{{ product.description }}</textarea>
+            </div>
+
+            <!-- Price -->
+            <div>
+                <label for="price" class="block text-gray-300 font-medium">Price (₹):</label>
+                <input type="number" id="price" name="price" value="{{ product.price }}" required 
+                    class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-400 neon-border">
+            </div>
+
+            <!-- Stock -->
+            <div>
+                <label for="stock" class="block text-gray-300 font-medium">Stock Quantity:</label>
+                <input type="number" id="stock" name="stock" value="{{ product.stock }}" required 
+                    class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-400 neon-border">
+            </div>
+
+            <!-- Low Stock Threshold -->
+            <div>
+                <label for="low_stock_threshold" class="block text-gray-300 font-medium">Low Stock Warning Level:</label>
+                <input type="number" id="low_stock_threshold" name="low_stock_threshold" value="{{ product.low_stock_threshold }}" required 
+                    class="w-full p-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:ring-2 focus:ring-blue-400 neon-border">
+            </div>
+
+            <!-- Update Button -->
+            <button type="submit" 
+                class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold text-lg btn-hover shadow-md">
+                💾 Save Changes
+            </button>
+        </form>
+
+        <!-- Back to Products Link -->
+        <p class="text-center mt-6">
+            <a href="{{ url_for('view_products') }}" 
+                class="text-blue-400 hover:text-blue-300 transition font-semibold">⬅ Back to Product List</a>
+        </p>
+    </div>
+
+</body>
+</html>
