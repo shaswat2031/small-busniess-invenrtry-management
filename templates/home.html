@@ -11,6 +11,8 @@
             font-family: 'Poppins', sans-serif;
             background: #0f0f0f;
             color: #e0e0e0;
+            margin: 0;
+            overflow: hidden;
         }
         .header-title {
             font-family: 'Orbitron', sans-serif;
@@ -21,6 +23,7 @@
         }
         .glass {
             background: rgba(30, 30, 30, 0.9);
+            -webkit-backdrop-filter: blur(8px);
             backdrop-filter: blur(8px);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -41,16 +44,62 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+        /* Next-Gen Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 15, 15, 0.8);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .navbar a {
+            position: relative;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            transition: width 0.3s ease;
+        }
+        .navbar a:hover::after {
+            width: 100%;
+        }
+        .navbar a:hover {
+            color: #ff8a00;
+        }
+        /* Canvas for Liquid Background */
+        #liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="bg-gray-900 p-4 glass">
+    <!-- Liquid Background Canvas -->
+    <canvas id="liquid-bg"></canvas>
+
+    <!-- Next-Gen Navbar -->
+    <nav class="navbar p-4">
         <div class="container mx-auto flex justify-between items-center">
             <a href="{{ url_for('home') }}" class="text-2xl font-bold header-title">Inventory Manager</a>
             <div class="space-x-4">
-                <a href="{{ url_for('login') }}" class="text-gray-300 hover:text-pink-400 transition duration-300">Login</a>
-                <a href="{{ url_for('register') }}" class="text-gray-300 hover:text-pink-400 transition duration-300">Register</a>
+                <a href="{{ url_for('login') }}" class="text-lg">Login</a>
+                <a href="{{ url_for('register') }}" class="text-lg">Register</a>
             </div>
         </div>
     </nav>
@@ -59,7 +108,7 @@
     <section class="gradient-bg py-20 parallax" style="background-image: url('https://source.unsplash.com/1920x1080/?technology,dark');">
         <div class="container mx-auto text-center">
             <h1 class="text-5xl font-bold mb-4 header-title">Revolutionize Your Inventory</h1>
-            <p class="text-xl text-gray-400 mb-8">Manage stock, track sales, and grow your business with ease.</p>
+            <p class="text-xl text-gray-400 mb-8">Manage stock, track sales, and grow your business with ease and improved User-Experience</p>
             <a href="{{ url_for('register') }}" class="bg-pink-600 text-white px-6 py-3 rounded-lg hover:bg-pink-700 transition duration-300 hover-scale">Get Started</a>
         </div>
     </section>
@@ -89,5 +138,73 @@
     <footer class="bg-gray-900 py-8 glass text-center">
         <p class="text-gray-400">&copy; 2025 Inventory Manager. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript for Liquid Background -->
+    <script>
+        const canvas = document.getElementById('liquid-bg');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.color = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.8)`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.size > 0.2) this.size -= 0.1;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((particle, index) => {
+                particle.update();
+                particle.draw();
+                if (particle.size <= 0.2) {
+                    particles.splice(index, 1);
+                }
+            });
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+
+        window.addEventListener('mousemove', (event) => {
+            const x = event.clientX;
+            const y = event.clientY;
+            for (let i = 0; i < 5; i++) {
+                particles.push(new Particle(x, y));
+            }
+        });
+    </script>
 </body>
 </html>

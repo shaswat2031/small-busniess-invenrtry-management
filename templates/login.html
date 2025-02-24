@@ -5,42 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Inventory Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #121212);
+            color: #e0e0e0;
+        }
+        .glass {
+            background: rgba(30, 30, 30, 0.8);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            border-color: rgba(59, 130, 246, 0.8);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .flash-message {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body class="flex justify-center items-center min-h-screen bg-gray-900 px-4">
+<body class="flex justify-center items-center min-h-screen px-4">
 
-    <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-700">
-        <h2 class="text-3xl font-semibold text-center text-white mb-4">🔑 Login</h2>
+    <div class="glass p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-3xl font-semibold text-center text-white mb-6">🔑 Login to Your Account</h2>
+        <p class="text-center text-gray-400 mb-6">
+            Welcome back! Please enter your credentials to access your inventory dashboard.
+        </p>
 
         <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <div class="mb-4">
+                <div class="mb-6">
                     {% for category, message in messages %}
-                        <p class="bg-red-700 text-white p-2 rounded text-center">{{ message }}</p>
+                        <p class="bg-red-700 text-white p-3 rounded-lg text-center flash-message">{{ message }}</p>
                     {% endfor %}
                 </div>
             {% endif %}
         {% endwith %}
 
-        <form method="POST" class="space-y-4">
+        <!-- Login Form -->
+        <form method="POST" class="space-y-6">
             <div>
-                <input type="text" name="username" placeholder="Username" required 
-                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <label for="username" class="block text-sm font-medium text-gray-400 mb-2">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required 
+                    class="w-full p-3 input-field text-white rounded-lg focus:outline-none" />
             </div>
             <div>
-                <input type="password" name="password" placeholder="Password" required 
-                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <label for="password" class="block text-sm font-medium text-gray-400 mb-2">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required 
+                    class="w-full p-3 input-field text-white rounded-lg focus:outline-none" />
             </div>
 
             <button type="submit" 
-                class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition transform hover:scale-105">
+                class="w-full btn-primary text-white py-3 rounded-lg font-semibold">
                 🔓 Login
             </button>
         </form>
 
-        <p class="text-center mt-4 text-gray-400">Don't have an account? 
-            <a href="{{ url_for('register') }}" class="text-blue-400 hover:text-blue-300 transition">Register</a>
-        </p>
+        <!-- Additional Links -->
+        <div class="mt-6 text-center">
+            <p class="text-gray-400">Don't have an account? 
+                <a href="{{ url_for('register') }}" class="text-blue-400 hover:text-blue-300 transition">Register here</a>
+            </p>
+            <p class="text-gray-400 mt-2">
+                <a href="{{ url_for('forgot_password') }}" class="text-blue-400 hover:text-blue-300 transition">Forgot your password?</a>
+            </p>
+        </div>
     </div>
 
 </body>
