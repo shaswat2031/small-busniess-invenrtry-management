@@ -1,263 +1,225 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard | Inventory Manager</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-    
-    <style>
-      /* Custom styles */
-      .hover-effect:hover {
-        transform: scale(1.05);
-        transition: all 0.3s ease-in-out;
-      }
-      .sidebar-link {
-        transition: background 0.3s ease, transform 0.3s ease;
-      }
-      .sidebar-link:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        transform: translateX(5px);
-      }
-      .sticky-header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-      }
-      .scrollable-table {
-        max-height: 300px;
-        overflow-y: auto;
-      }
-      .gradient-bg {
-        background: linear-gradient(135deg, #1e3a8a, #111827);
-      }
-      .shadow-soft {
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-      .sticky-sidebar {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        overflow-y: auto;
-      }
-      .fade-in {
-        animation: fadeIn 0.5s ease-in-out;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-      }
-    </style>
-  </head>
-  <body class="gradient-bg text-gray-300 flex">
-
-    <!-- Sidebar -->
-    <aside class="w-64 bg-gray-900 text-white min-h-screen p-6 shadow-2xl flex flex-col sticky-sidebar">
-      <!-- Sidebar Header -->
-      <h2 class="text-2xl font-semibold mb-6 text-blue-400 flex items-center gap-2">
-          <i class="fas fa-boxes"></i> Inventory Manager
-      </h2>
-  
-      <!-- Navigation Links -->
-      <nav class="flex-1">
-          <ul class="space-y-3">
-              <!-- Dashboard -->
-              <li>
-                  <a href="{{ url_for('dashboard') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
-                      <i class="fas fa-tachometer-alt"></i> Dashboard
-                  </a>
-              </li>
-  
-              <!-- View Products -->
-              <li>
-                  <a href="{{ url_for('view_products') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
-                      <i class="fas fa-box-open"></i> View Products
-                  </a>
-              </li>
-  
-              <!-- Add Product -->
-              <li>
-                  <a href="{{ url_for('add_product') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
-                      <i class="fas fa-plus"></i> Add Product
-                  </a>
-              </li>
-  
-              <!-- Profile -->
-              <li>
-                  <a href="{{ url_for('profile') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
-                      <i class="fas fa-user"></i> Profile
-                  </a>
-              </li>
-  
-              <!-- Billing -->
-              <li>
-                  <a href="{{ url_for('billing') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
-                      <i class="fas fa-receipt"></i> Billing
-                  </a>
-              </li>
-  
-              <!-- View Sales -->
-              <li>
-                  <a href="{{ url_for('view_sales') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
-                      <i class="fas fa-chart-line"></i> View Sales
-                  </a>
-              </li>
-  
-              <!-- Logout -->
-              <li>
-                  <a href="{{ url_for('logout') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-red-600 hover:text-white hover:shadow-md">
-                      <i class="fas fa-sign-out-alt"></i> Logout
-                  </a>
-              </li>
-          </ul>
-      </nav>
-  
-      <!-- Footer (Optional) -->
-      <footer class="mt-auto text-sm text-gray-400 text-center">
-          &copy; 2023 Inventory Manager
-      </footer>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="flex-1 p-8 fade-in">
-        <!-- Welcome user date and time  and Greet the user -->
-        <div class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-semibold text-white">Welcome, {{ username }}! 👋</h1>
-            <div class="text-gray-400">
-                <span id="current-date"></span> | <span id="current-time"></span>
-            </div>
-        </div> 
-
-      <h1 class="text-3xl font-bold mb-6 text-white flex items-center gap-2">
-        <i class="fas fa-tachometer-alt"></i> Dashboard Overview
-      </h1>
-      <p class="text-gray-400 mb-8">Welcome to your inventory dashboard. Here, you can track your products, monitor stock levels, and manage inventory efficiently. Stay on top of your business with real-time insights and actionable data.</p>
-
-      <!-- Stats Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-gradient-to-r from-blue-600 to-blue-400 p-6 rounded-lg shadow-soft text-center hover-effect">
-          <h3 class="text-xl font-semibold text-white mb-2">📦 Total Products</h3>
-          <p class="text-3xl text-white font-bold">{{ total_products }}</p>
-        </div>
-        <div class="bg-gradient-to-r from-red-600 to-red-400 p-6 rounded-lg shadow-soft text-center hover-effect">
-          <h3 class="text-xl font-semibold text-white mb-2">⚠️ Low Stock</h3>
-          <p class="text-3xl text-white font-bold">{{ low_stock_count }}</p>
-        </div>
-        <div class="bg-gradient-to-r from-green-600 to-green-400 p-6 rounded-lg shadow-soft text-center hover-effect">
-          <h3 class="text-xl font-semibold text-white mb-2">💰 Total Sales</h3>
-          <p class="text-3xl text-white font-bold">₹{{ total_sales }}</p>
-        </div>
-      </div>
-
-      <!-- Low Stock Alerts -->
-      <div class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2">
-          <i class="fas fa-exclamation-triangle"></i> Low Stock Alerts
-        </h2>
-        {% if low_stock_products %}
-        <ul class="bg-red-700 p-4 rounded-md border border-red-500 text-white space-y-2">
-          {% for product in low_stock_products %}
-            <li class="font-medium">🚨 {{ product.product_name }} is low! (Only {{ product.stock }} left)</li>
-          {% endfor %}
-        </ul>
-        {% else %}
-        <p class="text-gray-400">All products are well-stocked. No alerts.</p>
-        {% endif %}
-      </div>
-
-      <!-- Sales Predictions -->
-      <div class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2">
-          <i class="fas fa-chart-line"></i> Sales Predictions
-        </h2>
-        <div class="bg-gray-800 p-4 rounded-lg shadow-soft text-white">
-          <div class="overflow-x-auto scrollable-table">
-            <table class="w-full border-collapse">
-              <thead class="bg-gray-700 sticky-header">
-                <tr>
-                  <th class="border p-2 text-left">Timeframe</th>
-                  <th class="border p-2 text-center">Predicted Sales</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="border-t bg-gray-900 hover:bg-gray-700">
-                  <td class="border p-2">🔹 Per Day</td>
-                  <td class="border p-2 text-green-400 text-center font-bold">
-                    {{ sales_predictions.daily }} units
-                  </td>
-                </tr>
-                <tr class="border-t bg-gray-800 hover:bg-gray-700">
-                  <td class="border p-2">📅 Per Month</td>
-                  <td class="border p-2 text-green-400 text-center font-bold">
-                    {{ sales_predictions.monthly }} units
-                  </td>
-                </tr>
-                <tr class="border-t bg-gray-900 hover:bg-gray-700">
-                  <td class="border p-2">📆 Per Year</td>
-                  <td class="border p-2 text-green-400 text-center font-bold">
-                    {{ sales_predictions.yearly }} units
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Recent Products -->
-      <div class="mb-8">
-        <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2">
-          <i class="fas fa-boxes"></i> Recent Products
-        </h2>
-        <div class="bg-gray-800 p-4 rounded-lg shadow-soft">
-          <div class="overflow-x-auto scrollable-table">
-            <table class="w-full border-collapse">
-              <thead>
-                <tr class="bg-gray-700 text-white sticky-header">
-                  <th class="border p-2">Product Name</th>
-                  <th class="border p-2">Stock</th>
-                  <th class="border p-2">Price</th>
-                  <th class="border p-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for product in recent_products %}
-                <tr class="border-t {% if product.stock <= product.low_stock_threshold %}bg-red-900{% else %}bg-gray-900{% endif %} hover:bg-gray-700">
-                  <td class="border p-2">{{ product.product_name }}</td>
-                  <td class="border p-2">{{ product.stock }}</td>
-                  <td class="border p-2 text-green-400">₹{{ product.price }}</td>
-                  <td class="border p-2 text-center">
-                    <a href="{{ url_for('edit_product', product_id=product._id) }}" class="text-blue-400 hover:underline">✏️ Edit</a> |
-                    <a href="{{ url_for('delete_product', product_id=product._id) }}" class="text-red-400 hover:underline" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Help Section -->
-      <div class="text-center">
-        <h2 class="text-2xl font-semibold text-gray-200 flex items-center justify-center gap-2">
-          Need Help <span class="text-red-400 text-2xl">?</span>
-        </h2>
-        <p class="text-gray-400">Contact <span class="text-blue-400 font-bold">Prasadshaswat9265@gmail.com</span></p>
-      </div>
-    </main>
-
-    <script>
-        function updateDateTime() {
-            const now = new Date();
-            const date = now.toLocaleDateString();
-            const time = now.toLocaleTimeString();
-            document.getElementById('current-date').textContent = date;
-            document.getElementById('current-time').textContent = time;
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Dashboard | Inventory Manager</title>
+      <script src="https://cdn.tailwindcss.com"></script>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+      
+      <style>
+        /* Custom styles */
+        .hover-effect:hover {
+          transform: scale(1.05);
+          transition: all 0.3s ease-in-out;
         }
-        setInterval(updateDateTime, 1000);
-        updateDateTime();
-    </script>
-  </body>
-</html>
+        .sidebar-link {
+          transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .sidebar-link:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          transform: translateX(5px);
+        }
+        .sticky-header {
+          position: sticky;
+          top: 0;
+          z-index: 10;
+        }
+        .scrollable-table {
+          max-height: 300px;
+          overflow-y: auto;
+        }
+        .gradient-bg {
+          background: linear-gradient(135deg, #1e3a8a, #111827);
+        }
+        .shadow-soft {
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .sticky-sidebar {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          overflow-y: auto;
+        }
+        .fade-in {
+          animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+          from { transform: scale(0.95); }
+          to { transform: scale(1); }
+        }
+      </style>
+    </head>
+    <body class="gradient-bg text-gray-300 flex">
+
+      <!-- Sidebar -->
+      <aside class="w-64 bg-gray-900 text-white min-h-screen p-6 shadow-2xl flex flex-col sticky-sidebar">
+        <!-- Sidebar Header -->
+        <h2 class="text-2xl font-semibold mb-6 text-blue-400 flex items-center gap-2">
+            <i class="fas fa-boxes"></i> Inventory Manager
+        </h2>
+    
+        <!-- Navigation Links -->
+        <nav class="flex-1">
+            <ul class="space-y-3">
+                <!-- Dashboard -->
+                <li>
+                    <a href="{{ url_for('dashboard') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+    
+                <!-- View Products -->
+                <li>
+                    <a href="{{ url_for('view_products') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
+                        <i class="fas fa-box-open"></i> View Products
+                    </a>
+                </li>
+    
+                <!-- Add Product -->
+                <li>
+                    <a href="{{ url_for('add_product') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
+                        <i class="fas fa-plus"></i> Add Product
+                    </a>
+                </li>
+    
+                <!-- Profile -->
+                <li>
+                    <a href="{{ url_for('profile') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
+                        <i class="fas fa-user"></i> Profile
+                    </a>
+                </li>
+    
+                <!-- Billing -->
+                <li>
+                    <a href="{{ url_for('billing') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
+                        <i class="fas fa-receipt"></i> Billing
+                    </a>
+                </li>
+    
+                <!-- View Sales -->
+                <li>
+                    <a href="{{ url_for('view_sales') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-blue-600 hover:text-white hover:shadow-md">
+                        <i class="fas fa-chart-line"></i> View Sales
+                    </a>
+                </li>
+    
+                <!-- Logout -->
+                <li>
+                    <a href="{{ url_for('logout') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg transition-all duration-300 hover:bg-red-600 hover:text-white hover:shadow-md">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    
+        <!-- Footer (Optional) -->
+        <footer class="mt-auto text-sm text-gray-400 text-center">
+            &copy; 2023 Inventory Manager
+        </footer>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="flex-1 p-8 fade-in">
+          <!-- Welcome user date and time  and Greet the user -->
+          <div class="flex justify-between items-center mb-6">
+              <h1 class="text-2xl font-semibold text-white">Welcome, {{ username }}! 👋</h1>
+              <div class="text-gray-400">
+                  <span id="current-date"></span> | <span id="current-time"></span>
+              </div>
+          </div> 
+
+        <h1 class="text-3xl font-bold mb-6 text-white flex items-center gap-2">
+          <i class="fas fa-tachometer-alt"></i> Dashboard Overview
+        </h1>
+        <p class="text-gray-400 mb-8">Welcome to your inventory dashboard. Here, you can track your products, monitor stock levels, and manage inventory efficiently. Stay on top of your business with real-time insights and actionable data.</p>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div class="bg-gradient-to-r from-blue-600 to-blue-400 p-6 rounded-lg shadow-soft text-center hover-effect">
+            <h3 class="text-xl font-semibold text-white mb-2">📦 Total Products</h3>
+            <p class="text-3xl text-white font-bold">{{ total_products }}</p>
+          </div>
+          <div class="bg-gradient-to-r from-red-600 to-red-400 p-6 rounded-lg shadow-soft text-center hover-effect">
+            <h3 class="text-xl font-semibold text-white mb-2">⚠️ Low Stock</h3>
+            <p class="text-3xl text-white font-bold">{{ low_stock_count }}</p>
+          </div>
+          <div class="bg-gradient-to-r from-green-600 to-green-400 p-6 rounded-lg shadow-soft text-center hover-effect">
+            <h3 class="text-xl font-semibold text-white mb-2">💰 Total Sales</h3>
+            <p class="text-3xl text-white font-bold">₹{{ total_sales }}</p>
+          </div>
+        </div>
+
+        <!-- Low Stock Alerts -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2">
+            <i class="fas fa-exclamation-triangle"></i> Low Stock Alerts
+          </h2>
+          {% if low_stock_products %}
+          <ul class="bg-red-700 p-4 rounded-md border border-red-500 text-white space-y-2 list-disc pl-5">
+            {% for product in low_stock_products %}
+              <li class="font-medium">🚨 {{ product.product_name }} is low! (Only {{ product.stock }} left)</li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p class="text-gray-400">All products are well-stocked. No alerts.</p>
+          {% endif %}
+        </div>
+
+
+        <!-- Recent Products -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2">
+            <i class="fas fa-boxes"></i> Recent Products
+          </h2>
+          <div class="bg-gray-800 p-4 rounded-lg shadow-soft">
+            <div class="overflow-x-auto scrollable-table">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-gray-700 text-white sticky-header">
+                    <th class="border p-2">Product Name</th>
+                    <th class="border p-2">Stock</th>
+                    <th class="border p-2">Price</th>
+                    <th class="border p-2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for product in recent_products %}
+                  <tr class="border-t {% if product.stock <= product.low_stock_threshold %}bg-red-900{% else %}bg-gray-900{% endif %} hover:bg-gray-700">
+                    <td class="border p-2">{{ product.product_name }}</td>
+                    <td class="border p-2">{{ product.stock }}</td>
+                    <td class="border p-2 text-green-400">₹{{ product.price }}</td>
+                    <td class="border p-2 text-center">
+                      <a href="{{ url_for('edit_product', product_id=product._id) }}" class="text-blue-400 hover:underline">✏️ Edit</a> |
+                      <a href="{{ url_for('delete_product', product_id=product._id) }}" class="text-red-400 hover:underline" onclick="return confirm('Are you sure?')">🗑️ Delete</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Help Section -->
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold text-gray-200 flex items-center justify-center gap-2">
+            Need Help <span class="text-red-400 text-2xl">?</span>
+          </h2>
+          <p class="text-gray-400">Contact <span class="text-blue-400 font-bold">Prasadshaswat9265@gmail.com</span></p>
+        </div>
+      </main>
+
+      <script>
+          function updateDateTime() {
+              const now = new Date();
+              const date = now.toLocaleDateString();
+              const time = now.toLocaleTimeString();
+              document.getElementById('current-date').textContent = date;
+              document.getElementById('current-time').textContent = time;
+          }
+          setInterval(updateDateTime, 1000);
+          updateDateTime();
+      </script>
+    </body>
+  </html>

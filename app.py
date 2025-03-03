@@ -5,9 +5,6 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from bson import ObjectId
 from datetime import datetime
 from config import Config
-from sklearn.linear_model import LinearRegression
-from datetime import datetime, timedelta
-import numpy as np
 import csv
 from io import StringIO
 from reportlab.lib.pagesizes import letter
@@ -32,7 +29,7 @@ login_manager.login_view = 'login'
 # MongoDB collections
 user_collection = mongo.db.users
 product_collection = mongo.db.products
-sales_collection = mongo.db.sales  
+sales_collection = mongo.db.sales
 
 # User class for Flask-Login
 class User(UserMixin):
@@ -134,6 +131,11 @@ def logout():
     flash("You have been logged out.", "info")
     return redirect(url_for("home"))
 
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    return render_template("profile.html", current_user=current_user)
+
 # Dashboard route (main page after login)
 @app.route("/dashboard")
 @login_required
@@ -146,15 +148,13 @@ def dashboard():
     low_stock_count = len(low_stock_products)
     total_sales = calculate_total_sales(current_user.id)
     recent_products = list(product_collection.find({"owner_id": current_user.id}).sort("_id", -1).limit(10))
-    sales_predictions = predict_sales()
 
     return render_template("dashboard.html", 
                            total_products=total_products, 
                            low_stock_count=low_stock_count, 
                            total_sales=total_sales, 
                            low_stock_products=low_stock_products, 
-                           recent_products=recent_products, 
-                           sales_predictions=sales_predictions,
+                           recent_products=recent_products,
                            username=current_user.username)
 
 # Add product route
@@ -273,7 +273,7 @@ def sell_product(product_id):
 # Export sales route
 @app.route("/export_sales")
 @login_required
-def export_sales():
+def export_sales(): 
     sales = list(sales_collection.find({"owner_id": current_user.id}))
     user_profile = user_collection.find_one({"_id": current_user.id})
     business_name = user_profile["business_name"] if user_profile and "business_name" in user_profile else "Your Business"
@@ -362,28 +362,6 @@ def delete_product(product_id):
     else:
         flash("Product deleted successfully!", "success")
     return redirect(url_for("view_products"))
-
-# Predict sales function
-def predict_sales():
-    sales = list(sales_collection.find().sort("date_sold", 1))
-    if len(sales) < 3:
-        return {
-            "hourly": "Not enough data",
-            "daily": "Not enough data",
-            "monthly": "Not enough data"
-        }
-
-    X = np.array([(sale["date_sold"] - sales[0]["date_sold"]).total_seconds() / 3600 for sale in sales]).reshape(-1, 1)
-    y = np.array([sale["quantity_sold"] for sale in sales])
-    model = LinearRegression()
-    model.fit(X, y)
-    future_hours = [(datetime.utcnow() - sales[0]["date_sold"]).total_seconds() / 3600 + i for i in [1, 24, 24*30]]
-    predictions = model.predict(np.array(future_hours).reshape(-1, 1))
-    return {
-        "hourly": round(predictions[0]),
-        "daily": round(predictions[1]),
-        "monthly": round(predictions[2])
-    }
 
 # Billing route
 @app.route("/billing", methods=["GET", "POST"])
