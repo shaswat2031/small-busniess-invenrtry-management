@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Inventory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ...existing styles... -->
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <!-- Navbar placeholder -->
+    <!-- ...existing navbar code... -->
+    <div class="container mx-auto p-8">
+        <h1 class="text-4xl font-bold mb-8">Analytics Dashboard</h1>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h2 class="text-xl font-semibold">Total Sales</h2>
+                <p class="text-3xl font-bold">${{ total_sales }}</p>
+            </div>
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h2 class="text-xl font-semibold">Total Products</h2>
+                <p class="text-3xl font-bold">{{ total_products }}</p>
+            </div>
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h2 class="text-xl font-semibold">Average Sale Value</h2>
+                <p class="text-3xl font-bold">${{ avg_sale | round(2) }}</p>
+            </div>
+        </div>
+        <div class="mt-8">
+            <p class="text-sm">Total sales count: {{ sales_count }}</p>
+        </div>
+    </div>
+    <!-- Footer placeholder -->
+    <!-- ...existing footer code... -->
+</body>
+</html>

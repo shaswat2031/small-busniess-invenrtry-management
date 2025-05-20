@@ -15,20 +15,30 @@
             overflow-x: hidden;
             overflow-y: auto;
         }
+        /* Enhanced text styling */
         .header-title {
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 2px;
             background: linear-gradient(90deg, #ff8a00, #e52e71);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(255, 138, 0, 0.2);
         }
+        /* Improved glass effect */
         .glass {
-            background: rgba(30, 30, 30, 0.9);
-            -webkit-backdrop-filter: blur(8px);
-            backdrop-filter: blur(8px);
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(30, 30, 30, 0.85);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
+        .glass:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        }
+        /* Enhanced gradients */
         .gradient-bg {
             background: linear-gradient(135deg, #1a1a1a, #121212);
         }
@@ -99,6 +109,50 @@
         .navbar a:hover {
             color: #ff8a00;
         }
+        /* Pricing Table Styles */
+        .pricing-card {
+            background: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .pricing-popular {
+            position: relative;
+            border: 1px solid rgba(229, 46, 113, 0.3);
+            box-shadow: 0 10px 30px rgba(229, 46, 113, 0.2);
+        }
+        .pricing-popular::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .pricing-check {
+            color: #4ade80;
+            margin-right: 10px;
+        }
+        .pricing-cross {
+            color: #f87171;
+            margin-right: 10px;
+        }
         /* Canvas for Liquid Background */
         #liquid-bg {
             position: fixed;
@@ -129,6 +183,10 @@
                 </span>
             </a>
             <div class="flex items-center space-x-6">
+                <a href="#pricing" class="text-lg hover:text-pink-400 transition-colors relative group">
+                    Pricing
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-600 group-hover:w-full transition-all duration-300"></span>
+                </a>
                 <a href="{{ url_for('login') }}" class="text-lg hover:text-pink-400 transition-colors relative group">
                     Login
                     <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-purple-600 group-hover:w-full transition-all duration-300"></span>
@@ -218,7 +276,7 @@
                     <div class="flex flex-col items-center text-center">
                         <div class="p-3 rounded-full bg-blue-500/20 mb-5 group-hover:bg-blue-500/30 transition-all duration-300">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012-2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                             </svg>
                         </div>
                         <h3 class="text-xl font-bold text-blue-500 mb-4">Smart Sales Insights</h3>
@@ -242,9 +300,404 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-8 glass text-center">
-        <p class="text-gray-400">&copy; 2025 Inventory Manager. All rights reserved.</p>
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40 -z-10"></div>
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fadeInUp">
+                <div class="inline-block px-3 py-1 bg-gradient-to-r from-pink-500/20 to-purple-600/20 backdrop-blur-md rounded-full text-sm font-medium text-pink-300 border border-pink-500/20 mb-3">
+                    Flexible Pricing
+                </div>
+                <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">Choose Your Perfect Plan</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">Affordable solutions for businesses of all sizes with no hidden fees</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Starter Plan -->
+                <div class="pricing-card p-8 flex flex-col">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-2">Starter</h3>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold text-white">₹{{ pricing.starter.price }}</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">Perfect for small businesses just getting started with inventory management.</p>
+                        <a href="{{ url_for('register') }}" class="block text-center bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-4 rounded-lg transition duration-300">
+                            Start Free Trial
+                        </a>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8 mt-auto">
+                        <h4 class="text-white font-medium mb-4">What's included:</h4>
+                        <div class="space-y-3">
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">{{ pricing.starter.products }} products</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">{{ pricing.starter.users }} user</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">Basic reporting</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">CSV imports/exports</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-cross h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-400">Advanced analytics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Professional Plan (Popular) -->
+                <div class="pricing-card pricing-popular p-8 flex flex-col">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-2">Professional</h3>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold text-white">₹{{ pricing.professional.price }}</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">Ideal for growing businesses with expanding inventory needs.</p>
+                        <a href="{{ url_for('register') }}" class="block text-center bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-3 px-4 rounded-lg transition duration-300 shadow-lg shadow-pink-500/25">
+                            Start Free Trial
+                        </a>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8 mt-auto">
+                        <h4 class="text-white font-medium mb-4">What's included:</h4>
+                        <div class="space-y-3">
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">{{ pricing.professional.products }} products</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">{{ pricing.professional.users }} users</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">Advanced reporting</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">CSV imports/exports</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">Basic analytics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Enterprise Plan -->
+                <div class="pricing-card p-8 flex flex-col">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold text-white mb-2">Enterprise</h3>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold text-white">₹{{ pricing.enterprise.price }}</span>
+                            <span class="text-gray-400 ml-2">/month</span>
+                        </div>
+                        <p class="text-gray-400 mb-6">For large businesses with complex inventory management needs.</p>
+                        <a href="{{ url_for('contact') }}" class="block text-center bg-white/10 hover:bg-white/20 text-white font-medium py-3 px-4 rounded-lg transition duration-300">
+                            Contact Sales
+                        </a>
+                    </div>
+                    <div class="border-t border-gray-700 pt-8 mt-auto">
+                        <h4 class="text-white font-medium mb-4">What's included:</h4>
+                        <div class="space-y-3">
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">{{ pricing.enterprise.products }}+ products</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">{{ pricing.enterprise.users }}+ users</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">Custom reporting</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">API access</span>
+                            </div>
+                            <div class="pricing-feature">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="text-gray-300">Dedicated support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="mt-20 max-w-4xl mx-auto">
+                <h3 class="text-2xl font-bold text-white mb-8 text-center">Frequently Asked Questions</h3>
+                <div class="space-y-6">
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-xl font-medium text-white mb-3">Can I upgrade or downgrade my plan?</h4>
+                        <p class="text-gray-300">Yes, you can upgrade or downgrade your plan at any time. Changes will be reflected on your next billing cycle.</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-xl font-medium text-white mb-3">Is there a free trial available?</h4>
+                        <p class="text-gray-300">Yes, we offer a 14-day free trial for all plans. No credit card required to start.</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-xl font-medium text-white mb-3">What happens if I exceed my product limit?</h4>
+                        <p class="text-gray-300">We'll notify you when you're approaching your limit. You can upgrade to a higher tier or contact us for a custom solution.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Testimonials Section -->
+    <section class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 to-black/70 -z-10"></div>
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fadeInUp">
+                <div class="inline-block px-3 py-1 bg-gradient-to-r from-pink-500/20 to-purple-600/20 backdrop-blur-md rounded-full text-sm font-medium text-pink-300 border border-pink-500/20 mb-3">
+                    Success Stories
+                </div>
+                <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">What Our Customers Say</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">Businesses of all sizes trust our inventory management system</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="glass p-8 rounded-xl hover-scale group">
+                    <div class="flex flex-col h-full">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-300 italic leading-relaxed mb-6">"This inventory system has completely transformed how we manage our retail store. We've reduced stockouts by 85% and can now forecast our inventory needs with incredible accuracy."</p>
+                        </div>
+                        <div class="mt-auto">
+                            <p class="font-bold text-white">Sarah Johnson</p>
+                            <p class="text-sm text-gray-400">CEO, Boutique Fashion Store</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="glass p-8 rounded-xl hover-scale group">
+                    <div class="flex flex-col h-full">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-300 italic leading-relaxed mb-6">"As a small warehouse operator, keeping track of thousands of items was a nightmare. This system simplified everything with barcode scanning and real-time updates. Our efficiency has improved by 60%."</p>
+                        </div>
+                        <div class="mt-auto">
+                            <p class="font-bold text-white">Michael Rodriguez</p>
+                            <p class="text-sm text-gray-400">Operations Manager, RS Logistics</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="glass p-8 rounded-xl hover-scale group">
+                    <div class="flex flex-col h-full">
+                        <div class="mb-6">
+                            <div class="flex items-center mb-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"/>
+                                </svg>
+                            </div>
+                            <p class="text-gray-300 italic leading-relaxed mb-6">"The analytics features alone are worth the investment. We've uncovered sales patterns we never noticed before and optimized our purchasing. Our profits increased by 32% in just six months."</p>
+                        </div>
+                        <div class="mt-auto">
+                            <p class="font-bold text-white">Priya Patel</p>
+                            <p class="text-sm text-gray-400">Owner, Tech Gadgets Store</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Benefits Section -->
+    <section class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-black/80 -z-10"></div>
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 animate-fadeInUp">
+                <div class="inline-block px-3 py-1 bg-gradient-to-r from-pink-500/20 to-purple-600/20 backdrop-blur-md rounded-full text-sm font-medium text-pink-300 border border-pink-500/20 mb-3">
+                    Business Advantages
+                </div>
+                <h2 class="text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500">Transform Your Business Operations</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">Our inventory system provides tangible benefits with real business impact</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Left Side Benefits -->
+                <div class="space-y-8">
+                    <div class="glass p-6 rounded-xl flex items-start hover-scale">
+                        <div class="bg-gradient-to-br from-pink-500 to-pink-600 p-3 rounded-lg mr-4 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Save Valuable Time</h3>
+                            <p class="text-gray-300">Automate repetitive inventory tasks and reduce manual data entry by up to 75%, allowing your team to focus on growth activities.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="glass p-6 rounded-xl flex items-start hover-scale">
+                        <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-3 rounded-lg mr-4 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Minimize Costly Errors</h3>
+                            <p class="text-gray-300">Reduce inventory discrepancies by 95% with automated tracking and reconciliation. Never worry about mismatched stock counts again.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side Benefits -->
+                <div class="space-y-8">
+                    <div class="glass p-6 rounded-xl flex items-start hover-scale">
+                        <div class="bg-gradient-to-br from-green-500 to-green-600 p-3 rounded-lg mr-4 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Boost Your Profitability</h3>
+                            <p class="text-gray-300">Optimize stock levels to reduce holding costs by up to 30% while ensuring you never miss a sale due to stockouts.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="glass p-6 rounded-xl flex items-start hover-scale">
+                        <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-3 rounded-lg mr-4 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-2">Scalable Growth</h3>
+                            <p class="text-gray-300">Our system grows with your business, easily handling 10 to 10,000+ products without performance issues. No need to migrate as you expand.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/80 to-black/90 -z-10"></div>
+        <div class="container mx-auto px-4">
+            <div class="glass p-10 md:p-16 rounded-2xl relative overflow-hidden">
+                <!-- Decorative Elements -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pink-500 to-purple-600"></div>
+                <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-purple-600/20 blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-pink-600/20 blur-3xl"></div>
+                
+                <div class="relative z-10 text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to Transform Your Inventory Management?</h2>
+                    <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">Join thousands of businesses that have simplified their operations and increased profitability with our platform.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="{{ url_for('register') }}" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-lg transition duration-300 hover-scale text-lg font-semibold shadow-xl">
+                            Start Your Free Trial
+                        </a>
+                        <a href="#features" class="bg-transparent border-2 border-white/70 hover:border-white text-white px-8 py-4 rounded-lg hover:bg-white/10 transition duration-300 text-lg font-semibold">
+                            Schedule a Demo
+                        </a>
+                    </div>
+                    <p class="mt-6 text-gray-400">No credit card required. 14-day free trial.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with Enhanced Content -->
+    <footer class="bg-gray-900 py-16 glass">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-white font-bold mb-4">Inventory Manager</h3>
+                    <p class="text-gray-400 mb-4">Powerful inventory management solutions for businesses of all sizes. Streamline operations and boost profitability.</p>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Quick Links</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><a href="#features" class="hover:text-pink-400 transition-colors">Features</a></li>
+                        <li><a href="#" class="hover:text-pink-400 transition-colors">Pricing</a></li>
+                        <li><a href="#" class="hover:text-pink-400 transition-colors">Testimonials</a></li>
+                        <li><a href="#" class="hover:text-pink-400 transition-colors">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Legal</h3>
+                    <ul class="text-gray-400 space-y-2">
+                        <li><a href="#" class="hover:text-pink-400 transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-pink-400 transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-pink-400 transition-colors">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-bold mb-4">Contact Us</h3>
+                    <p class="text-gray-400 mb-2">Email: support@inventorymanager.com</p>
+                    <p class="text-gray-400 mb-4">Phone: +1 (555) 123-4567</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-400 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500">&copy; 2025 Inventory Manager. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <!-- JavaScript for Liquid Background -->

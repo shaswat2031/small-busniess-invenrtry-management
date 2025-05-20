@@ -422,7 +422,73 @@
             <div class="text-gray-400">
                 <span id="current-date"></span> | <span id="current-time"></span>
             </div>
-        </div> 
+        </div>
+
+        <!-- Enhanced Welcome Message with Tips -->
+        <div class="glass-card p-6 mb-8 border-l-4 border-blue-500 fade-in-left">
+            <div class="flex items-start">
+                <div class="bg-blue-500 bg-opacity-20 p-3 rounded-full mr-4">
+                    <i class="fas fa-lightbulb text-blue-400 text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold text-white mb-2">Hello, {{ username }}! Here's Your Daily Summary</h2>
+                    <p class="text-gray-300 mb-3">Your inventory system is functioning optimally. Here are some insights for today:</p>
+                    <ul class="text-gray-400 space-y-1 ml-5 list-disc">
+                        {% if low_stock_count > 0 %}
+                        <li>You have <span class="text-yellow-400 font-medium">{{ low_stock_count }} products</span> with low stock levels that need attention</li>
+                        {% else %}
+                        <li>All your products are well-stocked - great inventory management!</li>
+                        {% endif %}
+                        <li>Your total sales amount to <span class="text-green-400 font-medium">₹{{ total_sales }}</span> across all products</li>
+                        <li>The best time to restock is <span class="text-blue-400 font-medium">1-2 weeks</span> before you expect to run out</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="mb-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div class="glass-card stat-card p-6 text-center fade-in-up">
+            <div class="stat-card-icon mb-2 text-3xl text-blue-400"><i class="fas fa-boxes"></i></div>
+            <div class="text-lg font-semibold">Total Products</div>
+            <div class="text-3xl font-bold text-white">{{ total_products }}</div>
+            <div class="info-badge mt-2 tooltip">
+              <i class="fas fa-info-circle mr-1"></i>
+              <span>All products in your inventory</span>
+              <span class="tooltip-text">Maintaining a diverse product range helps meet customer needs. Consider removing products that haven't sold in 6+ months.</span>
+            </div>
+          </div>
+          <div class="glass-card stat-card p-6 text-center fade-in-up">
+            <div class="stat-card-icon mb-2 text-3xl text-yellow-400"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="text-lg font-semibold">Low Stock</div>
+            <div class="text-3xl font-bold text-white">{{ low_stock_count }}</div>
+            <div class="info-badge mt-2 tooltip">
+              <i class="fas fa-info-circle mr-1"></i>
+              <span>Products below threshold</span>
+              <span class="tooltip-text">Immediate attention required! Consider placing orders for these items to prevent stockouts and lost sales opportunities.</span>
+            </div>
+          </div>
+          <div class="glass-card stat-card p-6 text-center fade-in-up">
+            <div class="stat-card-icon mb-2 text-3xl text-green-400"><i class="fas fa-rupee-sign"></i></div>
+            <div class="text-lg font-semibold">Total Sales</div>
+            <div class="text-3xl font-bold text-white">₹{{ total_sales }}</div>
+            <div class="info-badge mt-2 tooltip">
+              <i class="fas fa-info-circle mr-1"></i>
+              <span>Revenue</span>
+              <span class="tooltip-text">Total sales revenue generated.</span>
+            </div>
+          </div>
+          <div class="glass-card stat-card p-6 text-center fade-in-up">
+            <div class="stat-card-icon mb-2 text-3xl text-purple-400"><i class="fas fa-users"></i></div>
+            <div class="text-lg font-semibold">Active Users</div>
+            <div class="text-3xl font-bold text-white">{{ active_users or 1 }}</div>
+            <div class="info-badge mt-2 tooltip">
+              <i class="fas fa-info-circle mr-1"></i>
+              <span>Currently logged in</span>
+              <span class="tooltip-text">Number of users currently active in the system.</span>
+            </div>
+          </div>
+        </div>
 
       <h1 class="text-3xl font-bold mb-6 text-white flex items-center gap-2">
         <i class="fas fa-tachometer-alt"></i> Dashboard Overview
@@ -494,6 +560,41 @@
             </table>
           </div>
         </div>
+      </div>
+
+      <!-- Recent Sales Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2 section-header">
+          <i class="fas fa-receipt"></i> Recent Sales
+        </h2>
+        {% if recent_sales %}
+        <div class="glass-card p-4">
+          <div class="overflow-x-auto scrollable-table">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="table-header">
+                  <th class="table-cell">Product</th>
+                  <th class="table-cell">Quantity</th>
+                  <th class="table-cell">Total Price</th>
+                  <th class="table-cell">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for sale in recent_sales %}
+                <tr class="table-row">
+                  <td class="table-cell">{{ sale.product_name }}</td>
+                  <td class="table-cell">{{ sale.quantity_sold }}</td>
+                  <td class="table-cell text-green-400">₹{{ sale.total_price }}</td>
+                  <td class="table-cell text-gray-400">{{ sale.date_sold.strftime('%Y-%m-%d %H:%M') }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% else %}
+        <p class="text-gray-400">No recent sales to display.</p>
+        {% endif %}
       </div>
 
       <!-- Help Section -->

@@ -242,6 +242,39 @@
                 </div>
             </div>
 
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-300 mb-2">Select Plan</label>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="relative">
+                        <input type="radio" name="plan" id="plan-starter" value="starter" class="hidden peer" checked>
+                        <label for="plan-starter" class="block p-4 bg-gray-800/70 border border-gray-700 rounded-lg peer-checked:border-pink-500 peer-checked:ring-2 peer-checked:ring-pink-500/50 cursor-pointer transition-all">
+                            <div class="font-semibold text-white mb-1">Starter</div>
+                            <div class="text-xl font-bold text-white mb-2">${{ pricing.starter.price }}<span class="text-sm font-normal text-gray-400">/mo</span></div>
+                            <div class="text-gray-400 text-sm">{{ pricing.starter.products }} products</div>
+                        </label>
+                    </div>
+                    
+                    <div class="relative">
+                        <input type="radio" name="plan" id="plan-professional" value="professional" class="hidden peer">
+                        <label for="plan-professional" class="block p-4 bg-gray-800/70 border border-gray-700 rounded-lg peer-checked:border-pink-500 peer-checked:ring-2 peer-checked:ring-pink-500/50 cursor-pointer transition-all">
+                            <div class="font-semibold text-white mb-1">Professional</div>
+                            <div class="text-xl font-bold text-white mb-2">${{ pricing.professional.price }}<span class="text-sm font-normal text-gray-400">/mo</span></div>
+                            <div class="text-gray-400 text-sm">{{ pricing.professional.products }} products</div>
+                        </label>
+                        <div class="absolute -top-2 right-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full">Popular</div>
+                    </div>
+                    
+                    <div class="relative">
+                        <input type="radio" name="plan" id="plan-enterprise" value="enterprise" class="hidden peer">
+                        <label for="plan-enterprise" class="block p-4 bg-gray-800/70 border border-gray-700 rounded-lg peer-checked:border-pink-500 peer-checked:ring-2 peer-checked:ring-pink-500/50 cursor-pointer transition-all">
+                            <div class="font-semibold text-white mb-1">Enterprise</div>
+                            <div class="text-xl font-bold text-white mb-2">${{ pricing.enterprise.price }}<span class="text-sm font-normal text-gray-400">/mo</span></div>
+                            <div class="text-gray-400 text-sm">{{ pricing.enterprise.products }}+ products</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
             <button type="submit" 
                 class="btn-primary w-full text-white py-3 rounded-lg font-semibold shadow-xl mt-4">
                 Create Account

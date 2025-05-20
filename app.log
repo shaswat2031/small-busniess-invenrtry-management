@@ -1,0 +1,89 @@
+2025-05-20 13:10:24,039 [INFO] Starting Inventory Manager application
+2025-05-20 13:10:24,070 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-20 13:10:24,070 [INFO] [33mPress CTRL+C to quit[0m
+2025-05-20 13:10:24,086 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-20 13:10:25,102 [INFO] Starting Inventory Manager application
+2025-05-20 13:10:25,121 [WARNING]  * Debugger is active!
+2025-05-20 13:10:25,125 [INFO]  * Debugger PIN: 531-858-104
+2025-05-20 13:10:31,269 [INFO] 127.0.0.1 - - [20/May/2025 13:10:31] "GET / HTTP/1.1" 200 -
+2025-05-20 13:10:36,398 [INFO] 127.0.0.1 - - [20/May/2025 13:10:36] "GET /register HTTP/1.1" 200 -
+2025-05-20 13:11:11,483 [INFO] 127.0.0.1 - - [20/May/2025 13:11:11] "[32mPOST /register HTTP/1.1[0m" 302 -
+2025-05-20 13:11:11,520 [INFO] 127.0.0.1 - - [20/May/2025 13:11:11] "GET /login HTTP/1.1" 200 -
+2025-05-20 13:11:18,667 [INFO] 127.0.0.1 - - [20/May/2025 13:11:18] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-20 13:11:18,726 [INFO] 127.0.0.1 - - [20/May/2025 13:11:18] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:11:22,091 [INFO] 127.0.0.1 - - [20/May/2025 13:11:22] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:11:32,036 [INFO] 127.0.0.1 - - [20/May/2025 13:11:32] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-20 13:11:32,045 [INFO] 127.0.0.1 - - [20/May/2025 13:11:32] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:11:37,438 [INFO] Processing payment for user shaswat1122: 8 -> 10
+2025-05-20 13:11:37,440 [INFO] 127.0.0.1 - - [20/May/2025 13:11:37] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-20 13:11:37,452 [INFO] 127.0.0.1 - - [20/May/2025 13:11:37] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:11:46,985 [INFO] Processing payment for user shaswat1122: 10 -> 15
+2025-05-20 13:11:46,988 [INFO] 127.0.0.1 - - [20/May/2025 13:11:46] "[32mPOST /change_plan/enterprise HTTP/1.1[0m" 302 -
+2025-05-20 13:11:46,999 [INFO] 127.0.0.1 - - [20/May/2025 13:11:46] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:11:48,658 [INFO] 127.0.0.1 - - [20/May/2025 13:11:48] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-20 13:11:48,668 [INFO] 127.0.0.1 - - [20/May/2025 13:11:48] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:11:49,952 [INFO] 127.0.0.1 - - [20/May/2025 13:11:49] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-20 13:11:49,962 [INFO] 127.0.0.1 - - [20/May/2025 13:11:49] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:12:03,383 [INFO] 127.0.0.1 - - [20/May/2025 13:12:03] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:12:06,186 [INFO] 127.0.0.1 - - [20/May/2025 13:12:06] "GET /add_product HTTP/1.1" 200 -
+2025-05-20 13:12:20,742 [INFO] 127.0.0.1 - - [20/May/2025 13:12:20] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-20 13:12:20,782 [INFO] 127.0.0.1 - - [20/May/2025 13:12:20] "GET /view_products HTTP/1.1" 200 -
+2025-05-20 13:12:26,530 [INFO] 127.0.0.1 - - [20/May/2025 13:12:26] "GET /add_product HTTP/1.1" 200 -
+2025-05-20 13:12:37,458 [INFO] 127.0.0.1 - - [20/May/2025 13:12:37] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-20 13:12:37,468 [INFO] 127.0.0.1 - - [20/May/2025 13:12:37] "GET /view_products HTTP/1.1" 200 -
+2025-05-20 13:12:40,539 [INFO] 127.0.0.1 - - [20/May/2025 13:12:40] "GET /add_product HTTP/1.1" 200 -
+2025-05-20 13:12:50,840 [INFO] 127.0.0.1 - - [20/May/2025 13:12:50] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-20 13:12:50,851 [INFO] 127.0.0.1 - - [20/May/2025 13:12:50] "GET /view_products HTTP/1.1" 200 -
+2025-05-20 13:12:56,184 [INFO] 127.0.0.1 - - [20/May/2025 13:12:56] "[32mPOST /sell_product/682c325c956143baf60b2f0e HTTP/1.1[0m" 302 -
+2025-05-20 13:12:56,197 [INFO] 127.0.0.1 - - [20/May/2025 13:12:56] "GET /view_products HTTP/1.1" 200 -
+2025-05-20 13:13:02,684 [INFO] 127.0.0.1 - - [20/May/2025 13:13:02] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:13:04,287 [INFO] 127.0.0.1 - - [20/May/2025 13:13:04] "GET /view_products HTTP/1.1" 200 -
+2025-05-20 13:13:22,451 [INFO] 127.0.0.1 - - [20/May/2025 13:13:22] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:13:26,022 [INFO] 127.0.0.1 - - [20/May/2025 13:13:26] "GET /sales HTTP/1.1" 200 -
+2025-05-20 13:13:48,545 [INFO] 127.0.0.1 - - [20/May/2025 13:13:48] "GET /sales HTTP/1.1" 200 -
+2025-05-20 13:13:52,884 [INFO] 127.0.0.1 - - [20/May/2025 13:13:52] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:13:56,778 [INFO] 127.0.0.1 - - [20/May/2025 13:13:56] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:13:58,371 [INFO] 127.0.0.1 - - [20/May/2025 13:13:58] "GET /sales HTTP/1.1" 200 -
+2025-05-20 13:13:59,680 [INFO] 127.0.0.1 - - [20/May/2025 13:13:59] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:14:34,289 [INFO] 127.0.0.1 - - [20/May/2025 13:14:34] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:15:31,926 [INFO] 127.0.0.1 - - [20/May/2025 13:15:31] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:15:37,200 [INFO] 127.0.0.1 - - [20/May/2025 13:15:37] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-05-20 13:15:37,241 [INFO] 127.0.0.1 - - [20/May/2025 13:15:37] "GET / HTTP/1.1" 200 -
+2025-05-20 13:16:28,324 [INFO] 127.0.0.1 - - [20/May/2025 13:16:28] "GET / HTTP/1.1" 200 -
+2025-05-20 13:16:34,916 [INFO] 127.0.0.1 - - [20/May/2025 13:16:34] "GET / HTTP/1.1" 200 -
+2025-05-20 13:16:40,107 [INFO] 127.0.0.1 - - [20/May/2025 13:16:40] "GET / HTTP/1.1" 200 -
+2025-05-20 13:16:46,152 [INFO] 127.0.0.1 - - [20/May/2025 13:16:46] "GET / HTTP/1.1" 200 -
+2025-05-20 13:16:49,585 [INFO] 127.0.0.1 - - [20/May/2025 13:16:49] "GET / HTTP/1.1" 200 -
+2025-05-20 13:16:57,643 [INFO] 127.0.0.1 - - [20/May/2025 13:16:57] "GET / HTTP/1.1" 200 -
+2025-05-20 13:17:15,906 [INFO] 127.0.0.1 - - [20/May/2025 13:17:15] "GET / HTTP/1.1" 200 -
+2025-05-20 13:17:15,944 [INFO] 127.0.0.1 - - [20/May/2025 13:17:15] "GET / HTTP/1.1" 200 -
+2025-05-20 13:17:18,672 [INFO] 127.0.0.1 - - [20/May/2025 13:17:18] "GET /login HTTP/1.1" 200 -
+2025-05-20 13:17:21,744 [INFO] 127.0.0.1 - - [20/May/2025 13:17:21] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-20 13:17:21,758 [INFO] 127.0.0.1 - - [20/May/2025 13:17:21] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:17:23,895 [INFO] 127.0.0.1 - - [20/May/2025 13:17:23] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:18:07,182 [INFO] 127.0.0.1 - - [20/May/2025 13:18:07] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:18:45,504 [INFO] 127.0.0.1 - - [20/May/2025 13:18:45] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:18:47,627 [INFO] Processing payment for user shaswat1122: 8 -> 10
+2025-05-20 13:18:47,631 [INFO] 127.0.0.1 - - [20/May/2025 13:18:47] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-20 13:18:47,643 [INFO] 127.0.0.1 - - [20/May/2025 13:18:47] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:18:50,756 [INFO] 127.0.0.1 - - [20/May/2025 13:18:50] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-20 13:18:50,770 [INFO] 127.0.0.1 - - [20/May/2025 13:18:50] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:18:51,848 [INFO] Processing payment for user shaswat1122: 8 -> 10
+2025-05-20 13:18:51,855 [INFO] 127.0.0.1 - - [20/May/2025 13:18:51] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-20 13:18:51,865 [INFO] 127.0.0.1 - - [20/May/2025 13:18:51] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:18:53,352 [INFO] 127.0.0.1 - - [20/May/2025 13:18:53] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-20 13:18:53,362 [INFO] 127.0.0.1 - - [20/May/2025 13:18:53] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:20:05,140 [INFO] 127.0.0.1 - - [20/May/2025 13:20:05] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:20:34,068 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-20 13:20:34,068 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-20 13:20:34,680 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-20 13:20:36,086 [INFO] Starting Inventory Manager application
+2025-05-20 13:20:36,108 [WARNING]  * Debugger is active!
+2025-05-20 13:20:36,117 [INFO]  * Debugger PIN: 531-858-104
+2025-05-20 13:20:36,186 [INFO] 127.0.0.1 - - [20/May/2025 13:20:36] "GET /profile HTTP/1.1" 200 -
+2025-05-20 13:20:39,473 [INFO] 127.0.0.1 - - [20/May/2025 13:20:39] "GET /dashboard HTTP/1.1" 200 -
+2025-05-20 13:20:44,234 [INFO] 127.0.0.1 - - [20/May/2025 13:20:44] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-05-20 13:20:44,252 [INFO] 127.0.0.1 - - [20/May/2025 13:20:44] "GET / HTTP/1.1" 200 -
+2025-05-20 13:20:48,579 [INFO] 127.0.0.1 - - [20/May/2025 13:20:48] "GET /login HTTP/1.1" 200 -
+2025-05-20 13:21:19,527 [INFO] 127.0.0.1 - - [20/May/2025 13:21:19] "GET /register HTTP/1.1" 200 -

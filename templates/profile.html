@@ -3,241 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile | Inventory Manager</title>
+    <title>Profile - Inventory Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background: #0f0f0f;
             color: #e0e0e0;
-            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
         }
-        
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            -webkit-backdrop-filter: blur(12px);
+        .glass {
+            background: rgba(30, 30, 30, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
         }
-        
-        .form-input {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: 'Poppins', sans-serif;
+        .glass:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
         }
-        
-        .form-input:focus {
-            border-color: rgba(59, 130, 246, 0.7);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
-            background: rgba(15, 23, 42, 0.8);
-            outline: none;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            color: white;
-            border-radius: 10px;
-            font-weight: 500;
+        .current-plan {
+            border: 2px solid #e52e71;
             position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.4);
-        }
-        
-        .btn-primary::after {
-            content: '';
+        .current-plan::before {
+            content: 'Current Plan';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: -100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
         }
-        
-        .btn-primary:hover::after {
-            left: 100%;
+        .pricing-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
         }
-        
-        .text-gradient {
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-family: 'Orbitron', sans-serif;
-        }
-        
-        .avatar-ring {
-            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
-            padding: 4px;
-            border-radius: 50%;
-        }
-        
-        .form-section {
-            transition: all 0.3s ease;
-        }
-        
-        .form-section:hover {
-            transform: translateY(-5px);
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-        
-        .input-icon {
-            color: rgba(255, 255, 255, 0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus ~ .input-icon {
-            color: #3b82f6;
+        .pricing-check {
+            color: #4ade80;
+            margin-right: 10px;
         }
     </style>
 </head>
-
-<body class="p-4 md:p-8">
-    <div class="container mx-auto max-w-6xl fade-in">
-        
-        <!-- Navigation Bar -->
-        <div class="flex justify-between items-center mb-8">
-            <a href="{{ url_for('dashboard') }}" class="text-gray-300 hover:text-white transition-colors flex items-center">
-                <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
-            </a>
-            <a href="{{ url_for('logout') }}" class="text-red-400 hover:text-red-300 transition-colors flex items-center">
-                <i class="fas fa-sign-out-alt mr-2"></i> Logout
-            </a>
-        </div>
-        
-        <!-- Main Content Area -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<body class="min-h-screen bg-gray-900">
+    <!-- Include your navbar here -->
+    
+    <div class="container mx-auto px-4 py-24">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-4xl font-bold mb-12 text-center bg-gradient-to-r from-pink-400 to-purple-500 bg-clip-text text-transparent">Your Profile</h1>
             
-            <!-- User Profile Card -->
-            <div class="glass-card p-8 flex flex-col items-center">
-                <div class="avatar-ring mb-6">
-                    <div class="w-32 h-32 rounded-full bg-gray-800 flex items-center justify-center text-5xl text-blue-400">
-                        {{ current_user.username[0]|upper }}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- User Info Card -->
+                <div class="glass p-8 rounded-xl col-span-1">
+                    <h2 class="text-2xl font-bold mb-6 text-white">Account Information</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-gray-400 text-sm">Username</p>
+                            <p class="text-white font-medium">{{ current_user.username }}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm">Business Name</p>
+                            <p class="text-white font-medium">{{ current_user.business_name }}</p>
+                        </div>
+                        <!-- Add more user details as needed -->
+                    </div>
+                    
+                    <div class="mt-8">
+                        <a href="{{ url_for('dashboard') }}" class="block text-center bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                            Back to Dashboard
+                        </a>
                     </div>
                 </div>
                 
-                <h2 class="text-xl font-semibold mb-1">{{ current_user.username }}</h2>
-                <p class="text-gray-400 text-sm mb-6">Account Owner</p>
-                
-                <div class="w-full">
-                    <div class="flex justify-between items-center py-3 border-b border-gray-700">
-                        <span class="text-gray-400">Member Since</span>
-                        <span>{{ current_user.created_at.strftime('%B %d, %Y') if current_user.created_at else 'N/A' }}</span>
+                <!-- Current Plan Card -->
+                <div class="glass p-8 rounded-xl col-span-2">
+                    <h2 class="text-2xl font-bold mb-6 text-white">Your Subscription Plan</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Starter Plan -->
+                        <div class="glass p-6 rounded-xl {% if plan_name == 'starter' %}current-plan{% endif %}">
+                            <h3 class="text-xl font-bold text-white mb-2">Starter</h3>
+                            <div class="flex items-end mb-4">
+                                <span class="text-3xl font-bold text-white">₹{{ pricing.starter.price }}</span>
+                                <span class="text-gray-400 ml-2">/month</span>
+                            </div>
+                            <div class="border-t border-gray-700 pt-4 mb-4">
+                                <div class="pricing-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-gray-300">{{ pricing.starter.products }} products</span>
+                                </div>
+                                <div class="pricing-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-gray-300">{{ pricing.starter.users }} user</span>
+                                </div>
+                            </div>
+                            {% if plan_name != 'starter' %}
+                            <form action="{{ url_for('change_plan', plan_name='starter') }}" method="POST">
+                                <button type="submit" class="w-full text-center bg-white/10 hover:bg-white/20 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                                    Switch Plan
+                                </button>
+                            </form>
+                            {% else %}
+                            <button disabled class="w-full text-center bg-green-500/20 text-green-400 font-medium py-2 px-4 rounded-lg cursor-default">
+                                Current Plan
+                            </button>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Professional Plan -->
+                        <div class="glass p-6 rounded-xl {% if plan_name == 'professional' %}current-plan{% endif %}">
+                            <h3 class="text-xl font-bold text-white mb-2">Professional</h3>
+                            <div class="flex items-end mb-4">
+                                <span class="text-3xl font-bold text-white">₹{{ pricing.professional.price }}</span>
+                                <span class="text-gray-400 ml-2">/month</span>
+                            </div>
+                            <div class="border-t border-gray-700 pt-4 mb-4">
+                                <div class="pricing-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-gray-300">{{ pricing.professional.products }} products</span>
+                                </div>
+                                <div class="pricing-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-gray-300">{{ pricing.professional.users }} users</span>
+                                </div>
+                            </div>
+                            {% if plan_name != 'professional' %}
+                            <form action="{{ url_for('change_plan', plan_name='professional') }}" method="POST">
+                                <button type="submit" class="w-full text-center bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                                    Upgrade
+                                </button>
+                            </form>
+                            {% else %}
+                            <button disabled class="w-full text-center bg-green-500/20 text-green-400 font-medium py-2 px-4 rounded-lg cursor-default">
+                                Current Plan
+                            </button>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Enterprise Plan -->
+                        <div class="glass p-6 rounded-xl {% if plan_name == 'enterprise' %}current-plan{% endif %}">
+                            <h3 class="text-xl font-bold text-white mb-2">Enterprise</h3>
+                            <div class="flex items-end mb-4">
+                                <span class="text-3xl font-bold text-white">₹{{ pricing.enterprise.price }}</span>
+                                <span class="text-gray-400 ml-2">/month</span>
+                            </div>
+                            <div class="border-t border-gray-700 pt-4 mb-4">
+                                <div class="pricing-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-gray-300">{{ pricing.enterprise.products }}+ products</span>
+                                </div>
+                                <div class="pricing-feature">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="pricing-check h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="text-gray-300">{{ pricing.enterprise.users }}+ users</span>
+                                </div>
+                            </div>
+                            {% if plan_name != 'enterprise' %}
+                            <form action="{{ url_for('change_plan', plan_name='enterprise') }}" method="POST">
+                                <button type="submit" class="w-full text-center bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                                    Upgrade
+                                </button>
+                            </form>
+                            {% else %}
+                            <button disabled class="w-full text-center bg-green-500/20 text-green-400 font-medium py-2 px-4 rounded-lg cursor-default">
+                                Current Plan
+                            </button>
+                            {% endif %}
+                        </div>
                     </div>
                     
-                    <div class="flex justify-between items-center py-3 border-b border-gray-700">
-                        <span class="text-gray-400">Last Login</span>
-                        <span>{{ current_user.last_login.strftime('%B %d, %Y') if current_user.last_login else 'N/A' }}</span>
-                    </div>
-                    
-                    <div class="flex justify-between items-center py-3">
-                        <span class="text-gray-400">Account Status</span>
-                        <span class="px-2 py-1 bg-green-900 text-green-400 rounded-full text-xs">Active</span>
+                    <div class="mt-8 p-4 bg-gray-800/50 rounded-lg">
+                        <h3 class="text-lg font-semibold text-white mb-2">Plan Information</h3>
+                        <p class="text-gray-300 mb-2">Your current plan: <span class="font-medium text-pink-400">{{ plan_name|capitalize }}</span></p>
+                        <p class="text-gray-300">If you have questions about our pricing plans or need help, please <a href="{{ url_for('contact') }}" class="text-pink-400 hover:text-pink-300 underline">contact our support team</a>.</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Profile Form -->
-            <div class="glass-card p-8 md:col-span-2">
-                <h2 class="text-2xl font-bold text-gradient mb-6">Profile Settings</h2>
+            <!-- Usage Statistics Card -->
+            <div class="glass p-8 rounded-xl mt-8">
+                <h2 class="text-2xl font-bold mb-6 text-white">Your Usage Statistics</h2>
                 
-                <!-- Flash Messages -->
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        <div class="mb-6">
-                            {% for category, message in messages %}
-                                <div class="p-4 rounded-lg {% if category == 'success' %}bg-green-800 bg-opacity-40 text-green-300 border border-green-700{% else %}bg-red-800 bg-opacity-40 text-red-300 border border-red-700{% endif %} flex items-center">
-                                    <i class="{% if category == 'success' %}fas fa-check-circle text-green-400{% else %}fas fa-exclamation-circle text-red-400{% endif %} text-xl mr-3"></i>
-                                    <p>{{ message }}</p>
-                                </div>
-                            {% endfor %}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-800/50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-white mb-3">Products</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Used</span>
+                            <span id="products-count" class="text-white font-medium">Loading...</span>
                         </div>
-                    {% endif %}
-                {% endwith %}
-
-                <form action="{{ url_for('profile') }}" method="POST" class="space-y-6">
-                    <!-- Business Information Section -->
-                    <div class="form-section glass-card p-6">
-                        <h3 class="text-lg font-medium mb-4 flex items-center">
-                            <i class="fas fa-building mr-2 text-blue-400"></i> Business Information
-                        </h3>
-                        
-                        <div class="mb-4">
-                            <label class="block text-gray-300 text-sm mb-2">Business Name</label>
-                            <div class="relative">
-                                <input type="text" name="business_name" value="{{ current_user.business_name }}" 
-                                    class="form-input w-full px-4 py-3 pl-10"
-                                    placeholder="Enter your business name">
-                                <i class="fas fa-store absolute left-3 top-3.5 input-icon"></i>
-                            </div>
+                        <div class="mt-2 h-3 bg-gray-700 rounded-full overflow-hidden">
+                            <div id="products-bar" class="h-full bg-gradient-to-r from-pink-500 to-purple-600" style="width: 0%"></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="text-gray-300 text-xs">0</span>
+                            <span class="text-gray-300 text-xs">Limit: {{ plan_details.products }}</span>
                         </div>
                     </div>
                     
-                    <!-- Contact Information Section -->
-                    <div class="form-section glass-card p-6">
-                        <h3 class="text-lg font-medium mb-4 flex items-center">
-                            <i class="fas fa-address-card mr-2 text-blue-400"></i> Contact Information
-                        </h3>
-                        
-                        <div class="mb-4">
-                            <label class="block text-gray-300 text-sm mb-2">Email Address</label>
-                            <div class="relative">
-                                <input type="email" name="email" value="{{ current_user.email }}" 
-                                    class="form-input w-full px-4 py-3 pl-10"
-                                    placeholder="Enter your email">
-                                <i class="fas fa-envelope absolute left-3 top-3.5 input-icon"></i>
-                            </div>
+                    <div class="bg-gray-800/50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-white mb-3">Users</h3>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Used</span>
+                            <span id="users-count" class="text-white font-medium">1</span>
                         </div>
-                        
-                        <div>
-                            <label class="block text-gray-300 text-sm mb-2">Phone Number</label>
-                            <div class="relative">
-                                <input type="text" name="phone" value="{{ current_user.phone }}" 
-                                    class="form-input w-full px-4 py-3 pl-10"
-                                    placeholder="Enter your phone number">
-                                <i class="fas fa-phone absolute left-3 top-3.5 input-icon"></i>
-                            </div>
+                        <div class="mt-2 h-3 bg-gray-700 rounded-full overflow-hidden">
+                            <div id="users-bar" class="h-full bg-gradient-to-r from-pink-500 to-purple-600" style="width: calc(100% / {{ plan_details.users }})"></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-2">
+                            <span class="text-gray-300 text-xs">0</span>
+                            <span class="text-gray-300 text-xs">Limit: {{ plan_details.users }}</span>
                         </div>
                     </div>
                     
-                    <!-- Security Section (Optional) -->
-                    <div class="form-section glass-card p-6">
-                        <h3 class="text-lg font-medium mb-4 flex items-center">
-                            <i class="fas fa-shield-alt mr-2 text-blue-400"></i> Security
-                        </h3>
-                        
-                        <a href="{{ url_for('change_password') if 'change_password' in url_for_map else '#' }}" class="text-blue-400 hover:text-blue-300 transition-colors flex items-center">
-                            <i class="fas fa-key mr-2"></i> Change Password
-                        </a>
+                    <div class="bg-gray-800/50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-white mb-3">Billing</h3>
+                        <p class="text-white font-medium mb-2">${{ plan_details.price }}/month</p>
+                        <p class="text-gray-300 text-sm mb-4">Next billing date: <span class="text-white">Coming soon</span></p>
+                        <a href="#" class="inline-block text-pink-400 hover:text-pink-300 font-medium">View billing history</a>
                     </div>
-                    
-                    <!-- Submit Button -->
-                    <button type="submit" class="btn-primary w-full py-3 flex items-center justify-center">
-                        <i class="fas fa-save mr-2"></i> Save Changes
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
     </div>
+    
+    <script>
+        // Fetch product count and update the usage bars
+        document.addEventListener('DOMContentLoaded', function() {
+            // For a real application, you would fetch this data from the server
+            // For now, we'll just simulate it
+                setTimeout(function() {
+                    const productCount = Math.floor(Math.random() * {{ plan_details.products }});
+                    document.getElementById('products-count').textContent = `${productCount} / {{ plan_details.products }}`;
+                    
+                    const percentage = (productCount / {{ plan_details.products }}) * 100;
+                    document.getElementById('products-bar').style.width = `${percentage}%`;
+                }, 500);
+            });
+        </script>
 </body>
 </html>
