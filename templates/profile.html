@@ -3,43 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Profile | Inventory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .form-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-input:focus {
+            border-color: rgba(59, 130, 246, 0.7);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+            background: rgba(15, 23, 42, 0.8);
+            outline: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border-radius: 10px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .avatar-ring {
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            padding: 4px;
+            border-radius: 50%;
+        }
+        
+        .form-section {
+            transition: all 0.3s ease;
+        }
+        
+        .form-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .input-icon {
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus ~ .input-icon {
+            color: #3b82f6;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
-    
-    
-    <div class="w-full max-w-lg bg-gray-800 p-6 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-semibold text-center mb-4">Profile Settings</h2>
-
-        <form action="{{ url_for('profile_update') }}" method="POST" class="space-y-4">
-            <div>
-                <label class="block text-gray-300">Business Name</label>
-                <input type="text" name="business_name" value="{{ current_user.business_name }}" 
-                    class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:ring focus:ring-blue-500"
-                    title="Business Name" placeholder="Enter your business name">
+<body class="p-4 md:p-8">
+    <div class="container mx-auto max-w-6xl fade-in">
+        
+        <!-- Navigation Bar -->
+        <div class="flex justify-between items-center mb-8">
+            <a href="{{ url_for('dashboard') }}" class="text-gray-300 hover:text-white transition-colors flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
+            </a>
+            <a href="{{ url_for('logout') }}" class="text-red-400 hover:text-red-300 transition-colors flex items-center">
+                <i class="fas fa-sign-out-alt mr-2"></i> Logout
+            </a>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- User Profile Card -->
+            <div class="glass-card p-8 flex flex-col items-center">
+                <div class="avatar-ring mb-6">
+                    <div class="w-32 h-32 rounded-full bg-gray-800 flex items-center justify-center text-5xl text-blue-400">
+                        {{ current_user.username[0]|upper }}
+                    </div>
+                </div>
+                
+                <h2 class="text-xl font-semibold mb-1">{{ current_user.username }}</h2>
+                <p class="text-gray-400 text-sm mb-6">Account Owner</p>
+                
+                <div class="w-full">
+                    <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                        <span class="text-gray-400">Member Since</span>
+                        <span>{{ current_user.created_at.strftime('%B %d, %Y') if current_user.created_at else 'N/A' }}</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                        <span class="text-gray-400">Last Login</span>
+                        <span>{{ current_user.last_login.strftime('%B %d, %Y') if current_user.last_login else 'N/A' }}</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center py-3">
+                        <span class="text-gray-400">Account Status</span>
+                        <span class="px-2 py-1 bg-green-900 text-green-400 rounded-full text-xs">Active</span>
+                    </div>
+                </div>
             </div>
             
-            <div>
-                <label class="block text-gray-300">Email</label>
-                <input type="email" name="email" value="{{ current_user.email }}" 
-                    class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:ring focus:ring-blue-500"
-                    title="Email" placeholder="Enter your email">
-            </div>
+            <!-- Profile Form -->
+            <div class="glass-card p-8 md:col-span-2">
+                <h2 class="text-2xl font-bold text-gradient mb-6">Profile Settings</h2>
+                
+                <!-- Flash Messages -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="mb-6">
+                            {% for category, message in messages %}
+                                <div class="p-4 rounded-lg {% if category == 'success' %}bg-green-800 bg-opacity-40 text-green-300 border border-green-700{% else %}bg-red-800 bg-opacity-40 text-red-300 border border-red-700{% endif %} flex items-center">
+                                    <i class="{% if category == 'success' %}fas fa-check-circle text-green-400{% else %}fas fa-exclamation-circle text-red-400{% endif %} text-xl mr-3"></i>
+                                    <p>{{ message }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
 
-            <div>
-                <label class="block text-gray-300">Phone</label>
-                <input type="text" name="phone" value="{{ current_user.phone }}" 
-                    class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:ring focus:ring-blue-500"
-                    title="Phone" placeholder="Enter your phone number">
+                <form action="{{ url_for('profile') }}" method="POST" class="space-y-6">
+                    <!-- Business Information Section -->
+                    <div class="form-section glass-card p-6">
+                        <h3 class="text-lg font-medium mb-4 flex items-center">
+                            <i class="fas fa-building mr-2 text-blue-400"></i> Business Information
+                        </h3>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-300 text-sm mb-2">Business Name</label>
+                            <div class="relative">
+                                <input type="text" name="business_name" value="{{ current_user.business_name }}" 
+                                    class="form-input w-full px-4 py-3 pl-10"
+                                    placeholder="Enter your business name">
+                                <i class="fas fa-store absolute left-3 top-3.5 input-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Information Section -->
+                    <div class="form-section glass-card p-6">
+                        <h3 class="text-lg font-medium mb-4 flex items-center">
+                            <i class="fas fa-address-card mr-2 text-blue-400"></i> Contact Information
+                        </h3>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-300 text-sm mb-2">Email Address</label>
+                            <div class="relative">
+                                <input type="email" name="email" value="{{ current_user.email }}" 
+                                    class="form-input w-full px-4 py-3 pl-10"
+                                    placeholder="Enter your email">
+                                <i class="fas fa-envelope absolute left-3 top-3.5 input-icon"></i>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-300 text-sm mb-2">Phone Number</label>
+                            <div class="relative">
+                                <input type="text" name="phone" value="{{ current_user.phone }}" 
+                                    class="form-input w-full px-4 py-3 pl-10"
+                                    placeholder="Enter your phone number">
+                                <i class="fas fa-phone absolute left-3 top-3.5 input-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Security Section (Optional) -->
+                    <div class="form-section glass-card p-6">
+                        <h3 class="text-lg font-medium mb-4 flex items-center">
+                            <i class="fas fa-shield-alt mr-2 text-blue-400"></i> Security
+                        </h3>
+                        
+                        <a href="{{ url_for('change_password') if 'change_password' in url_for_map else '#' }}" class="text-blue-400 hover:text-blue-300 transition-colors flex items-center">
+                            <i class="fas fa-key mr-2"></i> Change Password
+                        </a>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-primary w-full py-3 flex items-center justify-center">
+                        <i class="fas fa-save mr-2"></i> Save Changes
+                    </button>
+                </form>
             </div>
-
-            <button type="submit" 
-                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg">
-                Update Profile
-            </button>
-        </form>
+        </div>
     </div>
 </body>
 </html>

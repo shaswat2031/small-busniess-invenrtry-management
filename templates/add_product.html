@@ -6,144 +6,386 @@
     <title>Add Product | Inventory Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom gradient background */
+        /* Base styles */
         body {
-            background: linear-gradient(135deg, #1e3a8a, #111827);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e0e0e0;
+            min-height: 100vh;
         }
-        /* Smooth transitions */
-        .transition-smooth {
-            transition: all 0.3s ease-in-out;
+        
+        /* Advanced glass effect */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                        0 1px 2px rgba(0, 0, 0, 0.2),
+                        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
         }
-        /* Hover effect for buttons */
-        .hover-effect:hover {
-            transform: translateY(-2px);
+        
+        /* Form input styling */
+        .form-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-input:focus {
+            border-color: rgba(59, 130, 246, 0.7);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+            background: rgba(15, 23, 42, 0.8);
+            outline: none;
+        }
+        
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Label animations */
+        .label-active .input-label {
+            transform: translateY(-20px) scale(0.85);
+            color: #3b82f6;
+            opacity: 1;
+        }
+        
+        .input-label {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            position: absolute;
+            top: 13px;
+            left: 16px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Button styles */
+        .primary-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border-radius: 10px;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.4);
+        }
+        
+        .primary-btn::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .primary-btn:hover::after {
+            left: 100%;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: rgba(15, 23, 42, 0.95);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        /* Text gradient */
+        .text-gradient {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        /* Form section dividers */
+        .form-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            margin: 24px 0;
+        }
+        
+        /* Input icons */
+        .input-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus + .input-icon {
+            color: #3b82f6;
         }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen px-4">
+<body class="flex items-center justify-center min-h-screen p-4">
     
     <!-- Back Button (Top Left) -->
-    <a href="{{ url_for('dashboard') }}" class="absolute top-6 left-6 bg-gray-700 text-white px-4 py-2 rounded-lg flex items-center hover:bg-gray-600 transition-smooth hover-effect">
-        <i class="fas fa-arrow-left mr-2"></i> Back
+    <a href="{{ url_for('dashboard') }}" class="absolute top-6 left-6 bg-black bg-opacity-30 backdrop-filter backdrop-blur-md text-white px-5 py-2.5 rounded-full flex items-center hover:bg-opacity-50 transition-all duration-300 border border-white border-opacity-10">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Dashboard
     </a>
 
     <!-- Main Form Container -->
-    <div class="bg-gray-800 p-8 rounded-lg shadow-2xl w-full max-w-md border border-gray-700 relative transform transition-smooth hover:scale-101">
-        <h2 class="text-3xl font-bold text-center text-white mb-6 flex items-center justify-center">
-            <i class="fas fa-cart-plus mr-2"></i> Add a New Product
-        </h2>
-        <p class="text-gray-400 text-center mb-6">Fill in the details below to add a product to your inventory.</p>
+    <div class="glass-card p-8 w-full max-w-md fade-in relative">
+        <!-- Form Header -->
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center mb-4 shadow-lg">
+                <i class="fas fa-plus text-white text-xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gradient mb-2">Add New Product</h2>
+            <p class="text-gray-400 text-sm">Fill in the details to add a product to your inventory</p>
+        </div>
 
         <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-        <div class="mb-6">
+        <div class="mb-6 fade-in">
             {% for category, message in messages %}
-            <p class="bg-red-700 text-white p-3 rounded text-center">{{ message }}</p>
+            <div class="bg-red-800 bg-opacity-70 border border-red-700 text-white p-4 rounded-lg text-center flex items-center">
+                <i class="fas fa-exclamation-circle mr-2 text-red-300"></i>
+                <p>{{ message }}</p>
+            </div>
             {% endfor %}
         </div>
         {% endif %}
         {% endwith %}
 
         <!-- Form -->
-        <form method="POST" class="space-y-6">
-            <!-- Product Name -->
-            <div>
-                <label class="block text-gray-300 font-semibold mb-2">Product Name:</label>
-                <input 
-                    type="text" 
-                    name="product_name" 
-                    placeholder="Enter product name" 
-                    required 
-                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-smooth"
-                />
+        <form method="POST" class="space-y-5" id="product-form">
+            <!-- Basic Info Section -->
+            <div class="mb-2">
+                <h3 class="text-sm uppercase tracking-wider text-blue-400 font-semibold mb-3">Basic Information</h3>
+                
+                <!-- Product Name -->
+                <div class="relative mb-5">
+                    <input 
+                        type="text" 
+                        id="product_name"
+                        name="product_name" 
+                        placeholder="Product Name" 
+                        required 
+                        class="form-input w-full p-3 pl-4 pr-10"
+                    />
+                    <i class="fas fa-box input-icon"></i>
+                </div>
+
+                <!-- Description -->
+                <div class="relative">
+                    <textarea 
+                        id="description"
+                        name="description" 
+                        placeholder="Product Description" 
+                        rows="3"
+                        class="form-input w-full p-3 pl-4 resize-none"
+                    ></textarea>
+                </div>
             </div>
 
-            <!-- Description -->
-            <div>
-                <label class="block text-gray-300 font-semibold mb-2">Description:</label>
-                <textarea 
-                    name="description" 
-                    placeholder="Enter product description (optional)" 
-                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-smooth"
-                ></textarea>
+            <div class="form-divider"></div>
+
+            <!-- Pricing & Stock Section -->
+            <div class="mb-2">
+                <h3 class="text-sm uppercase tracking-wider text-blue-400 font-semibold mb-3">Pricing & Inventory</h3>
+                
+                <!-- Price and Stock in 2 columns -->
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Price -->
+                    <div class="relative">
+                        <input 
+                            type="number" 
+                            id="price"
+                            name="price" 
+                            placeholder="Price (₹)" 
+                            step="0.01"
+                            min="0" 
+                            required 
+                            class="form-input w-full p-3 pl-4 pr-10"
+                        />
+                        <i class="fas fa-rupee-sign input-icon"></i>
+                    </div>
+
+                    <!-- Stock Quantity -->
+                    <div class="relative">
+                        <input 
+                            type="number" 
+                            id="stock"
+                            name="stock" 
+                            placeholder="Stock Quantity" 
+                            min="0" 
+                            required 
+                            class="form-input w-full p-3 pl-4 pr-10"
+                        />
+                        <i class="fas fa-cubes input-icon"></i>
+                    </div>
+                </div>
+                
+                <!-- Low Stock Alert -->
+                <div class="relative mt-4">
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-sm text-gray-400">Low Stock Alert Threshold</label>
+                        <div class="tooltip">
+                            <i class="fas fa-question-circle text-gray-500 text-sm"></i>
+                            <span class="tooltip-text">You'll receive an alert when stock falls below this level</span>
+                        </div>
+                    </div>
+                    <input 
+                        type="number" 
+                        id="low_stock_threshold"
+                        name="low_stock_threshold" 
+                        placeholder="Low Stock Alert Level" 
+                        min="1" 
+                        required 
+                        class="form-input w-full p-3 pl-4 pr-10"
+                    />
+                    <i class="fas fa-exclamation-triangle input-icon"></i>
+                </div>
             </div>
 
-            <!-- Price -->
-            <div>
-                <label class="block text-gray-300 font-semibold mb-2">Price (₹):</label>
-                <input 
-                    type="number" 
-                    name="price" 
-                    placeholder="Enter product price" 
-                    required 
-                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-smooth"
-                />
+            <div class="form-divider"></div>
+
+            <!-- Barcode Section -->
+            <div class="mb-3">
+                <h3 class="text-sm uppercase tracking-wider text-blue-400 font-semibold mb-3">Product Identification</h3>
+                
+                <!-- Barcode -->
+                <div class="relative">
+                    <div class="flex items-center justify-between mb-1">
+                        <label class="text-sm text-gray-400">Barcode (Optional)</label>
+                        <div class="tooltip">
+                            <i class="fas fa-question-circle text-gray-500 text-sm"></i>
+                            <span class="tooltip-text">Scan a barcode or enter manually to identify this product</span>
+                        </div>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="barcode" 
+                        name="barcode"
+                        class="form-input w-full p-3 pl-4 pr-10"
+                        placeholder="Scan or Enter Barcode"
+                    />
+                    <i class="fas fa-barcode input-icon"></i>
+                </div>
             </div>
 
-            <!-- Stock Quantity -->
-            <div>
-                <label class="block text-gray-300 font-semibold mb-2">Stock Quantity:</label>
-                <input 
-                    type="number" 
-                    name="stock" 
-                    placeholder="Enter stock quantity" 
-                    required 
-                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-smooth"
-                />
+            <!-- Progress Bar -->
+            <div class="w-full h-1.5 bg-gray-700 rounded-full mt-6 mb-2 overflow-hidden">
+                <div id="form-progress" class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 w-0 transition-all duration-500"></div>
             </div>
-
-            <!-- Low Stock Alert -->
-            <div>
-                <label class="block text-gray-300 font-semibold mb-2">Low Stock Alert Level:</label>
-                <input 
-                    type="number" 
-                    name="low_stock_threshold" 
-                    placeholder="Set low stock alert threshold" 
-                    required 
-                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-smooth"
-                />
-            </div>
-
-            <!-- Barcode -->
-            <div>
-                <label class="block text-gray-300 font-semibold mb-2">Scan or Enter Barcode:</label>
-                <input 
-                    type="text" 
-                    id="barcode" 
-                    name="barcode"
-                    class="w-full p-3 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-smooth"
-                    autofocus 
-                    title="Scan or Enter Barcode"
-                    placeholder="Scan or Enter Barcode"
-                />
-            </div>
+            <p id="progress-text" class="text-xs text-gray-400 text-right mb-4">Fill out all required fields</p>
 
             <!-- Submit Button -->
             <button 
                 type="submit" 
-                class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-smooth hover-effect flex items-center justify-center"
+                id="submit-btn"
+                class="primary-btn w-full p-3.5 flex items-center justify-center"
             >
-                <i class="fas fa-plus mr-2"></i> Add Product
+                <i class="fas fa-plus-circle mr-2"></i> Add Product
             </button>
         </form>
 
         <!-- View All Products Link -->
         <p class="text-center mt-6">
-            <a href="{{ url_for('view_products') }}" class="text-blue-400 hover:underline hover:text-blue-300 transition-smooth">
-                <i class="fas fa-search mr-2"></i> View All Products
+            <a href="{{ url_for('view_products') }}" class="text-blue-400 hover:text-blue-300 transition flex items-center justify-center">
+                <i class="fas fa-th-list mr-2"></i> View All Products
             </a>
         </p>
     </div>
 
-    <!-- Barcode Auto-Submit Script -->
+    <!-- Form Validation and Progress Script -->
     <script>
-        document.getElementById("barcode").addEventListener("change", function () {
-            this.form.submit();
+        // Form progress tracking
+        const form = document.getElementById('product-form');
+        const requiredInputs = form.querySelectorAll('input[required]');
+        const progressBar = document.getElementById('form-progress');
+        const progressText = document.getElementById('progress-text');
+        const submitBtn = document.getElementById('submit-btn');
+        
+        function updateProgress() {
+            let filledCount = 0;
+            requiredInputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    filledCount++;
+                }
+            });
+            
+            const progressPercentage = (filledCount / requiredInputs.length) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+            
+            if (progressPercentage < 100) {
+                progressText.textContent = `${filledCount} of ${requiredInputs.length} required fields completed`;
+                submitBtn.disabled = true;
+                submitBtn.classList.add('opacity-70');
+            } else {
+                progressText.textContent = 'All required fields completed!';
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-70');
+            }
+        }
+        
+        requiredInputs.forEach(input => {
+            input.addEventListener('input', updateProgress);
+        });
+        
+        // Initialize progress
+        updateProgress();
+        
+        // Barcode auto-submit (optional)
+        document.getElementById("barcode").addEventListener("change", function() {
+            // Uncomment to enable auto-submit when barcode is scanned
+            // if (this.value.trim() !== '') {
+            //    this.form.submit();
+            // }
         });
     </script>
-
 </body>
 </html>

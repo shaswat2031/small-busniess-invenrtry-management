@@ -5,26 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales History</title>
     <script src="https://cdn.tailwindcss.com"></script> <!-- Tailwind CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .gradient-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transition: all 0.3s ease;
+        }
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
+        }
+        .gradient-red-btn {
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            transition: all 0.3s ease;
+        }
+        .gradient-red-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+        }
+        .gradient-green-btn {
+            background: linear-gradient(135deg, #10b981, #047857);
+            transition: all 0.3s ease;
+        }
+        .gradient-green-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
 </head>
 <body class="bg-gray-900 text-white">
 
 <div class="container mx-auto p-6">
-    <!-- Page Title -->
-    <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-white">📊 Sales History</h1>
-        <a href="{{ url_for('dashboard') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition">
-            ⬅ Back to Dashboard
+    <!-- Page Title with Gradient -->
+    <div class="flex justify-between items-center mb-6 p-4 bg-gray-800 rounded-lg shadow-lg">
+        <div>
+            <h1 class="text-3xl font-bold gradient-text">📊 Sales History</h1>
+            <p class="text-gray-400 mt-1 text-sm">View and manage your transaction records</p>
+        </div>
+        <a href="{{ url_for('dashboard') }}" class="gradient-btn text-white px-5 py-2.5 rounded-lg shadow font-medium flex items-center space-x-2">
+            <span>⬅</span>
+            <span>Back to Dashboard</span>
         </a>
     </div>
-
-    <!-- Export and Delete All Sales Buttons -->
-    <div class="flex justify-between mb-4">
-        <a href="{{ url_for('export_sales') }}" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 transition">
-            📥 Download Sales Report
+    
+    <!-- Enhanced Export and Delete All Sales Buttons -->
+    <div class="flex justify-between mb-6">
+        <a href="{{ url_for('export_sales') }}" class="gradient-green-btn text-white px-5 py-2.5 rounded-lg shadow font-medium flex items-center space-x-2">
+            <span>📥</span>
+            <span>Download Sales Report</span>
         </a>
         <form action="{{ url_for('delete_all_sales') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete ALL sales?')">
-            <button type="submit" class="bg-red-700 text-white px-4 py-2 rounded-lg shadow hover:bg-red-800 transition">
-                ❌ Delete All Sales
+            <button type="submit" class="gradient-red-btn text-white px-5 py-2.5 rounded-lg shadow font-medium flex items-center space-x-2">
+                <span>❌</span>
+                <span>Delete All Sales</span>
             </button>
         </form>
     </div>
@@ -52,7 +93,7 @@
                     </td>
                     <td class="border border-gray-700 px-6 py-3 text-center">
                         <form action="{{ url_for('delete_sale', sale_id=sale._id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
-                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition shadow">
+                            <button type="submit" class="gradient-red-btn text-white px-4 py-2 rounded-lg hover:bg-red-600 transition shadow">
                                 🗑 Delete
                             </button>
                         </form>
