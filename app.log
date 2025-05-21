@@ -818,3 +818,122 @@
 2025-05-21 09:05:03,511 [INFO] Found 1 products
 2025-05-21 09:05:03,513 [INFO] 127.0.0.1 - - [21/May/2025 09:05:03] "GET /view_products HTTP/1.1" 200 -
 2025-05-21 09:05:05,604 [INFO] 127.0.0.1 - - [21/May/2025 09:05:05] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:05:56,582 [INFO] 127.0.0.1 - - [21/May/2025 09:05:56] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:05:57,766 [INFO] 127.0.0.1 - - [21/May/2025 09:05:57] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:06:03,799 [INFO] 127.0.0.1 - - [21/May/2025 09:06:03] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:06:06,756 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:06:06,757 [INFO] Found 1 products
+2025-05-21 09:06:06,758 [INFO] 127.0.0.1 - - [21/May/2025 09:06:06] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:06:08,781 [INFO] 127.0.0.1 - - [21/May/2025 09:06:08] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:11,135 [ERROR] Payment error for user Vaibhav: 'team_member'
+2025-05-21 09:06:11,136 [INFO] 127.0.0.1 - - [21/May/2025 09:06:11] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-21 09:06:11,151 [INFO] 127.0.0.1 - - [21/May/2025 09:06:11] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:11,650 [INFO] 127.0.0.1 - - [21/May/2025 09:06:11] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:13,436 [INFO] 127.0.0.1 - - [21/May/2025 09:06:13] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:06:16,705 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:06:16,706 [INFO] Found 1 products
+2025-05-21 09:06:16,708 [INFO] 127.0.0.1 - - [21/May/2025 09:06:16] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:06:20,869 [INFO] 127.0.0.1 - - [21/May/2025 09:06:20] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:22,213 [INFO] 127.0.0.1 - - [21/May/2025 09:06:22] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-21 09:06:22,233 [INFO] 127.0.0.1 - - [21/May/2025 09:06:22] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:24,351 [INFO] 127.0.0.1 - - [21/May/2025 09:06:24] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:26,303 [INFO] 127.0.0.1 - - [21/May/2025 09:06:26] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:06:31,980 [INFO] 127.0.0.1 - - [21/May/2025 09:06:31] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:06:34,624 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:06:34,625 [INFO] Found 1 products
+2025-05-21 09:06:34,626 [INFO] 127.0.0.1 - - [21/May/2025 09:06:34] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:06:39,226 [INFO] 127.0.0.1 - - [21/May/2025 09:06:39] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:06:42,875 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:06:42,877 [INFO] Found 1 products
+2025-05-21 09:06:42,879 [INFO] 127.0.0.1 - - [21/May/2025 09:06:42] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:06:45,246 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:06:45,248 [INFO] Found 1 products
+2025-05-21 09:06:45,249 [INFO] 127.0.0.1 - - [21/May/2025 09:06:45] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:06:51,698 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:06:51,700 [INFO] Found 1 products
+2025-05-21 09:06:51,701 [INFO] 127.0.0.1 - - [21/May/2025 09:06:51] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:06:54,180 [INFO] 127.0.0.1 - - [21/May/2025 09:06:54] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:56,216 [ERROR] Payment error for user Vaibhav: 'team_member'
+2025-05-21 09:06:56,217 [INFO] 127.0.0.1 - - [21/May/2025 09:06:56] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-21 09:06:56,232 [INFO] 127.0.0.1 - - [21/May/2025 09:06:56] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:58,224 [ERROR] Payment error for user Vaibhav: 'team_member'
+2025-05-21 09:06:58,226 [INFO] 127.0.0.1 - - [21/May/2025 09:06:58] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-21 09:06:58,240 [INFO] 127.0.0.1 - - [21/May/2025 09:06:58] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:06:59,847 [ERROR] Payment error for user Vaibhav: 'team_member'
+2025-05-21 09:06:59,849 [INFO] 127.0.0.1 - - [21/May/2025 09:06:59] "[32mPOST /change_plan/enterprise HTTP/1.1[0m" 302 -
+2025-05-21 09:06:59,864 [INFO] 127.0.0.1 - - [21/May/2025 09:06:59] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:07:03,136 [ERROR] Payment error for user Vaibhav: 'team_member'
+2025-05-21 09:07:03,139 [INFO] 127.0.0.1 - - [21/May/2025 09:07:03] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-21 09:07:03,154 [INFO] 127.0.0.1 - - [21/May/2025 09:07:03] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:07:07,352 [INFO] 127.0.0.1 - - [21/May/2025 09:07:07] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:07:08,663 [INFO] 127.0.0.1 - - [21/May/2025 09:07:08] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:07:08,813 [INFO] 127.0.0.1 - - [21/May/2025 09:07:08] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:07:08,919 [INFO] 127.0.0.1 - - [21/May/2025 09:07:08] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:07:09,057 [INFO] 127.0.0.1 - - [21/May/2025 09:07:09] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:07:09,177 [INFO] 127.0.0.1 - - [21/May/2025 09:07:09] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:07:18,246 [INFO] Starting Inventory Manager application
+2025-05-21 09:07:18,291 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 09:07:18,292 [INFO] [33mPress CTRL+C to quit[0m
+2025-05-21 09:07:18,310 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 09:07:19,699 [INFO] Starting Inventory Manager application
+2025-05-21 09:07:19,724 [WARNING]  * Debugger is active!
+2025-05-21 09:07:19,733 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 09:07:21,152 [INFO] 127.0.0.1 - - [21/May/2025 09:07:21] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:07:24,105 [INFO] 127.0.0.1 - - [21/May/2025 09:07:24] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:07:53,838 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:07:53,840 [INFO] Found 1 products
+2025-05-21 09:07:53,858 [INFO] 127.0.0.1 - - [21/May/2025 09:07:53] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:07:56,586 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:07:56,588 [INFO] Found 1 products
+2025-05-21 09:07:56,589 [INFO] 127.0.0.1 - - [21/May/2025 09:07:56] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:09:23,862 [INFO] Processing sell for product ID: 682d44b538c4d60ba6637ab5, owner ID: 682d43407385924ffc9b3c75
+2025-05-21 09:09:23,867 [INFO] Selling 40 units of 'sdd'
+2025-05-21 09:09:23,877 [INFO] 127.0.0.1 - - [21/May/2025 09:09:23] "[32mPOST /sell_product/682d44b538c4d60ba6637ab5 HTTP/1.1[0m" 302 -
+2025-05-21 09:09:23,884 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:09:23,887 [INFO] Found 1 products
+2025-05-21 09:09:23,887 [INFO] 127.0.0.1 - - [21/May/2025 09:09:23] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:09:26,210 [INFO] 127.0.0.1 - - [21/May/2025 09:09:26] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:09:46,793 [INFO] Processing sell for product ID: 682d44b538c4d60ba6637ab5, owner ID: 682d43407385924ffc9b3c75
+2025-05-21 09:09:46,795 [INFO] Selling 40 units of 'sdd'
+2025-05-21 09:09:46,798 [INFO] 127.0.0.1 - - [21/May/2025 09:09:46] "[32mPOST /sell_product/682d44b538c4d60ba6637ab5 HTTP/1.1[0m" 302 -
+2025-05-21 09:09:46,805 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:09:46,808 [INFO] Found 1 products
+2025-05-21 09:09:46,810 [INFO] 127.0.0.1 - - [21/May/2025 09:09:46] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:09:53,442 [INFO] 127.0.0.1 - - [21/May/2025 09:09:53] "GET /edit_product/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:09:58,861 [INFO] 127.0.0.1 - - [21/May/2025 09:09:58] "[32mPOST /edit_product/682d44b538c4d60ba6637ab5 HTTP/1.1[0m" 302 -
+2025-05-21 09:09:58,868 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:09:58,869 [INFO] Found 1 products
+2025-05-21 09:09:58,870 [INFO] 127.0.0.1 - - [21/May/2025 09:09:58] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:10:03,049 [INFO] 127.0.0.1 - - [21/May/2025 09:10:03] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:10:05,498 [INFO] 127.0.0.1 - - [21/May/2025 09:10:05] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:10:12,326 [INFO] 127.0.0.1 - - [21/May/2025 09:10:12] "GET /edit_product/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:10:18,212 [INFO] 127.0.0.1 - - [21/May/2025 09:10:18] "[32mPOST /edit_product/682d44b538c4d60ba6637ab5 HTTP/1.1[0m" 302 -
+2025-05-21 09:10:18,222 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:10:18,224 [INFO] Found 1 products
+2025-05-21 09:10:18,227 [INFO] 127.0.0.1 - - [21/May/2025 09:10:18] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:11:24,832 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:11:24,839 [INFO] Found 1 products
+2025-05-21 09:11:25,278 [INFO] 127.0.0.1 - - [21/May/2025 09:11:25] "[35m[1mGET /view_products HTTP/1.1[0m" 500 -
+2025-05-21 09:11:25,553 [INFO] 127.0.0.1 - - [21/May/2025 09:11:25] "GET /view_products?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-05-21 09:11:25,555 [INFO] 127.0.0.1 - - [21/May/2025 09:11:25] "GET /view_products?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-21 09:11:25,694 [INFO] 127.0.0.1 - - [21/May/2025 09:11:25] "GET /view_products?__debugger__=yes&cmd=resource&f=console.png&s=jpwPvfQfL1ef3236ldQN HTTP/1.1" 200 -
+2025-05-21 09:11:25,750 [INFO] 127.0.0.1 - - [21/May/2025 09:11:25] "GET /view_products?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-21 09:12:00,148 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:12:00,150 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:12:01,006 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 09:12:03,109 [INFO] Starting Inventory Manager application
+2025-05-21 09:12:03,147 [WARNING]  * Debugger is active!
+2025-05-21 09:12:03,158 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 09:12:32,985 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:12:32,987 [INFO] Found 1 products
+2025-05-21 09:12:33,009 [INFO] 127.0.0.1 - - [21/May/2025 09:12:33] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:12:42,432 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:12:42,434 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:12:43,232 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 09:12:47,018 [INFO] Starting Inventory Manager application
+2025-05-21 09:12:47,078 [WARNING]  * Debugger is active!
+2025-05-21 09:12:47,094 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 09:13:20,354 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:13:20,385 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:13:21,084 [INFO]  * Restarting with watchdog (windowsapi)

@@ -40,7 +40,25 @@
 </head>
 <body class="bg-[#0a0a0a] min-h-screen p-8">
     <div class="container mx-auto max-w-7xl">
-        <!-- Plan Notification -->
+        <!-- Add team member info notice -->
+        {% if is_team_member and owner_info %}
+        <div class="glass p-4 mb-8 border-l-4 border-blue-500">
+            <div class="flex items-center">
+                <div class="mr-4 text-blue-500">
+                    <i class="fas fa-info-circle text-3xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-white">Team Member Access</h3>
+                    <p class="text-gray-400">
+                        You're accessing this as a team member of {{ owner_info.business_name }}.
+                        Feature availability is determined by your organization's {{ owner_info.plan|capitalize }} plan.
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Modified plan notification to handle team members -->
         {% if basic_analytics_only %}
         <div class="glass p-4 mb-8 border-l-4 border-yellow-500">
             <div class="flex items-center">
@@ -49,13 +67,22 @@
                 </div>
                 <div>
                     <h3 class="text-lg font-medium text-white">Limited Analytics Available</h3>
-                    <p class="text-gray-400">Your Starter plan (₹{{ plan_details.price }}/month) includes basic sales data only.</p>
+                    
+                    {% if is_team_member and owner_info %}
+                    <p class="text-gray-400">
+                        Your organization is on the {{ owner_info.plan|capitalize }} plan which includes basic sales data only.
+                    </p>
+                    {% else %}
+                    <p class="text-gray-400">
+                        Your {{ plan_name|capitalize }} plan (₹{{ plan_details.price }}/month) includes basic sales data only.
+                    </p>
                     <div class="mt-2">
                         <a href="{{ url_for('profile') }}" class="bg-gradient-to-r from-yellow-500 to-orange-600 px-4 py-2 rounded-lg text-white font-medium inline-flex items-center gap-2 hover:from-yellow-600 hover:to-orange-700 transition-all">
                             <i class="fas fa-arrow-up"></i>
                             <span>Upgrade to Professional for ₹{{ pricing.professional.price }}/month</span>
                         </a>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -158,11 +185,20 @@
             <div class="bg-gray-800/50 p-6 rounded-lg text-center">
                 <i class="fas fa-lock text-4xl text-gray-500 mb-4"></i>
                 <h3 class="text-lg font-medium text-white mb-2">Advanced Analytics Locked</h3>
-                <p class="text-gray-400 mb-4">Unlock detailed charts and analytics by upgrading to Professional or Enterprise plan.</p>
-                <a href="{{ url_for('profile') }}" class="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-lg text-white inline-flex items-center gap-2 hover:from-blue-600 hover:to-purple-700 transition-all">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Upgrade Your Plan</span>
-                </a>
+                
+                {% if is_team_member and owner_info %}
+                <p class="text-gray-400 mb-4">
+                    Ask your business administrator to upgrade to Professional or Enterprise plan to unlock detailed charts.
+                </p>
+                {% else %}
+                <p class="text-gray-400 mb-4">
+                    Unlock detailed charts and analytics by upgrading to Professional or Enterprise plan.
+                    <a href="{{ url_for('profile') }}" class="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-lg text-white inline-flex items-center gap-2 hover:from-blue-600 hover:to-purple-700 transition-all mt-4">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Upgrade Your Plan</span>
+                    </a>
+                </p>
+                {% endif %}
             </div>
             {% endif %}
         </div>
