@@ -188,7 +188,7 @@
                             </td>
                             <td class="px-6 py-4 text-sm font-medium">
                                 <div class="flex space-x-2">
-                                    <a href="#" class="text-blue-400 hover:text-blue-300">Edit</a>
+                                    <a href="{{ url_for('edit_team_member', user_id=member._id) }}" class="text-blue-400 hover:text-blue-300">Edit</a>
                                     <form action="{{ url_for('delete_team_member', user_id=member._id) }}" method="POST" onsubmit="return confirm('Are you sure you want to remove this team member?');">
                                         <button type="submit" class="text-red-400 hover:text-red-300">Remove</button>
                                     </form>

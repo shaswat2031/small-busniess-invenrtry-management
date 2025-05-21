@@ -1,0 +1,26 @@
+{% extends 'add_user.html' %}
+{% block title %}Edit Team Member{% endblock %}
+
+{% block form_action %}{{ url_for('edit_team_member', user_id=member._id) }}{% endblock %}
+
+{% block submit_label %}Save Changes{% endblock %}
+
+{% block extra_form_fields %}
+<script>
+window.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('username').value = '{{ member.username }}';
+    document.getElementById('email').value = '{{ member.email }}';
+    document.getElementById('role').value = '{{ member.role }}';
+    // Uncheck all permissions first
+    document.querySelectorAll('input[name="permissions[]"]').forEach(cb => cb.checked = false);
+    var perms = {{ member.permissions|tojson }};
+    perms.forEach(function(perm) {
+        var cb = document.querySelector('input[name="permissions[]"][value="' + perm + '"]');
+        if (cb) cb.checked = true;
+    });
+    // Remove required from password fields for edit
+    document.getElementById('password').required = false;
+    document.getElementById('confirm_password').required = false;
+});
+</script>
+{% endblock %}

@@ -241,6 +241,7 @@ def profile():
     owner_id = current_user.get_owner_id()
     total_products = product_collection.count_documents({"owner_id": owner_id})
     team_members_count = user_collection.count_documents({"parent_user_id": owner_id})
+    total_active_users = 1 + team_members_count
     return render_template(
         "profile.html",
         current_user=current_user,
@@ -248,7 +249,8 @@ def profile():
         plan_details=plan_details,
         plan_name=plan_name,
         total_products=total_products,
-        team_members_count=team_members_count
+        team_members_count=team_members_count,
+        total_active_users=total_active_users
     )
 
 @app.route("/dashboard")
@@ -267,8 +269,9 @@ def dashboard():
     product_limit = plan_details['products']
     product_usage_percent = (total_products / product_limit) * 100 if product_limit > 0 else 0
     team_info = None
+    team_members_count = user_collection.count_documents({"parent_user_id": owner_id})
+    total_active_users = 1 + team_members_count
     if not current_user.is_team_member:
-        team_members_count = user_collection.count_documents({"parent_user_id": current_user.id})
         team_info = {
             "count": team_members_count,
             "limit": plan_details['users']
@@ -286,7 +289,8 @@ def dashboard():
                         team_info=team_info,
                         is_team_member=current_user.is_team_member,
                         plan_name=current_user.get_effective_plan(),
-                        recent_sales=recent_sales)
+                        recent_sales=recent_sales,
+                        total_active_users=total_active_users)
 
 @app.route("/add_product", methods=["GET", "POST"])
 @login_required
@@ -907,6 +911,54 @@ def delete_team_member(user_id):
     user_collection.delete_one({"_id": ObjectId(user_id)})
     flash("Team member removed successfully!", "success")
     return redirect(url_for("manage_team"))
+
+@app.route("/edit_team_member/<user_id>", methods=["GET", "POST"])
+@login_required
+def edit_team_member(user_id):
+    if current_user.is_team_member:
+        flash("Only business owners can edit team members.", "warning")
+        return redirect(url_for("dashboard"))
+    member = user_collection.find_one({"_id": ObjectId(user_id), "parent_user_id": current_user.id})
+    if not member:
+        flash("Team member not found!", "danger")
+        return redirect(url_for("manage_team"))
+    if request.method == "POST":
+        username = request.form.get("username")
+        email = request.form.get("email")
+        role = request.form.get("role", "staff")
+        permissions = request.form.getlist("permissions[]")
+        # Only update password if provided
+        password = request.form.get("password")
+        update_fields = {
+            "username": username,
+            "email": email,
+            "role": role,
+            "permissions": permissions
+        }
+        if password:
+            hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+            update_fields["password"] = hashed_password
+        user_collection.update_one({"_id": ObjectId(user_id)}, {"$set": update_fields})
+        flash("Team member updated successfully!", "success")
+        return redirect(url_for("manage_team"))
+    plan_details = current_user.get_plan_details()
+    plan_name = current_user.get_effective_plan()
+    total_products = product_collection.count_documents({"owner_id": current_user.id})
+    current_user_count = user_collection.count_documents({"parent_user_id": current_user.id})
+    owner_info = {
+        "username": current_user.username,
+        "business_name": current_user.business_name,
+        "email": current_user.email
+    }
+    return render_template(
+        "edit_user.html",
+        member=member,
+        plan_details=plan_details,
+        plan_name=plan_name,
+        total_products=total_products,
+        current_user_count=current_user_count,
+        owner_info=owner_info
+    )
 
 if __name__ == "__main__":
     logger.info("Starting Inventory Manager application")

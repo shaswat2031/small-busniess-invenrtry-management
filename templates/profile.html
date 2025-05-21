@@ -204,7 +204,7 @@
             <div class="glass p-8 rounded-xl mt-8">
                 <h2 class="text-2xl font-bold mb-6 text-white">Your Usage Statistics</h2>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div class="bg-gray-800/50 p-6 rounded-lg">
                         <h3 class="text-lg font-semibold text-white mb-3">Products</h3>
                         <div class="flex items-center justify-between">
@@ -224,14 +224,24 @@
                         <h3 class="text-lg font-semibold text-white mb-3">Users</h3>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-300">Used</span>
-                            <span id="users-count" class="text-white font-medium">1</span>
+                            <span id="users-count" class="text-white font-medium">{{ total_active_users }} / {{ plan_details.users }}</span>
                         </div>
                         <div class="mt-2 h-3 bg-gray-700 rounded-full overflow-hidden">
-                            <div id="users-bar" class="h-full bg-gradient-to-r from-pink-500 to-purple-600" style="width: calc(100% / {{ plan_details.users }})"></div>
+                            <div id="users-bar" class="h-full bg-gradient-to-r from-pink-500 to-purple-600" style="width: {{ (total_active_users / plan_details.users * 100)|round|int }}%"></div>
                         </div>
                         <div class="flex items-center justify-between mt-2">
                             <span class="text-gray-300 text-xs">0</span>
                             <span class="text-gray-300 text-xs">Limit: {{ plan_details.users }}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-800/50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-white mb-3">Total Active Users</h3>
+                        <div class="flex items-center justify-center h-full">
+                            <span class="text-3xl font-bold text-pink-400">{{ total_active_users }}</span>
+                        </div>
+                        <div class="flex items-center justify-center mt-2">
+                            <span class="text-gray-400 text-xs">(Owner + Team Members)</span>
                         </div>
                     </div>
                     
