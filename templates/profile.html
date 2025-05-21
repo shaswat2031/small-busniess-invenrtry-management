@@ -209,10 +209,10 @@
                         <h3 class="text-lg font-semibold text-white mb-3">Products</h3>
                         <div class="flex items-center justify-between">
                             <span class="text-gray-300">Used</span>
-                            <span id="products-count" class="text-white font-medium">Loading...</span>
+                            <span id="products-count" class="text-white font-medium">{{ total_products }} / {{ plan_details.products }}</span>
                         </div>
                         <div class="mt-2 h-3 bg-gray-700 rounded-full overflow-hidden">
-                            <div id="products-bar" class="h-full bg-gradient-to-r from-pink-500 to-purple-600" style="width: 0%"></div>
+                            <div id="products-bar" class="h-full bg-gradient-to-r from-pink-500 to-purple-600" style="width: {{ (total_products / plan_details.products * 100)|round|int }}%"></div>
                         </div>
                         <div class="flex items-center justify-between mt-2">
                             <span class="text-gray-300 text-xs">0</span>
@@ -243,22 +243,75 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Team Management Section -->
+            <div class="glass p-8 rounded-xl mt-8">
+                <h2 class="text-2xl font-bold mb-6 text-white">Team Management</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-gray-800/50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-white mb-3">Team Members</h3>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-gray-300">Used</span>
+                            <span class="text-white font-medium">{{ team_members_count }} / {{ plan_details.users }}</span>
+                        </div>
+                        <div class="mt-2 h-3 bg-gray-700 rounded-full overflow-hidden mb-4">
+                            <div class="h-full bg-gradient-to-r from-pink-500 to-purple-600" style="width: {{ (team_members_count / plan_details.users * 100)|round|int }}%"></div>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            {% if team_members_count < plan_details.users %}
+                            <a href="{{ url_for('add_team_member') }}" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white px-4 py-2 rounded-lg transition duration-300 inline-flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                                </svg>
+                                Add Team Member
+                            </a>
+                            {% endif %}
+                            
+                            <a href="{{ url_for('manage_team') }}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition duration-300 inline-flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                                </svg>
+                                Manage Team
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-800/50 p-6 rounded-lg">
+                        <h3 class="text-lg font-semibold text-white mb-3">Plan Features</h3>
+                        <ul class="space-y-2 text-gray-300">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Up to {{ plan_details.products }} products</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Up to {{ plan_details.users }} team members</span>
+                            </li>
+                            {% if plan_name == 'professional' or plan_name == 'enterprise' %}
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 mr-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Advanced analytics</span>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
     <script>
-        // Fetch product count and update the usage bars
         document.addEventListener('DOMContentLoaded', function() {
-            // For a real application, you would fetch this data from the server
-            // For now, we'll just simulate it
-                setTimeout(function() {
-                    const productCount = Math.floor(Math.random() * {{ plan_details.products }});
-                    document.getElementById('products-count').textContent = `${productCount} / {{ plan_details.products }}`;
-                    
-                    const percentage = (productCount / {{ plan_details.products }}) * 100;
-                    document.getElementById('products-bar').style.width = `${percentage}%`;
-                }, 500);
-            });
-        </script>
+            // No need for random data anymore as we're using the real data
+        });
+    </script>
 </body>
 </html>

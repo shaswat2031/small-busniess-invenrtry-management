@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Team - Inventory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f0f;
+            color: #e0e0e0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(30, 30, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glass:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+        }
+        .gradient-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transition: all 0.3s ease;
+        }
+        .gradient-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
+        }
+        .table-row {
+            transition: all 0.3s ease;
+        }
+        .table-row:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: scale(1.01);
+        }
+        .header-title {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-900 p-8">
+    <div class="container mx-auto max-w-6xl">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold header-title">Team Management</h1>
+            
+            <div class="flex space-x-4">
+                <a href="{{ url_for('profile') }}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Profile</span>
+                </a>
+                
+                {% if team_members|length < plan_details.users %}
+                <a href="{{ url_for('add_team_member') }}" class="gradient-btn text-white px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Add Team Member</span>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="glass p-6 mb-8">
+            <h2 class="text-xl font-semibold text-white mb-4">Team Usage</h2>
+            <div class="flex items-center mb-4">
+                <div class="w-full bg-gray-700 h-3 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-blue-500 to-purple-600" style="width: {{ (team_members|length / plan_details.users * 100)|round|int }}%"></div>
+                </div>
+                <span class="ml-4 text-white font-medium">{{ team_members|length }} / {{ plan_details.users }}</span>
+            </div>
+            <p class="text-gray-400 text-sm">
+                Your {{ plan_name|capitalize }} plan allows up to {{ plan_details.users }} team member{{ 's' if plan_details.users > 1 else '' }}.
+                {% if team_members|length >= plan_details.users %}
+                    <span class="text-red-400">You've reached your team member limit.</span>
+                    <a href="{{ url_for('profile') }}" class="text-blue-400 hover:underline">Upgrade your plan</a> to add more team members.
+                {% endif %}
+            </p>
+        </div>
+        
+        {% if team_members %}
+        <div class="glass p-6">
+            <h2 class="text-xl font-semibold text-white mb-6">Your Team ({{ team_members|length }})</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-700">
+                    <thead>
+                        <tr class="bg-gray-800 text-left text-gray-400 text-sm uppercase tracking-wider">
+                            <th class="px-6 py-3 font-medium">User</th>
+                            <th class="px-6 py-3 font-medium">Role</th>
+                            <th class="px-6 py-3 font-medium">Joined</th>
+                            <th class="px-6 py-3 font-medium">Status</th>
+                            <th class="px-6 py-3 font-medium">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-700">
+                        {% for member in team_members %}
+                        <tr class="table-row">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <div class="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center text-white">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-white">{{ member.username }}</div>
+                                        <div class="text-sm text-gray-400">{{ member.email }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 rounded-full text-xs
+                                    {% if member.role == 'admin' %}
+                                        bg-purple-900/50 text-purple-300
+                                    {% elif member.role == 'manager' %}
+                                        bg-blue-900/50 text-blue-300
+                                    {% else %}
+                                        bg-green-900/50 text-green-300
+                                    {% endif %}
+                                ">
+                                    {{ member.role|title }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-300">
+                                {{ member.registration_date.strftime('%Y-%m-%d') if member.registration_date else 'N/A' }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="px-3 py-1 rounded-full bg-green-900/50 text-green-300 text-xs">Active</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <a href="#" class="text-blue-400 hover:text-blue-300">Edit</a>
+                                    <form action="{{ url_for('delete_team_member', user_id=member._id) }}" method="POST" onsubmit="return confirm('Are you sure you want to remove this team member?');">
+                                        <button type="submit" class="text-red-400 hover:text-red-300">Remove</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="glass p-12 text-center">
+            <div class="text-6xl text-gray-600 mb-4"><i class="fas fa-users"></i></div>
+            <h2 class="text-2xl font-semibold text-white mb-2">No team members yet</h2>
+            <p class="text-gray-400 mb-6">Add team members to help manage your inventory</p>
+            
+            {% if plan_details.users > 0 %}
+            <a href="{{ url_for('add_team_member') }}" class="gradient-btn text-white px-6 py-3 rounded-lg inline-flex items-center gap-2">
+                <i class="fas fa-user-plus"></i>
+                <span>Add Your First Team Member</span>
+            </a>
+            {% else %}
+            <a href="{{ url_for('profile') }}" class="gradient-btn text-white px-6 py-3 rounded-lg inline-flex items-center gap-2">
+                <i class="fas fa-arrow-up"></i>
+                <span>Upgrade to Add Team Members</span>
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

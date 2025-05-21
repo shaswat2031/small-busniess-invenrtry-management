@@ -9,35 +9,89 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            background-color: #111827;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(16, 185, 129, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
         }
+        
+        /* Enhanced Button Styles */
         .gradient-btn {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #60a5fa, #3b82f6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+        .gradient-btn:hover::after {
+            opacity: 1;
         }
         .gradient-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
         }
+        .gradient-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Enhanced Red Button */
         .gradient-red-btn {
-            background: linear-gradient(135deg, #ef4444, #b91c1c);
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #ef4444, #991b1b);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
         }
         .gradient-red-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(239, 68, 68, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4);
         }
-        .gradient-green-btn {
-            background: linear-gradient(135deg, #10b981, #047857);
+        
+        /* Glass Effect for Table */
+        .glass-container {
+            background: rgba(31, 41, 55, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Table Row Animation */
+        .table-row {
             transition: all 0.3s ease;
         }
-        .gradient-green-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+        .table-row:hover {
+            background-color: rgba(55, 65, 81, 0.8);
+            transform: translateY(-2px) scale(1.005);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
-        .gradient-text {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        
+        /* Enhanced Page Header */
+        .page-header {
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
         }
     </style>
 </head>
@@ -45,7 +99,7 @@
 
 <div class="container mx-auto p-6">
     <!-- Page Title with Gradient -->
-    <div class="flex justify-between items-center mb-6 p-4 bg-gray-800 rounded-lg shadow-lg">
+    <div class="flex justify-between items-center mb-6 p-4 bg-gray-800 rounded-lg shadow-lg page-header">
         <div>
             <h1 class="text-3xl font-bold gradient-text">📊 Sales History</h1>
             <p class="text-gray-400 mt-1 text-sm">View and manage your transaction records</p>
@@ -71,7 +125,7 @@
     </div>
 
     {% if sales %}
-    <div class="overflow-x-auto bg-gray-800 p-6 rounded-lg shadow-lg">
+    <div class="overflow-x-auto glass-container p-6 rounded-lg shadow-lg">
         <table class="min-w-full border border-gray-700 rounded-lg overflow-hidden">
             <thead>
                 <tr class="bg-gray-900 text-white text-left text-lg">
@@ -84,7 +138,7 @@
             </thead>
             <tbody>
                 {% for sale in sales %}
-                <tr class="text-gray-300 hover:bg-gray-700 transition">
+                <tr class="text-gray-300 table-row">
                     <td class="border border-gray-700 px-6 py-3">{{ sale.product_name }}</td>
                     <td class="border border-gray-700 px-6 py-3 text-center">{{ sale.quantity_sold }}</td>
                     <td class="border border-gray-700 px-6 py-3 text-green-400 font-semibold">₹{{ sale.total_price }}</td>

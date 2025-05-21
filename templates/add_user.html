@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Team Member - Inventory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e2e8f0;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-title {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: #374151;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            transition: width 0.3s ease;
+        }
+
+        /* Add style for product usage card */
+        .usage-card {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .usage-indicator {
+            height: 5px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+        
+        .usage-indicator-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col p-6">
+    <div class="container mx-auto max-w-4xl">
+        <!-- Header with Back Button -->
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold header-title">Add Team Member</h1>
+            <a href="{{ url_for('profile') }}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-all flex items-center gap-2">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Profile</span>
+            </a>
+        </div>
+        
+        <!-- Plan Limits Info Card -->
+        <div class="glass-card p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                <i class="fas fa-users text-blue-400"></i> Team Member Allocation
+            </h2>
+            
+            <div class="mb-4">
+                <div class="flex justify-between text-sm mb-1">
+                    <span>Current Users: {{ current_user_count }}/{{ plan_details.users }}</span>
+                    <span>{{ (current_user_count / plan_details.users * 100)|round|int }}% of limit used</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ (current_user_count / plan_details.users * 100)|round|int }}%"></div>
+                </div>
+            </div>
+            
+            <div class="text-gray-400 text-sm">
+                {% if current_user_count >= plan_details.users %}
+                <div class="bg-red-900/30 border border-red-700/30 rounded-lg p-4 mb-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-exclamation-circle text-red-500 mr-3 mt-1"></i>
+                        <div>
+                            <p class="text-red-400 font-medium">User Limit Reached</p>
+                            <p class="text-sm text-gray-300">Your {{ plan_name|capitalize }} plan is limited to {{ plan_details.users }} user{{ 's' if plan_details.users > 1 else '' }}.</p>
+                            <a href="{{ url_for('profile') }}#plans" class="text-blue-400 hover:underline mt-2 inline-block">
+                                <i class="fas fa-arrow-up"></i> Upgrade your plan to add more users
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <p>Your {{ plan_name|capitalize }} plan allows up to {{ plan_details.users }} team member{{ 's' if plan_details.users > 1 else '' }}.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Plan Resources Usage -->
+        <div class="glass-card p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                <i class="fas fa-boxes text-blue-400"></i> Plan Resources Usage
+            </h2>
+            
+            <!-- Product count usage -->
+            <div class="usage-card">
+                <div class="flex justify-between text-sm">
+                    <span>Products</span>
+                    <span>{{ total_products }} / {{ plan_details.products }}</span>
+                </div>
+                <div class="usage-indicator">
+                    <div class="usage-indicator-fill" style="width: {{ (total_products / plan_details.products * 100)|round|int }}%"></div>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                    {% if total_products >= plan_details.products %}
+                        <span class="text-red-400">You've reached your product limit!</span>
+                    {% elif total_products >= plan_details.products * 0.8 %}
+                        <span class="text-yellow-400">Approaching product limit ({{ plan_details.products - total_products }} remaining)</span>
+                    {% else %}
+                        <span>{{ (total_products / plan_details.products * 100)|round|int }}% of product limit used</span>
+                    {% endif %}
+                </p>
+            </div>
+            
+            <!-- User count usage -->
+            <div class="usage-card">
+                <div class="flex justify-between text-sm">
+                    <span>Team Members</span>
+                    <span>{{ current_user_count }} / {{ plan_details.users }}</span>
+                </div>
+                <div class="usage-indicator">
+                    <div class="usage-indicator-fill" style="width: {{ (current_user_count / plan_details.users * 100)|round|int }}%"></div>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                    {% if current_user_count >= plan_details.users %}
+                        <span class="text-red-400">You've reached your user limit!</span>
+                    {% elif current_user_count >= plan_details.users * 0.8 %}
+                        <span class="text-yellow-400">Approaching user limit ({{ plan_details.users - current_user_count }} remaining)</span>
+                    {% else %}
+                        <span>{{ (current_user_count / plan_details.users * 100)|round|int }}% of user limit used</span>
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        
+        <!-- Add User Form -->
+        {% if current_user_count < plan_details.users %}
+        <div class="glass-card p-6">
+            <form method="POST" action="{{ url_for('add_team_member') }}">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="username" class="block text-sm font-medium mb-2">Username</label>
+                        <input type="text" id="username" name="username" required 
+                               class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" id="email" name="email" required 
+                               class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="password" class="block text-sm font-medium mb-2">Password</label>
+                        <input type="password" id="password" name="password" required 
+                               class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                    </div>
+                    
+                    <div>
+                        <label for="confirm_password" class="block text-sm font-medium mb-2">Confirm Password</label>
+                        <input type="password" id="confirm_password" name="confirm_password" required 
+                               class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="role" class="block text-sm font-medium mb-2">User Role</label>
+                    <select id="role" name="role" required 
+                            class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white">
+                        <option value="staff">Staff</option>
+                        <option value="manager">Manager</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                    <p class="text-xs text-gray-400 mt-1">
+                        <i class="fas fa-info-circle"></i> Staff can only view and sell products. Managers can add/edit products. Administrators have full access.
+                    </p>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="permissions" class="block text-sm font-medium mb-2">Permissions</label>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="perm_view" name="permissions[]" value="view" checked 
+                                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
+                            <label for="perm_view" class="ml-2">View Products & Sales</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="perm_sell" name="permissions[]" value="sell" checked 
+                                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
+                            <label for="perm_sell" class="ml-2">Record Sales</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="perm_add" name="permissions[]" value="add" 
+                                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
+                            <label for="perm_add" class="ml-2">Add/Edit Products</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input type="checkbox" id="perm_reports" name="permissions[]" value="reports" 
+                                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
+                            <label for="perm_reports" class="ml-2">Generate Reports</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end">
+                    <button type="submit" class="btn-gradient text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Add Team Member</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+        
+        <!-- Recommendation for Professional Plan if on Starter -->
+        {% if plan_name == 'starter' %}
+        <div class="mt-8 glass-card p-6 border border-blue-500/30">
+            <div class="flex items-start">
+                <div class="bg-blue-900/30 p-3 rounded-full mr-4">
+                    <i class="fas fa-star text-blue-400 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-medium mb-2">Need More Team Members?</h3>
+                    <p class="text-gray-300 mb-4">Upgrade to our Professional plan to add up to 5 team members and unlock advanced features.</p>
+                    <a href="{{ url_for('profile') }}#plans" class="btn-gradient inline-block text-white px-4 py-2 rounded-lg font-medium">
+                        View Upgrade Options
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    
+    <script>
+        // Real-time password matching validation
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+        
+        function validatePassword() {
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.setCustomValidity("Passwords don't match");
+            } else {
+                confirmPassword.setCustomValidity('');
+            }
+        }
+        
+        password.addEventListener('change', validatePassword);
+        confirmPassword.addEventListener('keyup', validatePassword);
+        
+        // Role-based permission toggling
+        const roleSelect = document.getElementById('role');
+        const permAdd = document.getElementById('perm_add');
+        const permReports = document.getElementById('perm_reports');
+        
+        roleSelect.addEventListener('change', function() {
+            if (this.value === 'staff') {
+                permAdd.checked = false;
+                permReports.checked = false;
+            } else if (this.value === 'manager') {
+                permAdd.checked = true;
+                permReports.checked = true;
+            } else if (this.value === 'admin') {
+                permAdd.checked = true;
+                permReports.checked = true;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -16,31 +16,58 @@
             min-height: 100vh;
         }
         
+        /* Animated Gradient Text */
         .text-gradient {
-            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             font-family: 'Orbitron', sans-serif;
+            animation: gradientShift 3s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
+        /* Enhanced Glass Card with Gradient Border */
         .glass-card {
             background: rgba(30, 41, 59, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent; /* updated */
+            background-clip: padding-box;    /* updated */
+            position: relative;              /* updated */
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-        
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(45deg, #ff6ec4, #7873f5); /* new gradient */
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+                    mask-composite: exclude;
+            pointer-events: none;
+        }
+
         .hover-lift {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
+
+        /* Enhanced hover effect for cards */
         .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px); /* increased motion */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); /* intensified shadow */
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -66,9 +93,10 @@
             transition: all 0.3s ease;
         }
         
+        /* Enhanced Table Row Hover */
         .table-row:hover {
-            background: rgba(59, 130, 246, 0.1);
-            transform: scale(1.01);
+            background: rgba(59, 130, 246, 0.2);
+            transform: scale(1.02);
         }
         
         /* Chart customization */
@@ -79,6 +107,22 @@
         
         .chart-container:hover {
             transform: scale(1.02);
+        }
+
+        /* Refined Back Button Styling */
+        a[href="{{ url_for('view_products') }}"] {
+            background: linear-gradient(45deg, #7873f5, #ff6ec4);
+            border: none;
+            color: #fff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        a[href="{{ url_for('view_products') }}"]:hover {
+            background: linear-gradient(45deg, #ff6ec4, #7873f5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
     </style>
 </head>
