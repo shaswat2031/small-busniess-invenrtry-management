@@ -353,7 +353,7 @@
         </div>
       </div>
       
-      <!-- Navigation Links -->
+      <!-- Update navigation links to hide team management for team members -->
       <nav class="flex-1 p-4">
         <div class="text-xs text-gray-500 uppercase tracking-wide mb-2 ml-2">Main Menu</div>
         <ul class="space-y-1">
@@ -364,19 +364,21 @@
             </a>
           </li>
       
-          <!-- View Products -->
+          <!-- View Products - always available but will check permission in route -->
           <li>
             <a href="{{ url_for('view_products') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg">
               <i class="fas fa-box-open"></i> View Products
             </a>
           </li>
       
-          <!-- Add Product -->
+          <!-- Add Product - only if can_edit_products -->
+          {% if current_user.can_edit_products() %}
           <li>
             <a href="{{ url_for('add_product') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg">
               <i class="fas fa-plus"></i> Add Product
             </a>
           </li>
+          {% endif %}
       
           <!-- Profile -->
           <li>
@@ -392,12 +394,23 @@
             </a>
           </li>
       
-          <!-- View Sales -->
+          <!-- View Sales - only if can_view_reports -->
+          {% if current_user.can_view_reports() %}
           <li>
             <a href="{{ url_for('view_sales') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg">
               <i class="fas fa-chart-line"></i> View Sales
             </a>
           </li>
+          {% endif %}
+      
+          <!-- Team Management - only for business owners -->
+          {% if not current_user.is_team_member %}
+          <li>
+            <a href="{{ url_for('manage_team') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg">
+              <i class="fas fa-users"></i> Team Management
+            </a>
+          </li>
+          {% endif %}
       
           <!-- Logout -->
           <li>
@@ -510,6 +523,48 @@
           <p class="text-3xl text-white font-bold">₹{{ total_sales }}</p>
         </div>
       </div>
+
+      <!-- Update team info section to only show for business owners -->
+      {% if team_info and not current_user.is_team_member %}
+      <div class="mb-8">
+          <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2">
+              <i class="fas fa-users"></i> Team Management
+          </h2>
+          <div class="glass-card p-6">
+              <div class="flex flex-col md:flex-row justify-between items-center">
+                  <div>
+                      <p class="text-xl font-semibold text-white">{{ team_info.count }} / {{ team_info.limit }} team members</p>
+                      <p class="text-gray-400 mt-1">{{ team_info.limit - team_info.count }} slots available in your {{ plan_name }} plan</p>
+                  </div>
+                  <div class="flex mt-4 md:mt-0 space-x-4">
+                      {% if team_info.count < team_info.limit %}
+                      <a href="{{ url_for('add_team_member') }}" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white px-4 py-2 rounded-md transition-colors">
+                          <i class="fas fa-user-plus mr-2"></i>Add Team Member
+                      </a>
+                      {% endif %}
+                      <a href="{{ url_for('manage_team') }}" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition-colors">
+                          <i class="fas fa-users-cog mr-2"></i>Manage Team
+                      </a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      {% endif %}
+
+      {% if is_team_member %}
+      <!-- Team Member Context Banner -->
+      <div class="mb-8 bg-blue-900/30 border border-blue-500/30 rounded-lg p-4">
+          <div class="flex items-center">
+              <div class="bg-blue-500/20 p-2 rounded-full mr-4">
+                  <i class="fas fa-user-friends text-blue-400 text-xl"></i>
+              </div>
+              <div>
+                  <p class="text-white font-medium">You're viewing this dashboard as a {{ current_user.role }}</p>
+                  <p class="text-gray-400">You have access to the inventory shared by your business owner</p>
+              </div>
+          </div>
+      </div>
+      {% endif %}
 
       <!-- Low Stock Alerts -->
       <div class="mb-8">

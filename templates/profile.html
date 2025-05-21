@@ -245,6 +245,7 @@
             </div>
             
             <!-- Team Management Section -->
+            {% if not current_user.is_team_member %}
             <div class="glass p-8 rounded-xl mt-8">
                 <h2 class="text-2xl font-bold mb-6 text-white">Team Management</h2>
                 
@@ -305,6 +306,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
     

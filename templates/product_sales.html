@@ -3,392 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Sales - {{ product.product_name }}</title>
+    <title>{{ product.product_name }} Sales | Inventory Manager</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
+            background-color: #0a0a0a;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.05) 0%, transparent 25%);
             color: #e0e0e0;
-            min-height: 100vh;
         }
-        
-        /* Animated Gradient Text */
-        .text-gradient {
-            background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
-            background-size: 200% 200%;
+        .glass {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+        }
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-family: 'Orbitron', sans-serif;
-            animation: gradientShift 3s ease infinite;
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Enhanced Glass Card with Gradient Border */
-        .glass-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid transparent; /* updated */
-            background-clip: padding-box;    /* updated */
-            position: relative;              /* updated */
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        .glass-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: inherit;
-            padding: 2px;
-            background: linear-gradient(45deg, #ff6ec4, #7873f5); /* new gradient */
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-                    mask-composite: exclude;
-            pointer-events: none;
-        }
-
-        .hover-lift {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        /* Enhanced hover effect for cards */
-        .hover-lift:hover {
-            transform: translateY(-8px); /* increased motion */
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); /* intensified shadow */
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-        
-        .delay-100 {
-            animation-delay: 0.1s;
-        }
-        
-        .delay-200 {
-            animation-delay: 0.2s;
-        }
-        
-        .delay-300 {
-            animation-delay: 0.3s;
-        }
-        
-        .table-row {
-            transition: all 0.3s ease;
-        }
-        
-        /* Enhanced Table Row Hover */
-        .table-row:hover {
-            background: rgba(59, 130, 246, 0.2);
-            transform: scale(1.02);
-        }
-        
-        /* Chart customization */
-        .chart-container {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .chart-container:hover {
-            transform: scale(1.02);
-        }
-
-        /* Refined Back Button Styling */
-        a[href="{{ url_for('view_products') }}"] {
-            background: linear-gradient(45deg, #7873f5, #ff6ec4);
-            border: none;
-            color: #fff;
-            padding: 0.75rem 1.25rem;
-            border-radius: 9999px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        a[href="{{ url_for('view_products') }}"]:hover {
-            background: linear-gradient(45deg, #ff6ec4, #7873f5);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
-
-    <div class="container mx-auto max-w-6xl fade-in">
-        <!-- Header with Back Button -->
-        <div class="flex flex-col md:flex-row justify-between items-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gradient mb-4 md:mb-0">
-                Sales Analytics: {{ product.product_name }}
-            </h1>
-            
-            <a href="{{ url_for('view_products') }}" class="bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-all flex items-center space-x-2">
-                <i class="fas fa-arrow-left"></i>
-                <span>Back to Products</span>
-            </a>
-        </div>
-        
-        <!-- Stats Overview Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 fade-in delay-100">
-            <div class="glass-card p-6 hover-lift">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="text-gray-400 text-sm mb-1">Total Sales</h3>
-                        <p class="text-3xl font-bold text-white">{{ sales|length }}</p>
-                    </div>
-                    <div class="p-3 bg-blue-500 bg-opacity-20 rounded-lg">
-                        <i class="fas fa-shopping-cart text-blue-400 text-xl"></i>
-                    </div>
+<body class="bg-[#0a0a0a] min-h-screen p-8">
+    <div class="container mx-auto max-w-7xl">
+        <!-- Plan Notification -->
+        {% if basic_analytics_only %}
+        <div class="glass p-4 mb-8 border-l-4 border-yellow-500">
+            <div class="flex items-center">
+                <div class="mr-4 text-yellow-500">
+                    <i class="fas fa-exclamation-circle text-3xl"></i>
                 </div>
-                <div class="mt-4 text-sm text-gray-400">
-                    <span class="text-green-400"><i class="fas fa-chart-line mr-1"></i> Analytics</span>
-                </div>
-            </div>
-            
-            <div class="glass-card p-6 hover-lift">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="text-gray-400 text-sm mb-1">Total Units Sold</h3>
-                        <p class="text-3xl font-bold text-white">{{ sales_quantities|sum }}</p>
+                <div>
+                    <h3 class="text-lg font-medium text-white">Limited Analytics Available</h3>
+                    <p class="text-gray-400">Your Starter plan (₹{{ plan_details.price }}/month) includes basic sales data only.</p>
+                    <div class="mt-2">
+                        <a href="{{ url_for('profile') }}" class="bg-gradient-to-r from-yellow-500 to-orange-600 px-4 py-2 rounded-lg text-white font-medium inline-flex items-center gap-2 hover:from-yellow-600 hover:to-orange-700 transition-all">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>Upgrade to Professional for ₹{{ pricing.professional.price }}/month</span>
+                        </a>
                     </div>
-                    <div class="p-3 bg-purple-500 bg-opacity-20 rounded-lg">
-                        <i class="fas fa-box text-purple-400 text-xl"></i>
-                    </div>
-                </div>
-                <div class="mt-4 text-sm text-gray-400">
-                    <span class="text-green-400"><i class="fas fa-chart-line mr-1"></i> Inventory</span>
-                </div>
-            </div>
-            
-            <div class="glass-card p-6 hover-lift">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h3 class="text-gray-400 text-sm mb-1">Revenue Generated</h3>
-                        <p class="text-3xl font-bold text-white">₹{{ "%.2f"|format(sales|sum(attribute='total_price')) }}</p>
-                    </div>
-                    <div class="p-3 bg-green-500 bg-opacity-20 rounded-lg">
-                        <i class="fas fa-rupee-sign text-green-400 text-xl"></i>
-                    </div>
-                </div>
-                <div class="mt-4 text-sm text-gray-400">
-                    <span class="text-green-400"><i class="fas fa-chart-line mr-1"></i> Finance</span>
                 </div>
             </div>
         </div>
+        {% endif %}
 
-        <!-- Charts Section -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8 fade-in delay-200">
-            <div class="glass-card p-6">
-                <h2 class="text-xl font-semibold mb-4 flex items-center">
-                    <i class="fas fa-chart-line text-blue-400 mr-2"></i> Sales Trend
-                </h2>
-                <div class="chart-container h-80">
-                    <canvas id="salesChart"></canvas>
-                </div>
+        <!-- Header Section -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold gradient-text">Product Sales Analysis</h1>
+                <p class="text-gray-400">Detailed sales information for {{ product.product_name }}</p>
             </div>
-            
-            <div class="glass-card p-6">
-                <h2 class="text-xl font-semibold mb-4 flex items-center">
-                    <i class="fas fa-chart-pie text-purple-400 mr-2"></i> Sales Distribution
-                </h2>
-                <div class="chart-container h-80">
-                    <canvas id="salesPieChart"></canvas>
+            <div class="flex space-x-3">
+                <a href="{{ url_for('view_products') }}" class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg flex items-center gap-2 text-white transition-colors">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Products</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Product Information Card -->
+        <div class="glass p-6 mb-8">
+            <div class="flex flex-col md:flex-row justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-2">{{ product.product_name }}</h2>
+                    <p class="text-gray-400 mb-4">{{ product.description }}</p>
+                    <div class="flex gap-4 text-sm">
+                        <span class="px-3 py-1 bg-blue-900/40 text-blue-400 rounded-full">₹{{ product.price }}</span>
+                        <span class="px-3 py-1 {% if product.stock <= product.low_stock_threshold %}bg-red-900/40 text-red-400{% else %}bg-green-900/40 text-green-400{% endif %} rounded-full">
+                            Stock: {{ product.stock }}
+                        </span>
+                    </div>
+                </div>
+                <div class="mt-4 md:mt-0 text-right">
+                    <div class="text-4xl font-bold text-white">
+                        {% if total_revenue %}
+                            ₹{{ total_revenue }}
+                        {% else %}
+                            ₹0
+                        {% endif %}
+                    </div>
+                    <div class="text-gray-400">Total Revenue</div>
                 </div>
             </div>
         </div>
 
-        <!-- Sales Table -->
-        <div class="glass-card p-6 overflow-hidden fade-in delay-300">
-            <h2 class="text-xl font-semibold mb-4 flex items-center">
-                <i class="fas fa-history text-green-400 mr-2"></i> Sales History
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="glass p-6 stat-card">
+                <div class="text-4xl font-bold text-white mb-2">
+                    {{ total_sales if total_sales is not none else 0 }}
+                </div>
+                <div class="text-gray-400 flex items-center">
+                    <i class="fas fa-shopping-cart mr-2 text-blue-400"></i>
+                    Total Sales Transactions
+                </div>
+            </div>
+            
+            <div class="glass p-6 stat-card">
+                <div class="text-4xl font-bold text-white mb-2">
+                    {{ total_quantity if total_quantity is not none else 0 }}
+                </div>
+                <div class="text-gray-400 flex items-center">
+                    <i class="fas fa-box mr-2 text-purple-400"></i>
+                    Units Sold
+                </div>
+            </div>
+            
+            <div class="glass p-6 stat-card">
+                <div class="text-4xl font-bold text-white mb-2">
+                    {% if total_quantity and total_quantity > 0 %}
+                        ₹{{ (total_revenue / total_quantity) | round(2) }}
+                    {% else %}
+                        ₹0
+                    {% endif %}
+                </div>
+                <div class="text-gray-400 flex items-center">
+                    <i class="fas fa-calculator mr-2 text-green-400"></i>
+                    Average Price Per Unit
+                </div>
+            </div>
+        </div>
+
+        <!-- Sales Chart -->
+        <div class="glass p-6 mb-8">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-chart-line mr-2 text-blue-400"></i>
+                Sales Over Time
             </h2>
             
+            {% if not basic_analytics_only and chart_dates %}
+            <div class="h-80">
+                <canvas id="salesChart"></canvas>
+            </div>
+            {% elif not basic_analytics_only and not chart_dates %}
+            <div class="text-center py-12 text-gray-400">
+                <i class="fas fa-chart-area text-4xl mb-3"></i>
+                <p>No sales data available for this product yet.</p>
+            </div>
+            {% else %}
+            <div class="bg-gray-800/50 p-6 rounded-lg text-center">
+                <i class="fas fa-lock text-4xl text-gray-500 mb-4"></i>
+                <h3 class="text-lg font-medium text-white mb-2">Advanced Analytics Locked</h3>
+                <p class="text-gray-400 mb-4">Unlock detailed charts and analytics by upgrading to Professional or Enterprise plan.</p>
+                <a href="{{ url_for('profile') }}" class="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-lg text-white inline-flex items-center gap-2 hover:from-blue-600 hover:to-purple-700 transition-all">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Upgrade Your Plan</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Recent Sales Table -->
+        <div class="glass p-6">
+            <h2 class="text-xl font-bold text-white mb-6 flex items-center">
+                <i class="fas fa-history mr-2 text-blue-400"></i>
+                Recent Sales
+            </h2>
+            
+            {% if sales and sales|length > 0 %}
             <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-gray-800 text-left text-gray-400 text-sm uppercase tracking-wider">
-                            <th class="px-6 py-3 font-medium">Date & Time</th>
-                            <th class="px-6 py-3 font-medium">Quantity</th>
-                            <th class="px-6 py-3 font-medium">Revenue</th>
+                <table class="min-w-full bg-gray-800 rounded-lg overflow-hidden">
+                    <thead class="bg-gray-900">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Quantity</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Price</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Total</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Seller</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-800">
-                        {% for sale in sales %}
-                        <tr class="table-row">
-                            <td class="px-6 py-4">
-                                <div class="flex items-center">
-                                    <div class="bg-blue-900 bg-opacity-40 p-2 rounded-lg mr-3">
-                                        <i class="fas fa-calendar-day text-blue-400"></i>
-                                    </div>
-                                    <div>
-                                        <div class="font-medium">{{ sale.date_sold.strftime('%Y-%m-%d') }}</div>
-                                        <div class="text-sm text-gray-500">{{ sale.date_sold.strftime('%H:%M:%S') }}</div>
-                                    </div>
-                                </div>
+                    <tbody class="divide-y divide-gray-700">
+                        {% for sale in sales[:5 if basic_analytics_only else None] %}
+                        <tr class="transition-colors hover:bg-gray-700">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                {% if sale.date_sold is defined %}
+                                    {{ sale.date_sold.strftime('%Y-%m-%d %H:%M') if sale.date_sold is not string else sale.date_sold }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
                             </td>
-                            <td class="px-6 py-4">
-                                <span class="bg-purple-900 bg-opacity-30 text-purple-400 px-3 py-1 rounded-full text-sm">
-                                    {{ sale.quantity_sold }} units
-                                </span>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                {{ sale.quantity_sold if sale.quantity_sold is defined else 0 }}
                             </td>
-                            <td class="px-6 py-4 font-medium text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">
-                                ₹{{ "%.2f"|format(sale.total_price) }}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                ₹{{ product.price }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-400">
+                                ₹{{ sale.total_price if sale.total_price is defined else 0 }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                                {% if sale.seller_name is defined and sale.seller_name %}
+                                    {{ sale.seller_name }}
+                                {% else %}
+                                    Unknown
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
+                
+                {% if basic_analytics_only and sales|length > 5 %}
+                <div class="text-center mt-4 p-3 bg-gray-800/50 rounded-lg">
+                    <p class="text-gray-300">
+                        <i class="fas fa-info-circle mr-2 text-blue-400"></i>
+                        Showing 5 of {{ sales|length }} sales. Upgrade to view complete history.
+                    </p>
+                </div>
+                {% endif %}
             </div>
-            
-            {% if not sales %}
-            <div class="text-center py-8 text-gray-500">
-                <i class="fas fa-box-open text-4xl mb-3"></i>
+            {% else %}
+            <div class="text-center py-12 text-gray-400">
+                <i class="fas fa-receipt text-4xl mb-3"></i>
                 <p>No sales records found for this product.</p>
+                <p class="mt-2">Try selling some units to see the data here.</p>
             </div>
             {% endif %}
         </div>
     </div>
 
+    <!-- Chart initialization script -->
+    {% if not basic_analytics_only and chart_dates %}
     <script>
-        // Enhanced Chart.js Configuration
-        const salesDates = {{ sales_dates | tojson }};
-        const salesQuantities = {{ sales_quantities | tojson }};
-        
-        // Line Chart (Sales Trend)
-        const ctx1 = document.getElementById('salesChart').getContext('2d');
-        const salesChart = new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: salesDates,
-                datasets: [{
-                    label: 'Units Sold',
-                    data: salesQuantities,
-                    fill: true,
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                    borderColor: 'rgba(59, 130, 246, 1)',
-                    borderWidth: 2,
-                    pointBackgroundColor: '#fff',
-                    pointBorderColor: 'rgba(59, 130, 246, 1)',
-                    pointRadius: 5,
-                    pointHoverRadius: 8,
-                    tension: 0.4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: { 
-                            color: '#e0e0e0',
-                            font: { family: 'Poppins', size: 12 }
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                        titleFont: { family: 'Poppins', size: 14 },
-                        bodyFont: { family: 'Poppins', size: 12 },
-                        padding: 12,
-                        borderColor: 'rgba(59, 130, 246, 0.5)',
-                        borderWidth: 1
-                    }
-                },
-                scales: {
-                    x: { 
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { 
-                            color: '#e0e0e0',
-                            font: { family: 'Poppins', size: 10 }
-                        }
-                    },
-                    y: { 
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { 
-                            color: '#e0e0e0', 
-                            font: { family: 'Poppins', size: 10 },
-                            precision: 0
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('salesChart').getContext('2d');
+            const salesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: {{ chart_dates|tojson }},
+                    datasets: [
+                        {
+                            label: 'Quantity Sold',
+                            data: {{ chart_quantities|tojson }},
+                            backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                            yAxisID: 'y'
                         },
-                        beginAtZero: true 
-                    }
+                        {
+                            label: 'Revenue (₹)',
+                            data: {{ chart_revenues|tojson }},
+                            backgroundColor: 'rgba(139, 92, 246, 0.2)',
+                            borderColor: 'rgba(139, 92, 246, 1)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            pointBackgroundColor: 'rgba(139, 92, 246, 1)',
+                            yAxisID: 'y1'
+                        }
+                    ]
                 },
-                animation: {
-                    duration: 2000,
-                    easing: 'easeOutQuart'
-                },
-                interaction: {
-                    mode: 'index',
-                    intersect: false
-                }
-            }
-        });
-
-        // Enhanced Pie Chart (Sales Distribution)
-        const ctx2 = document.getElementById('salesPieChart').getContext('2d');
-        const salesPieChart = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: salesDates,
-                datasets: [{
-                    data: salesQuantities,
-                    backgroundColor: [
-                        'rgba(59, 130, 246, 0.7)',  // Blue
-                        'rgba(139, 92, 246, 0.7)',  // Purple
-                        'rgba(16, 185, 129, 0.7)',  // Green
-                        'rgba(239, 68, 68, 0.7)',   // Red
-                        'rgba(245, 158, 11, 0.7)',  // Yellow
-                        'rgba(236, 72, 153, 0.7)'   // Pink
-                    ],
-                    borderColor: 'rgba(30, 41, 59, 0.8)',
-                    borderWidth: 2,
-                    hoverOffset: 15
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                        labels: { 
-                            color: '#e0e0e0',
-                            font: { family: 'Poppins', size: 11 },
-                            padding: 15
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Quantity',
+                                color: '#9ca3af'
+                            },
+                            grid: {
+                                color: 'rgba(75, 85, 99, 0.2)'
+                            },
+                            ticks: {
+                                color: '#9ca3af'
+                            }
+                        },
+                        y1: {
+                            beginAtZero: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'Revenue (₹)',
+                                color: '#9ca3af'
+                            },
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#9ca3af'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(75, 85, 99, 0.2)'
+                            },
+                            ticks: {
+                                color: '#9ca3af'
+                            }
                         }
                     },
-                    tooltip: {
-                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                        titleFont: { family: 'Poppins', size: 13 },
-                        bodyFont: { family: 'Poppins', size: 12 },
-                        padding: 12,
-                        callbacks: {
-                            label: function(context) {
-                                return `Units sold: ${context.raw}`;
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#e0e0e0'
                             }
                         }
                     }
-                },
-                cutout: '65%',
-                animation: {
-                    animateScale: true,
-                    animateRotate: true,
-                    duration: 2000,
-                    easing: 'easeOutQuart'
                 }
-            }
+            });
         });
     </script>
+    {% endif %}
 </body>
 </html>

@@ -460,3 +460,361 @@
 2025-05-21 08:12:15,202 [INFO] 127.0.0.1 - - [21/May/2025 08:12:15] "GET /profile HTTP/1.1" 200 -
 2025-05-21 08:12:17,939 [INFO] 127.0.0.1 - - [21/May/2025 08:12:17] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
 2025-05-21 08:12:17,951 [INFO] 127.0.0.1 - - [21/May/2025 08:12:17] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:12:58,199 [INFO] 127.0.0.1 - - [21/May/2025 08:12:58] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 08:13:20,035 [INFO] 127.0.0.1 - - [21/May/2025 08:13:20] "[32mPOST /add_team_member HTTP/1.1[0m" 302 -
+2025-05-21 08:13:20,046 [INFO] 127.0.0.1 - - [21/May/2025 08:13:20] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 08:13:23,453 [INFO] 127.0.0.1 - - [21/May/2025 08:13:23] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 08:13:27,662 [INFO] 127.0.0.1 - - [21/May/2025 08:13:27] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 08:13:29,248 [INFO] 127.0.0.1 - - [21/May/2025 08:13:29] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 08:13:54,845 [INFO] 127.0.0.1 - - [21/May/2025 08:13:54] "[32mPOST /add_team_member HTTP/1.1[0m" 302 -
+2025-05-21 08:13:54,854 [INFO] 127.0.0.1 - - [21/May/2025 08:13:54] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 08:14:12,134 [INFO] 127.0.0.1 - - [21/May/2025 08:14:12] "[32mGET /manage_team HTTP/1.1[0m" 302 -
+2025-05-21 08:14:12,153 [INFO] 127.0.0.1 - - [21/May/2025 08:14:12] "GET /login?next=/manage_team HTTP/1.1" 200 -
+2025-05-21 08:14:13,349 [INFO] 127.0.0.1 - - [21/May/2025 08:14:13] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 08:14:36,222 [INFO] 127.0.0.1 - - [21/May/2025 08:14:36] "[32mPOST /login?next=/manage_team HTTP/1.1[0m" 302 -
+2025-05-21 08:14:36,259 [INFO] 127.0.0.1 - - [21/May/2025 08:14:36] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:14:45,154 [INFO] 127.0.0.1 - - [21/May/2025 08:14:45] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:15:07,065 [INFO] 127.0.0.1 - - [21/May/2025 08:15:07] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:15:10,099 [INFO] 127.0.0.1 - - [21/May/2025 08:15:10] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 08:17:33,004 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:17:33,005 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:17:33,006 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:17:33,725 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:17:35,461 [INFO] Starting Inventory Manager application
+2025-05-21 08:17:35,519 [WARNING]  * Debugger is active!
+2025-05-21 08:17:35,533 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:18:12,622 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:18:12,622 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:18:13,139 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:18:14,410 [INFO] Starting Inventory Manager application
+2025-05-21 08:18:14,432 [WARNING]  * Debugger is active!
+2025-05-21 08:18:14,438 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:18:20,122 [INFO] 127.0.0.1 - - [21/May/2025 08:18:20] "[32mGET /view_products HTTP/1.1[0m" 302 -
+2025-05-21 08:18:20,137 [INFO] 127.0.0.1 - - [21/May/2025 08:18:20] "GET /login?next=/view_products HTTP/1.1" 200 -
+2025-05-21 08:18:24,512 [INFO] 127.0.0.1 - - [21/May/2025 08:18:24] "[32mPOST /login?next=/view_products HTTP/1.1[0m" 302 -
+2025-05-21 08:18:24,521 [INFO] 127.0.0.1 - - [21/May/2025 08:18:24] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:18:28,079 [INFO] 127.0.0.1 - - [21/May/2025 08:18:28] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 08:18:30,675 [INFO] 127.0.0.1 - - [21/May/2025 08:18:30] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:18:33,802 [INFO] 127.0.0.1 - - [21/May/2025 08:18:33] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 08:18:55,899 [INFO] 127.0.0.1 - - [21/May/2025 08:18:55] "[32mPOST /add_team_member HTTP/1.1[0m" 302 -
+2025-05-21 08:18:55,911 [INFO] 127.0.0.1 - - [21/May/2025 08:18:55] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 08:18:59,115 [INFO] 127.0.0.1 - - [21/May/2025 08:18:59] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:19:01,973 [INFO] 127.0.0.1 - - [21/May/2025 08:19:01] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:19:08,165 [INFO] 127.0.0.1 - - [21/May/2025 08:19:08] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:19:09,457 [INFO] 127.0.0.1 - - [21/May/2025 08:19:09] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 08:20:01,305 [INFO] 127.0.0.1 - - [21/May/2025 08:20:01] "[32mPOST /add_team_member HTTP/1.1[0m" 302 -
+2025-05-21 08:20:01,314 [INFO] 127.0.0.1 - - [21/May/2025 08:20:01] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 08:20:07,096 [INFO] 127.0.0.1 - - [21/May/2025 08:20:07] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 08:20:07,152 [INFO] 127.0.0.1 - - [21/May/2025 08:20:07] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:20:13,215 [INFO] 127.0.0.1 - - [21/May/2025 08:20:13] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:20:16,538 [INFO] 127.0.0.1 - - [21/May/2025 08:20:16] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:25:59,325 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:25:59,328 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:26:00,312 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:26:02,367 [INFO] Starting Inventory Manager application
+2025-05-21 08:26:02,400 [WARNING]  * Debugger is active!
+2025-05-21 08:26:02,408 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:26:27,427 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:26:27,427 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:26:27,428 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:26:27,881 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:26:29,380 [INFO] Starting Inventory Manager application
+2025-05-21 08:26:29,404 [WARNING]  * Debugger is active!
+2025-05-21 08:26:29,408 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:26:32,818 [INFO] 127.0.0.1 - - [21/May/2025 08:26:32] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:26:36,863 [INFO] 127.0.0.1 - - [21/May/2025 08:26:36] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:26:46,515 [INFO] 127.0.0.1 - - [21/May/2025 08:26:46] "[32mGET /add_team_member HTTP/1.1[0m" 302 -
+2025-05-21 08:26:46,533 [INFO] 127.0.0.1 - - [21/May/2025 08:26:46] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:26:50,482 [INFO] 127.0.0.1 - - [21/May/2025 08:26:50] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:27:03,407 [INFO] 127.0.0.1 - - [21/May/2025 08:27:03] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:27:10,649 [INFO] 127.0.0.1 - - [21/May/2025 08:27:10] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 08:27:16,947 [INFO] 127.0.0.1 - - [21/May/2025 08:27:16] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:27:21,394 [INFO] 127.0.0.1 - - [21/May/2025 08:27:21] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:27:31,051 [INFO] 127.0.0.1 - - [21/May/2025 08:27:31] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:27:33,271 [INFO] 127.0.0.1 - - [21/May/2025 08:27:33] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:27:41,107 [INFO] 127.0.0.1 - - [21/May/2025 08:27:41] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:27:43,430 [INFO] 127.0.0.1 - - [21/May/2025 08:27:43] "GET /billing HTTP/1.1" 200 -
+2025-05-21 08:31:07,087 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:31:07,089 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:31:08,518 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:31:11,237 [INFO] Starting Inventory Manager application
+2025-05-21 08:31:11,275 [WARNING]  * Debugger is active!
+2025-05-21 08:31:11,283 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:31:16,782 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:31:17,568 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:31:20,094 [INFO] Starting Inventory Manager application
+2025-05-21 08:31:20,135 [WARNING]  * Debugger is active!
+2025-05-21 08:31:20,146 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:31:23,908 [INFO] 127.0.0.1 - - [21/May/2025 08:31:23] "GET /billing HTTP/1.1" 200 -
+2025-05-21 08:31:34,785 [INFO] 127.0.0.1 - - [21/May/2025 08:31:34] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:33:21,234 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:33:21,237 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:33:22,554 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:33:25,143 [INFO] Starting Inventory Manager application
+2025-05-21 08:33:25,208 [WARNING]  * Debugger is active!
+2025-05-21 08:33:25,218 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:33:59,609 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:33:59,610 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:34:00,700 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:34:02,666 [INFO] Starting Inventory Manager application
+2025-05-21 08:34:02,691 [WARNING]  * Debugger is active!
+2025-05-21 08:34:02,696 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:34:09,955 [INFO] 127.0.0.1 - - [21/May/2025 08:34:09] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-05-21 08:34:10,003 [INFO] 127.0.0.1 - - [21/May/2025 08:34:10] "GET / HTTP/1.1" 200 -
+2025-05-21 08:34:16,866 [INFO] 127.0.0.1 - - [21/May/2025 08:34:16] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:34:25,586 [INFO] 127.0.0.1 - - [21/May/2025 08:34:25] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:34:29,027 [INFO] 127.0.0.1 - - [21/May/2025 08:34:29] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:34:30,675 [INFO] 127.0.0.1 - - [21/May/2025 08:34:30] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-05-21 08:34:30,684 [INFO] 127.0.0.1 - - [21/May/2025 08:34:30] "GET / HTTP/1.1" 200 -
+2025-05-21 08:35:07,541 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:35:07,541 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:35:08,916 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:35:11,085 [INFO] Starting Inventory Manager application
+2025-05-21 08:35:11,140 [WARNING]  * Debugger is active!
+2025-05-21 08:35:11,149 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:35:11,515 [INFO] 127.0.0.1 - - [21/May/2025 08:35:11] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:35:14,829 [INFO] 127.0.0.1 - - [21/May/2025 08:35:14] "GET /register HTTP/1.1" 200 -
+2025-05-21 08:35:36,607 [INFO] 127.0.0.1 - - [21/May/2025 08:35:36] "[32mPOST /register HTTP/1.1[0m" 302 -
+2025-05-21 08:35:36,615 [INFO] 127.0.0.1 - - [21/May/2025 08:35:36] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:35:45,847 [INFO] 127.0.0.1 - - [21/May/2025 08:35:45] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 08:35:45,856 [INFO] 127.0.0.1 - - [21/May/2025 08:35:45] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:35:50,983 [INFO] 127.0.0.1 - - [21/May/2025 08:35:50] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 08:35:50,989 [INFO] 127.0.0.1 - - [21/May/2025 08:35:50] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:36:21,579 [INFO] 127.0.0.1 - - [21/May/2025 08:36:21] "GET /register HTTP/1.1" 200 -
+2025-05-21 08:36:40,993 [INFO] 127.0.0.1 - - [21/May/2025 08:36:40] "[32mPOST /register HTTP/1.1[0m" 302 -
+2025-05-21 08:36:40,998 [INFO] 127.0.0.1 - - [21/May/2025 08:36:40] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:36:46,996 [INFO] 127.0.0.1 - - [21/May/2025 08:36:46] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 08:36:47,001 [INFO] 127.0.0.1 - - [21/May/2025 08:36:47] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:37:03,115 [INFO] 127.0.0.1 - - [21/May/2025 08:37:03] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 08:37:03,121 [INFO] 127.0.0.1 - - [21/May/2025 08:37:03] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:37:17,489 [INFO] 127.0.0.1 - - [21/May/2025 08:37:17] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 08:37:17,515 [INFO] 127.0.0.1 - - [21/May/2025 08:37:17] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:37:40,487 [INFO] 127.0.0.1 - - [21/May/2025 08:37:40] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 08:38:04,844 [INFO] 127.0.0.1 - - [21/May/2025 08:38:04] "[32mPOST /add_team_member HTTP/1.1[0m" 302 -
+2025-05-21 08:38:04,877 [INFO] 127.0.0.1 - - [21/May/2025 08:38:04] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 08:38:10,966 [INFO] 127.0.0.1 - - [21/May/2025 08:38:10] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:38:13,202 [INFO] 127.0.0.1 - - [21/May/2025 08:38:13] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:38:23,901 [INFO] 127.0.0.1 - - [21/May/2025 08:38:23] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 08:38:23,909 [INFO] 127.0.0.1 - - [21/May/2025 08:38:23] "GET /login HTTP/1.1" 200 -
+2025-05-21 08:38:51,420 [INFO] 127.0.0.1 - - [21/May/2025 08:38:51] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 08:38:51,433 [INFO] 127.0.0.1 - - [21/May/2025 08:38:51] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:39:04,887 [INFO] 127.0.0.1 - - [21/May/2025 08:39:04] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:39:09,964 [INFO] 127.0.0.1 - - [21/May/2025 08:39:09] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:39:20,507 [INFO] 127.0.0.1 - - [21/May/2025 08:39:20] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:39:24,714 [INFO] 127.0.0.1 - - [21/May/2025 08:39:24] "GET /add_product HTTP/1.1" 200 -
+2025-05-21 08:39:33,317 [INFO] 127.0.0.1 - - [21/May/2025 08:39:33] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-21 08:39:33,327 [INFO] 127.0.0.1 - - [21/May/2025 08:39:33] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:39:35,580 [INFO] 127.0.0.1 - - [21/May/2025 08:39:35] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:39:40,077 [INFO] 127.0.0.1 - - [21/May/2025 08:39:40] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:39:51,561 [INFO] 127.0.0.1 - - [21/May/2025 08:39:51] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:39:55,969 [INFO] 127.0.0.1 - - [21/May/2025 08:39:55] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:39:57,401 [INFO] 127.0.0.1 - - [21/May/2025 08:39:57] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:40:01,245 [INFO] 127.0.0.1 - - [21/May/2025 08:40:01] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:40:24,030 [INFO] 127.0.0.1 - - [21/May/2025 08:40:24] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:40:27,569 [INFO] 127.0.0.1 - - [21/May/2025 08:40:27] "GET /billing HTTP/1.1" 200 -
+2025-05-21 08:42:31,268 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:42:31,270 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:42:32,584 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:42:34,104 [INFO] Starting Inventory Manager application
+2025-05-21 08:42:34,164 [WARNING]  * Debugger is active!
+2025-05-21 08:42:34,177 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:42:34,692 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:42:34,716 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:42:34,717 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:42:35,350 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:42:36,933 [INFO] Starting Inventory Manager application
+2025-05-21 08:42:36,953 [WARNING]  * Debugger is active!
+2025-05-21 08:42:36,958 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:42:39,263 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:42:39,264 [INFO] Found 0 products
+2025-05-21 08:42:39,294 [INFO] 127.0.0.1 - - [21/May/2025 08:42:39] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:42:41,127 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:42:41,128 [INFO] Found 0 products
+2025-05-21 08:42:41,129 [INFO] 127.0.0.1 - - [21/May/2025 08:42:41] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:42:44,057 [INFO] 127.0.0.1 - - [21/May/2025 08:42:44] "GET /add_product HTTP/1.1" 200 -
+2025-05-21 08:42:53,028 [INFO] 127.0.0.1 - - [21/May/2025 08:42:53] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-21 08:42:53,034 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:42:53,036 [INFO] Found 1 products
+2025-05-21 08:42:53,038 [INFO] 127.0.0.1 - - [21/May/2025 08:42:53] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:42:59,130 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:42:59,132 [INFO] Found 1 products
+2025-05-21 08:42:59,133 [INFO] 127.0.0.1 - - [21/May/2025 08:42:59] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:43:06,624 [INFO] 127.0.0.1 - - [21/May/2025 08:43:06] "GET /billing HTTP/1.1" 200 -
+2025-05-21 08:43:11,917 [INFO] 127.0.0.1 - - [21/May/2025 08:43:11] "POST /billing HTTP/1.1" 200 -
+2025-05-21 08:43:23,052 [INFO] 127.0.0.1 - - [21/May/2025 08:43:23] "GET /sales HTTP/1.1" 200 -
+2025-05-21 08:43:26,571 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:43:26,572 [INFO] Found 1 products
+2025-05-21 08:43:26,573 [INFO] 127.0.0.1 - - [21/May/2025 08:43:26] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:47:16,898 [INFO] 127.0.0.1 - - [21/May/2025 08:47:16] "GET /billing HTTP/1.1" 200 -
+2025-05-21 08:47:27,266 [INFO] 127.0.0.1 - - [21/May/2025 08:47:27] "POST /billing HTTP/1.1" 200 -
+2025-05-21 08:47:46,658 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:47:46,660 [INFO] Found 1 products
+2025-05-21 08:47:46,661 [INFO] 127.0.0.1 - - [21/May/2025 08:47:46] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:47:49,173 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:47:49,174 [INFO] Found 1 products
+2025-05-21 08:47:49,176 [INFO] 127.0.0.1 - - [21/May/2025 08:47:49] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:47:52,613 [INFO] 127.0.0.1 - - [21/May/2025 08:47:52] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:47:54,906 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:47:54,907 [INFO] Found 1 products
+2025-05-21 08:47:54,908 [INFO] 127.0.0.1 - - [21/May/2025 08:47:54] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:47:57,900 [INFO] 127.0.0.1 - - [21/May/2025 08:47:57] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:48:02,127 [INFO] 127.0.0.1 - - [21/May/2025 08:48:02] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:48:12,410 [INFO] 127.0.0.1 - - [21/May/2025 08:48:12] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 08:48:22,514 [INFO] 127.0.0.1 - - [21/May/2025 08:48:22] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:48:24,189 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:48:24,191 [INFO] Found 1 products
+2025-05-21 08:48:24,192 [INFO] 127.0.0.1 - - [21/May/2025 08:48:24] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:48:28,954 [INFO] 127.0.0.1 - - [21/May/2025 08:48:28] "GET /edit_product/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 08:50:59,194 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:50:59,195 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:51:00,302 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:51:06,317 [INFO] Starting Inventory Manager application
+2025-05-21 08:51:06,402 [WARNING]  * Debugger is active!
+2025-05-21 08:51:06,427 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:52:27,598 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:52:27,599 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:52:28,529 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:52:30,115 [INFO] Starting Inventory Manager application
+2025-05-21 08:52:30,141 [WARNING]  * Debugger is active!
+2025-05-21 08:52:30,147 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:52:31,871 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:52:31,873 [INFO] Found 1 products
+2025-05-21 08:52:31,929 [INFO] 127.0.0.1 - - [21/May/2025 08:52:31] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:52:32,254 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:52:32,258 [INFO] Found 1 products
+2025-05-21 08:52:32,262 [INFO] 127.0.0.1 - - [21/May/2025 08:52:32] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:52:38,887 [INFO] Processing sell for product ID: 682d44b538c4d60ba6637ab5, owner ID: 682d43407385924ffc9b3c75
+2025-05-21 08:52:38,894 [INFO] Selling 1 units of 'sdd'
+2025-05-21 08:52:38,898 [INFO] 127.0.0.1 - - [21/May/2025 08:52:38] "[32mPOST /sell_product/682d44b538c4d60ba6637ab5 HTTP/1.1[0m" 302 -
+2025-05-21 08:52:38,915 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:52:38,916 [INFO] Found 1 products
+2025-05-21 08:52:38,918 [INFO] 127.0.0.1 - - [21/May/2025 08:52:38] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:53:39,257 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:53:39,258 [INFO] Found 1 products
+2025-05-21 08:53:39,260 [INFO] 127.0.0.1 - - [21/May/2025 08:53:39] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:53:43,982 [INFO] 127.0.0.1 - - [21/May/2025 08:53:43] "GET /sales HTTP/1.1" 200 -
+2025-05-21 08:53:50,785 [INFO] 127.0.0.1 - - [21/May/2025 08:53:50] "GET /sales HTTP/1.1" 200 -
+2025-05-21 08:53:58,418 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:53:58,419 [INFO] Found 1 products
+2025-05-21 08:53:58,421 [INFO] 127.0.0.1 - - [21/May/2025 08:53:58] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:54:19,680 [INFO] 127.0.0.1 - - [21/May/2025 08:54:19] "GET /billing HTTP/1.1" 200 -
+2025-05-21 08:55:42,931 [INFO] 127.0.0.1 - - [21/May/2025 08:55:42] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:55:45,039 [INFO] 127.0.0.1 - - [21/May/2025 08:55:45] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:55:47,397 [INFO] Processing payment for user Shaswat: 400 -> 800
+2025-05-21 08:55:47,399 [INFO] 127.0.0.1 - - [21/May/2025 08:55:47] "[32mPOST /change_plan/enterprise HTTP/1.1[0m" 302 -
+2025-05-21 08:55:47,420 [INFO] 127.0.0.1 - - [21/May/2025 08:55:47] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:55:57,962 [INFO] 127.0.0.1 - - [21/May/2025 08:55:57] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:55:59,885 [INFO] 127.0.0.1 - - [21/May/2025 08:55:59] "GET /sales HTTP/1.1" 200 -
+2025-05-21 08:56:00,238 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:56:00,259 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:56:01,348 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:56:05,862 [INFO] Starting Inventory Manager application
+2025-05-21 08:56:05,939 [WARNING]  * Debugger is active!
+2025-05-21 08:56:05,949 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:56:06,026 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:56:06,027 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:56:06,028 [INFO] Found 1 products
+2025-05-21 08:56:06,029 [INFO] Found 1 products
+2025-05-21 08:56:06,196 [INFO] 127.0.0.1 - - [21/May/2025 08:56:06] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:56:06,205 [INFO] 127.0.0.1 - - [21/May/2025 08:56:06] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:56:09,730 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask\\app.py', reloading
+2025-05-21 08:56:09,765 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask_login\\utils.py', reloading
+2025-05-21 08:56:09,793 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask\\templating.py', reloading
+2025-05-21 08:56:09,833 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\jinja2\\environment.py', reloading
+2025-05-21 08:56:09,861 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\jinja2\\filters.py', reloading
+2025-05-21 08:56:09,884 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\jinja2\\utils.py', reloading
+2025-05-21 08:56:09,910 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask_pymongo\\helpers.py', reloading
+2025-05-21 08:56:09,941 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\bson\\json_util.py', reloading
+2025-05-21 08:56:09,979 [INFO] 127.0.0.1 - - [21/May/2025 08:56:09] "[35m[1mGET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1[0m" 500 -
+2025-05-21 08:56:10,260 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:56:11,732 [INFO] Starting Inventory Manager application
+2025-05-21 08:56:11,761 [WARNING]  * Debugger is active!
+2025-05-21 08:56:11,767 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:56:11,870 [INFO] 127.0.0.1 - - [21/May/2025 08:56:11] "GET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-21 08:56:11,913 [INFO] 127.0.0.1 - - [21/May/2025 08:56:11] "GET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-21 08:56:11,931 [INFO] 127.0.0.1 - - [21/May/2025 08:56:11] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-21 08:56:29,172 [INFO] 127.0.0.1 - - [21/May/2025 08:56:29] "[35m[1mGET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1[0m" 500 -
+2025-05-21 08:56:29,192 [INFO] 127.0.0.1 - - [21/May/2025 08:56:29] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 08:56:29,195 [INFO] 127.0.0.1 - - [21/May/2025 08:56:29] "GET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-05-21 08:56:29,432 [INFO] 127.0.0.1 - - [21/May/2025 08:56:29] "GET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=console.png&s=tVN1CakUKD4OXRPkiO4K HTTP/1.1" 200 -
+2025-05-21 08:56:29,440 [INFO] 127.0.0.1 - - [21/May/2025 08:56:29] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-21 08:56:29,453 [INFO] 127.0.0.1 - - [21/May/2025 08:56:29] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-21 08:56:32,429 [INFO] 127.0.0.1 - - [21/May/2025 08:56:32] "[35m[1mGET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1[0m" 500 -
+2025-05-21 08:56:32,449 [INFO] 127.0.0.1 - - [21/May/2025 08:56:32] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-21 08:56:32,451 [INFO] 127.0.0.1 - - [21/May/2025 08:56:32] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-21 08:56:32,616 [INFO] 127.0.0.1 - - [21/May/2025 08:56:32] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=console.png&s=tVN1CakUKD4OXRPkiO4K HTTP/1.1[0m" 304 -
+2025-05-21 08:56:32,626 [INFO] 127.0.0.1 - - [21/May/2025 08:56:32] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-21 08:56:32,638 [INFO] 127.0.0.1 - - [21/May/2025 08:56:32] "[36mGET /product_sales/682d44b538c4d60ba6637ab5?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-21 08:57:05,954 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:57:05,955 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 08:57:06,903 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 08:57:08,646 [INFO] Starting Inventory Manager application
+2025-05-21 08:57:08,672 [WARNING]  * Debugger is active!
+2025-05-21 08:57:08,679 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 08:57:43,345 [INFO] 127.0.0.1 - - [21/May/2025 08:57:43] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 08:57:47,844 [INFO] 127.0.0.1 - - [21/May/2025 08:57:47] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 08:58:02,948 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:58:02,949 [INFO] Found 1 products
+2025-05-21 08:58:03,021 [INFO] 127.0.0.1 - - [21/May/2025 08:58:03] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:58:07,163 [INFO] 127.0.0.1 - - [21/May/2025 08:58:07] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:58:12,853 [INFO] 127.0.0.1 - - [21/May/2025 08:58:12] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:58:14,320 [INFO] 127.0.0.1 - - [21/May/2025 08:58:14] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-21 08:58:14,333 [INFO] 127.0.0.1 - - [21/May/2025 08:58:14] "GET /profile HTTP/1.1" 200 -
+2025-05-21 08:58:16,323 [INFO] 127.0.0.1 - - [21/May/2025 08:58:16] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:58:17,918 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:58:17,919 [INFO] Found 1 products
+2025-05-21 08:58:17,921 [INFO] 127.0.0.1 - - [21/May/2025 08:58:17] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:58:20,205 [INFO] 127.0.0.1 - - [21/May/2025 08:58:20] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 08:58:23,787 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 08:58:23,788 [INFO] Found 1 products
+2025-05-21 08:58:23,789 [INFO] 127.0.0.1 - - [21/May/2025 08:58:23] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 08:58:37,215 [INFO] 127.0.0.1 - - [21/May/2025 08:58:37] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 08:58:39,378 [INFO] 127.0.0.1 - - [21/May/2025 08:58:39] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:01:15,087 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:01:16,134 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 09:01:19,354 [INFO] Starting Inventory Manager application
+2025-05-21 09:01:19,388 [WARNING]  * Debugger is active!
+2025-05-21 09:01:19,395 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 09:01:26,076 [INFO] 127.0.0.1 - - [21/May/2025 09:01:26] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:01:37,841 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:01:37,843 [INFO] Found 1 products
+2025-05-21 09:01:37,858 [INFO] 127.0.0.1 - - [21/May/2025 09:01:37] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:01:39,596 [INFO] 127.0.0.1 - - [21/May/2025 09:01:39] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:01:46,449 [INFO] 127.0.0.1 - - [21/May/2025 09:01:46] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:01:49,913 [INFO] 127.0.0.1 - - [21/May/2025 09:01:49] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:01:51,190 [ERROR] Payment error for user Vaibhav: 'team_member'
+2025-05-21 09:01:51,191 [INFO] 127.0.0.1 - - [21/May/2025 09:01:51] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-21 09:01:51,206 [INFO] 127.0.0.1 - - [21/May/2025 09:01:51] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:01:59,981 [INFO] 127.0.0.1 - - [21/May/2025 09:01:59] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:02:03,419 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:02:03,421 [INFO] Found 1 products
+2025-05-21 09:02:03,423 [INFO] 127.0.0.1 - - [21/May/2025 09:02:03] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:02:05,432 [INFO] 127.0.0.1 - - [21/May/2025 09:02:05] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:02:13,339 [INFO] 127.0.0.1 - - [21/May/2025 09:02:13] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:02:16,624 [INFO] 127.0.0.1 - - [21/May/2025 09:02:16] "GET /billing HTTP/1.1" 200 -
+2025-05-21 09:02:19,500 [INFO] 127.0.0.1 - - [21/May/2025 09:02:19] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:04:00,333 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:04:01,860 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 09:04:04,814 [INFO] Starting Inventory Manager application
+2025-05-21 09:04:04,842 [WARNING]  * Debugger is active!
+2025-05-21 09:04:04,848 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 09:04:40,161 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:04:40,162 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-21 09:04:40,401 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 09:04:42,545 [INFO] Starting Inventory Manager application
+2025-05-21 09:04:42,580 [WARNING]  * Debugger is active!
+2025-05-21 09:04:42,586 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 09:04:46,305 [INFO] 127.0.0.1 - - [21/May/2025 09:04:46] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:04:48,821 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:04:48,822 [INFO] Found 1 products
+2025-05-21 09:04:48,882 [INFO] 127.0.0.1 - - [21/May/2025 09:04:48] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:04:51,097 [INFO] 127.0.0.1 - - [21/May/2025 09:04:51] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -
+2025-05-21 09:04:57,920 [INFO] 127.0.0.1 - - [21/May/2025 09:04:57] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:04:59,900 [INFO] Processing payment for user Shaswat: 200 -> 400
+2025-05-21 09:04:59,902 [INFO] 127.0.0.1 - - [21/May/2025 09:04:59] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-21 09:04:59,914 [INFO] 127.0.0.1 - - [21/May/2025 09:04:59] "GET /profile HTTP/1.1" 200 -
+2025-05-21 09:05:01,086 [INFO] 127.0.0.1 - - [21/May/2025 09:05:01] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 09:05:03,510 [INFO] Fetching products for owner_id: 682d43407385924ffc9b3c75
+2025-05-21 09:05:03,511 [INFO] Found 1 products
+2025-05-21 09:05:03,513 [INFO] 127.0.0.1 - - [21/May/2025 09:05:03] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 09:05:05,604 [INFO] 127.0.0.1 - - [21/May/2025 09:05:05] "GET /product_sales/682d44b538c4d60ba6637ab5 HTTP/1.1" 200 -

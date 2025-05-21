@@ -119,16 +119,75 @@ def plan_required(min_plan_level=None, feature=None):
         return decorated_function
     return decorator
 
-# User class for Flask-Login
+# Enhanced permission decorator
+def role_required(role=None, permission=None):
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            # Business owner can do anything
+            if not current_user.is_team_member:
+                return f(*args, **kwargs)
+                
+            # Role-based check
+            if role and current_user.role != role:
+                flash(f"This action requires {role} privileges.", "warning")
+                return redirect(url_for("dashboard"))
+                
+            # Permission-based check
+            if permission and permission not in current_user.permissions:
+                flash(f"You don't have permission to {permission}.", "warning")
+                return redirect(url_for("dashboard"))
+                
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+# Enhance the User class to better handle permissions
 class User(UserMixin):
     def __init__(self, user_data):
         self.id = str(user_data["_id"])
         self.username = user_data["username"]
         self.business_name = user_data.get("business_name", "")
         self.plan = user_data.get("plan", "starter")  # Default to starter plan if not specified
+        self.is_team_member = "parent_user_id" in user_data
+        self.parent_user_id = user_data.get("parent_user_id", None)
+        self.role = user_data.get("role", "owner")
+        self.permissions = user_data.get("permissions", [])
+        self.email = user_data.get("email", "")
+        
+        # Store the original user data for access to all fields
+        self._data = user_data
 
     def get_plan_details(self):
+        # If this is a team member, get the owner's plan details
+        if self.is_team_member and self.parent_user_id:
+            owner = user_collection.find_one({'_id': ObjectId(self.parent_user_id)})
+            if owner:
+                return pricing.get(owner.get('plan', 'starter'), pricing['starter'])
         return pricing.get(self.plan, pricing['starter'])
+    
+    def get_owner_id(self):
+        # Return parent_user_id if team member, or own id if business owner
+        return self.parent_user_id if self.is_team_member else self.id
+    
+    def can_view_products(self):
+        # All team members should be able to view products
+        return True
+        
+    def can_edit_products(self):
+        # Admin and manager roles or users with 'add' permission can edit products
+        return not self.is_team_member or self.role in ["admin", "manager"] or "add" in self.permissions
+        
+    def can_sell_products(self):
+        # All team members should be able to sell products
+        return True
+        
+    def can_view_reports(self):
+        return not self.is_team_member or "reports" in self.permissions or self.role in ["admin", "manager"]
+        
+    def can_manage_team(self):
+        # Only business owners can manage team members, not team members themselves
+        return not self.is_team_member
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -200,9 +259,20 @@ def login():
         password = request.form["password"]
         user = user_collection.find_one({"username": username})
         if user and bcrypt.check_password_hash(user["password"], password):
-            login_user(User(user))
-            flash(f"Welcome {user.get('business_name', username)}!", "success")
+            user_obj = User(user)
+            login_user(user_obj)
+            
+            # Different welcome messages for team members vs owners
+            if user_obj.is_team_member:
+                # Get owner info for team member welcome message
+                owner = user_collection.find_one({"_id": ObjectId(user_obj.parent_user_id)})
+                owner_name = owner.get("business_name", "the business") if owner else "the business"
+                flash(f"Welcome {username}! You are logged in as a {user_obj.role} for {owner_name}.", "success")
+            else:
+                flash(f"Welcome {user.get('business_name', username)}!", "success")
+            
             return redirect(url_for("dashboard"))
+            
         flash("Invalid username or password!", "danger")
         return redirect(url_for("login"))
     return render_template("login.html")
@@ -244,71 +314,111 @@ def profile():
                           team_members=team_members,
                           pricing=pricing)
 
-# Dashboard route (main page after login)
+# Dashboard route - updated to show the right products for team members
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    total_products = product_collection.count_documents({"owner_id": current_user.id})
+    # Use the owner's ID for product queries (either the team member's parent or the current user)
+    owner_id = current_user.get_owner_id()
+    
+    total_products = product_collection.count_documents({"owner_id": owner_id})
     low_stock_products = list(product_collection.find({
-        "owner_id": current_user.id,
+        "owner_id": owner_id,
         "$expr": {"$lte": ["$stock", "$low_stock_threshold"]}
     }))
     low_stock_count = len(low_stock_products)
-    total_sales = calculate_total_sales(current_user.id)
-    recent_products = list(product_collection.find({"owner_id": current_user.id}).sort("_id", -1).limit(10))
+    total_sales = calculate_total_sales(owner_id)
+    recent_products = list(product_collection.find({"owner_id": owner_id}).sort("_id", -1).limit(10))
     
     # Add plan limit information
     plan_details = current_user.get_plan_details()
     product_limit = plan_details['products']
     product_usage_percent = (total_products / product_limit) * 100 if product_limit > 0 else 0
     
+    # Get team info if current user is a business owner
+    team_info = None
+    if not current_user.is_team_member:
+        team_members_count = user_collection.count_documents({"parent_user_id": current_user.id})
+        team_info = {
+            "count": team_members_count,
+            "limit": plan_details['users']
+        }
+    
     return render_template("dashboard.html", 
-                           total_products=total_products, 
-                           low_stock_count=low_stock_count, 
-                           total_sales=total_sales, 
-                           low_stock_products=low_stock_products, 
-                           recent_products=recent_products, 
-                           username=current_user.username,
-                           product_limit=product_limit,
-                           product_usage_percent=product_usage_percent)
+                        total_products=total_products, 
+                        low_stock_count=low_stock_count, 
+                        total_sales=total_sales, 
+                        low_stock_products=low_stock_products, 
+                        recent_products=recent_products, 
+                        username=current_user.username,
+                        product_limit=product_limit,
+                        product_usage_percent=product_usage_percent,
+                        team_info=team_info,
+                        is_team_member=current_user.is_team_member)
 
-# Add product route
+# Fix add_product route to use the correct owner_id
 @app.route("/add_product", methods=["GET", "POST"])
 @login_required
-@plan_required(feature='product_count')  # This will check product limits
+@plan_required(feature='product_count')
+@role_required(permission="add")
 def add_product():
     if request.method == "POST":
         if not validate_product_input(request.form):
             flash("Invalid input data!", "danger")
             return redirect(url_for("add_product"))
+        
+        # Use the owner's ID to ensure products are properly associated
+        owner_id = current_user.get_owner_id()
+        
         product_data = {
             "product_name": request.form["product_name"],
             "description": request.form["description"],
             "price": float(request.form["price"]),
             "stock": int(request.form["stock"]),
             "low_stock_threshold": int(request.form.get("low_stock_threshold", 5)),
-            "owner_id": current_user.id
+            "owner_id": owner_id  # Use the owner_id instead of current_user.id
         }
         product_collection.insert_one(product_data)
         flash("Product added successfully!", "success")
         return redirect(url_for("view_products"))
     return render_template("add_product.html")
 
-# View products route
+# Ensure view_products is using string comparison for IDs if needed
 @app.route("/view_products")
 @login_required
 def view_products():
-    products = list(product_collection.find({"owner_id": current_user.id}))
+    if current_user.is_team_member and not current_user.can_view_products():
+        flash("You don't have permission to view products.", "warning")
+        return redirect(url_for("dashboard"))
+    
+    owner_id = current_user.get_owner_id()
+    
+    # Add logging to debug the issue
+    logger.info(f"Fetching products for owner_id: {owner_id}")
+    
+    # Make sure we're querying with the correct type (string vs ObjectId)
+    # If owner_id is a string but stored as ObjectId or vice versa, this could cause issues
+    products = list(product_collection.find({"owner_id": owner_id}))
+    
+    logger.info(f"Found {len(products)} products")
+    
     low_stock_products = [
         product for product in products if product["stock"] <= product.get("low_stock_threshold", 5)
     ]
-    return render_template("view_products.html", products=products, low_stock_products=low_stock_products)
+    
+    return render_template("view_products.html", 
+                          products=products, 
+                          low_stock_products=low_stock_products,
+                          can_edit=current_user.can_edit_products(),
+                          can_sell=current_user.can_sell_products())
 
-# Edit product route
+# Fix edit_product route to use the correct owner_id for consistency
 @app.route("/edit_product/<product_id>", methods=["GET", "POST"])
 @login_required
 def edit_product(product_id):
-    product = product_collection.find_one({"_id": ObjectId(product_id), "owner_id": current_user.id})
+    owner_id = current_user.get_owner_id()
+    product = product_collection.find_one({"_id": ObjectId(product_id), "owner_id": owner_id})
+    
     if not product:
         flash("Product not found", "danger")
         return redirect(url_for("view_products"))
@@ -337,41 +447,69 @@ def edit_product(product_id):
 @app.route("/sell_product/<product_id>", methods=["POST"])
 @login_required
 def sell_product(product_id):
-    product = product_collection.find_one({"_id": ObjectId(product_id), "owner_id": current_user.id})
-    if not product:
-        flash("Product not found!", "danger")
-        return redirect(url_for("view_products"))
     try:
+        # Get the owner ID for proper product lookup
+        owner_id = current_user.get_owner_id()
+        
+        # Add logging for debugging
+        logger.info(f"Processing sell for product ID: {product_id}, owner ID: {owner_id}")
+        
+        # Use ObjectId for product lookup when the field is an ObjectId in MongoDB
+        product = product_collection.find_one({"_id": ObjectId(product_id), "owner_id": owner_id})
+        
+        if not product:
+            logger.warning(f"Product not found for ID: {product_id}, owner ID: {owner_id}")
+            flash("Product not found!", "danger")
+            return redirect(url_for("view_products"))
+        
+        # Get quantity from form data
         quantity_sold = int(request.form["quantity"])
+        logger.info(f"Selling {quantity_sold} units of '{product['product_name']}'")
+        
         if quantity_sold <= 0:
             flash("Invalid quantity!", "danger")
             return redirect(url_for("view_products"))
 
         if quantity_sold > product["stock"]:
-            flash("Not enough stock available!", "danger")
+            flash(f"Not enough stock! Only {product['stock']} available.", "danger")
             return redirect(url_for("view_products"))
 
+        # Calculate sale details
         total_price = quantity_sold * product["price"]
-        sales_collection.insert_one({
-            "product_id": product_id,
-            "owner_id": current_user.id,
+        
+        # Record the sale
+        sale_record = {
+            "product_id": str(product_id),  # Store as string for consistency
+            "owner_id": owner_id,
+            "seller_id": current_user.id,
+            "seller_name": current_user.username,
             "product_name": product["product_name"],
             "quantity_sold": quantity_sold,
             "total_price": total_price,
             "date_sold": datetime.utcnow()
-        })
+        }
+        sales_collection.insert_one(sale_record)
+        
+        # Update product stock
         new_stock = product["stock"] - quantity_sold
         product_collection.update_one(
             {"_id": ObjectId(product_id)},
             {"$set": {"stock": new_stock}}
         )
+        
+        # Notify based on inventory status
         if new_stock == 0:
             flash(f"Product '{product['product_name']}' is now out of stock!", "warning")
         elif new_stock <= product.get("low_stock_threshold", 5):
             flash(f"Warning! '{product['product_name']}' is low on stock ({new_stock} left).", "warning")
-        flash("Sale recorded successfully!", "success")
+        
+        flash(f"Sale of {quantity_sold} {product['product_name']} recorded successfully! Total: ₹{total_price}", "success")
     except ValueError:
         flash("Invalid input. Please enter a valid quantity.", "danger")
+    except Exception as e:
+        logger.error(f"Error selling product: {str(e)}")
+        flash(f"An error occurred: {str(e)}", "danger")
+        
     return redirect(url_for("view_products"))
 
 # Export sales route
@@ -411,24 +549,89 @@ def export_sales():
     response.headers["Content-Disposition"] = f"attachment; filename=sales_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
     return response
 
-# Product sales route
+# Enhanced product sales route with more robust handling of data
 @app.route("/product_sales/<product_id>")
 @login_required
 def product_sales(product_id):
-    product = product_collection.find_one({"_id": ObjectId(product_id), "owner_id": current_user.id})
+    owner_id = current_user.get_owner_id()
+    product = product_collection.find_one({"_id": ObjectId(product_id), "owner_id": owner_id})
+    
     if not product:
         flash("Product not found!", "danger")
         return redirect(url_for("view_products"))
+    
+    # Check plan permissions - only Professional and Enterprise plans get full analytics
+    plan_name = current_user.plan
+    plan_details = current_user.get_plan_details()
+    basic_analytics_only = plan_name == 'starter'
+    
+    # For starter plan, provide only basic info
+    total_sales = 0
+    total_quantity = 0
+    total_revenue = 0
+    chart_dates = []
+    chart_quantities = []
+    chart_revenues = []
+    sales = []
+    
+    # Always fetch basic stats for all plans
+    try:
+        # Get all sales for this product
+        sales_cursor = sales_collection.find({
+            "product_id": str(product_id),
+            "owner_id": owner_id
+        })
         
-    sales = list(sales_collection.find({"product_id": product_id, "owner_id": current_user.id}).sort("date_sold", 1))
-    sales_dates = [sale["date_sold"].strftime("%Y-%m-%d") for sale in sales]
-    sales_quantities = [sale["quantity_sold"] for sale in sales]
+        # Calculate basic statistics that are available to all plans
+        if sales_cursor:
+            sales = list(sales_cursor)
+            total_sales = len(sales)
+            total_quantity = sum(sale.get("quantity_sold", 0) for sale in sales)
+            total_revenue = sum(sale.get("total_price", 0) for sale in sales)
+            
+        # Advanced analytics only for professional and enterprise plans
+        if not basic_analytics_only:
+            # Format dates for chart display and process data for advanced charts
+            chart_data = {}
+            if sales:
+                for sale in sales:
+                    if "date_sold" in sale:
+                        if isinstance(sale["date_sold"], datetime):
+                            date_str = sale["date_sold"].strftime("%Y-%m-%d")
+                        else:
+                            try:
+                                date_str = datetime.fromisoformat(str(sale["date_sold"])).strftime("%Y-%m-%d")
+                            except (ValueError, TypeError):
+                                date_str = "Unknown Date"
+                        
+                        if date_str not in chart_data:
+                            chart_data[date_str] = {"quantity": 0, "revenue": 0}
+                        chart_data[date_str]["quantity"] += sale.get("quantity_sold", 0)
+                        chart_data[date_str]["revenue"] += sale.get("total_price", 0)
+                
+                # Sort by date
+                chart_dates = sorted(chart_data.keys())
+                chart_quantities = [chart_data[date]["quantity"] for date in chart_dates]
+                chart_revenues = [chart_data[date]["revenue"] for date in chart_dates]
+                
+    except Exception as e:
+        logger.error(f"Error generating product sales data: {str(e)}")
+        flash("An error occurred retrieving sales data.", "danger")
+        return redirect(url_for("view_products"))
     
     return render_template("product_sales.html", 
-                           product=product, 
-                           sales=sales, 
-                           sales_dates=sales_dates, 
-                           sales_quantities=sales_quantities)
+                          product=product,
+                          sales=sales, 
+                          total_sales=total_sales,
+                          total_quantity=total_quantity,
+                          total_revenue=total_revenue,
+                          chart_dates=chart_dates,
+                          chart_quantities=chart_quantities,
+                          chart_revenues=chart_revenues,
+                          basic_analytics_only=basic_analytics_only,
+                          plan_name=plan_name,
+                          plan_details=plan_details,
+                          pricing=pricing)
 
 # Delete sale route
 @app.route("/delete_sale/<sale_id>", methods=["POST"])
@@ -449,14 +652,22 @@ def delete_all_sales():
     flash("All sales records have been deleted!", "warning")
     return redirect(url_for("view_sales"))
 
-# View sales route
+# Fix the view_sales route to properly handle team members
 @app.route("/sales")
 @login_required
 def view_sales():
-    sales = list(sales_collection.find().sort("date_sold", -1))
+    # For team members, check if they have permission to view sales
+    if current_user.is_team_member and not current_user.can_view_reports():
+        flash("You don't have permission to view sales records.", "warning")
+        return redirect(url_for("dashboard"))
+        
+    owner_id = current_user.get_owner_id()
+    sales = list(sales_collection.find({"owner_id": owner_id}).sort("date_sold", -1))
+    
     for sale in sales:
         if isinstance(sale["date_sold"], str):
             sale["date_sold"] = datetime.strptime(sale["date_sold"], "%Y-%m-%d %H:%M:%S")
+            
     return render_template("view_sales.html", sales=sales)
 
 # Delete product route
@@ -474,6 +685,9 @@ def delete_product(product_id):
 @app.route("/billing", methods=["GET", "POST"])
 @login_required
 def billing():
+    # Get owner_id for proper product access
+    owner_id = current_user.get_owner_id()
+    
     if request.method == "POST":
         customer_name = request.form.get("customer_name")
         selected_items = request.form.getlist("selected_items")
@@ -487,7 +701,8 @@ def billing():
         total_price = 0
         for item_id, quantity in zip(selected_items, quantities):
             try:
-                product = mongo.db.products.find_one({"_id": ObjectId(item_id), "owner_id": str(current_user.id)})
+                # Use the owner_id to find products, not just the current user's id
+                product = mongo.db.products.find_one({"_id": ObjectId(item_id), "owner_id": owner_id})
                 if not product:
                     flash(f"Product not found!", "danger")
                     return redirect(url_for("billing"))
@@ -506,15 +721,19 @@ def billing():
                 })
                 total_price += item_total
 
+                # Record sale with the owner's ID for proper tracking
                 sales_collection.insert_one({
                     "product_id": item_id,
-                    "owner_id": current_user.id,
+                    "owner_id": owner_id,  # Use owner_id instead of current_user.id
+                    "seller_id": current_user.id,  # Also track who made the sale
+                    "seller_name": current_user.username,
                     "product_name": product["product_name"],
                     "quantity_sold": quantity,
                     "total_price": item_total,
                     "date_sold": datetime.utcnow(),
                     "customer_name": customer_name,
                 })
+                
                 mongo.db.products.update_one(
                     {"_id": ObjectId(item_id)},
                     {"$inc": {"stock": -int(quantity)}}
@@ -523,9 +742,18 @@ def billing():
                 flash(f"An error occurred: {str(e)}", "danger")
                 return redirect(url_for("billing"))
 
-        pdf_buffer = generate_pdf_bill(customer_name, items, total_price)
+        # Add billing info to PDF
+        business_info = {
+            "name": current_user.business_name,
+            "seller": current_user.username,
+            "role": current_user.role if current_user.is_team_member else "Owner"
+        }
+        
+        pdf_buffer = generate_pdf_bill(customer_name, items, total_price, business_info)
         return send_file(pdf_buffer, as_attachment=True, download_name="bill.pdf", mimetype="application/pdf")
-    products = list(mongo.db.products.find({"owner_id": str(current_user.id)}))
+    
+    # Show products from the owner for team members
+    products = list(mongo.db.products.find({"owner_id": owner_id}))
     return render_template("billing.html", products=products)
 
 # Add page number function
@@ -537,7 +765,7 @@ def add_page_number(canvas, doc):
     canvas.restoreState()
 
 # Generate PDF bill function
-def generate_pdf_bill(customer_name, items, total_price):
+def generate_pdf_bill(customer_name, items, total_price, business_info):
     buffer = BytesIO()
     doc = SimpleDocTemplate(
         buffer,
@@ -600,10 +828,9 @@ def generate_pdf_bill(customer_name, items, total_price):
     content.append(Paragraph("Inventory Manager Invoice", styles['InvoiceHeader']))
     content.append(Paragraph(f"Invoice Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", styles['InvoiceSubHeader']))
     
-    # Add business plan information
-    business_name = current_user.business_name
-    plan_name = current_user.plan.capitalize()
-    content.append(Paragraph(f"<b>Business:</b> {business_name} | <b>Plan:</b> {plan_name}", styles['Normal']))
+    # Add seller information
+    content.append(Paragraph(f"<b>Business:</b> {business_info['name']}", styles['Normal']))
+    content.append(Paragraph(f"<b>Sale by:</b> {business_info['seller']} ({business_info['role']})", styles['Normal']))
     content.append(Spacer(1, 12))
     
     # Customer Details
@@ -755,6 +982,11 @@ def change_plan(plan_name):
 @app.route("/add_team_member", methods=["GET", "POST"])
 @login_required
 def add_team_member():
+    # Only business owners can add team members
+    if current_user.is_team_member:
+        flash("Only business owners can add team members.", "warning")
+        return redirect(url_for("dashboard"))
+    
     # Get current user count for this business owner
     current_user_count = user_collection.count_documents({"parent_user_id": current_user.id})
     plan_details = current_user.get_plan_details()
@@ -808,30 +1040,71 @@ def add_team_member():
         flash(f"Team member {username} added successfully!", "success")
         return redirect(url_for("manage_team"))
         
+    # Get owner information to display
+    owner_info = None
+    if current_user.is_team_member:
+        # If team member is adding another team member, show the business owner
+        parent = user_collection.find_one({"_id": ObjectId(current_user.parent_user_id)})
+        if parent:
+            owner_info = {
+                "username": parent.get("username", ""),
+                "business_name": parent.get("business_name", ""),
+                "email": parent.get("email", "")
+            }
+    else:
+        # Business owner is adding team member
+        owner_info = {
+            "username": current_user.username,
+            "business_name": current_user.business_name,
+            "email": current_user.email
+        }
+    
+    # Also get existing team members to display
+    existing_team_members = list(user_collection.find({"parent_user_id": current_user.get_owner_id()}))
+    
     return render_template(
         "add_user.html",
         current_user_count=current_user_count,
         plan_details=plan_details,
         plan_name=plan_name,
-        total_products=total_products  # Pass total products to the template
+        total_products=total_products,
+        existing_team_members=existing_team_members,
+        owner_info=owner_info
     )
 
 @app.route("/manage_team")
 @login_required
 def manage_team():
+    # Only business owners can manage team
+    if current_user.is_team_member:
+        flash("Only business owners can manage team members.", "warning")
+        return redirect(url_for("dashboard"))
+    
     # Get all team members for this business owner
-    team_members = list(user_collection.find({"parent_user_id": current_user.id}))
+    owner_id = current_user.id  # Use current_user.id directly since only owners can access this route
+    team_members = list(user_collection.find({"parent_user_id": owner_id}))
     plan_details = current_user.get_plan_details()
     
     return render_template(
         "manage_team.html",
         team_members=team_members,
-        plan_details=plan_details
+        plan_details=plan_details,
+        plan_name=current_user.plan,
+        owner_info={
+            "username": current_user.username,
+            "business_name": current_user.business_name
+        },
+        is_team_member=False  # Will always be false since we're restricting access to owners
     )
 
 @app.route("/delete_team_member/<user_id>", methods=["POST"])
 @login_required
 def delete_team_member(user_id):
+    # Only business owners can delete team members
+    if current_user.is_team_member:
+        flash("Only business owners can manage team members.", "warning")
+        return redirect(url_for("dashboard"))
+        
     # Check if the team member belongs to current user
     team_member = user_collection.find_one({
         "_id": ObjectId(user_id),

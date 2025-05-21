@@ -86,6 +86,35 @@
             </a>
         </div>
         
+        <!-- Business Owner Info Card -->
+        <div class="glass-card p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                <i class="fas fa-building text-blue-400"></i> Business Information
+            </h2>
+            
+            {% if owner_info %}
+            <div class="flex items-center mb-4">
+                <div class="h-16 w-16 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-xl">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="ml-6">
+                    <div class="text-lg font-semibold text-white">{{ owner_info.business_name }}</div>
+                    <div class="text-gray-400">Owner: {{ owner_info.username }}</div>
+                    <div class="text-gray-400">{{ owner_info.email }}</div>
+                </div>
+            </div>
+            <p class="text-sm text-gray-400">
+                {% if is_team_member %}
+                You're creating a team member for the above business. This team member will have access to the business inventory based on the permissions you grant.
+                {% else %}
+                You're creating a team member for your business. This will allow the new user to access your inventory based on the permissions you grant.
+                {% endif %}
+            </p>
+            {% else %}
+            <p class="text-yellow-400">Business owner information not available.</p>
+            {% endif %}
+        </div>
+        
         <!-- Plan Limits Info Card -->
         <div class="glass-card p-6 mb-8">
             <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -168,6 +197,69 @@
                 </p>
             </div>
         </div>
+
+        <!-- Current Team Members Section -->
+        <div class="glass-card p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+                <i class="fas fa-users text-blue-400"></i> Current Team Members
+            </h2>
+            
+            {% if existing_team_members %}
+            <div class="overflow-x-auto mb-4">
+                <table class="min-w-full bg-gray-800/50 rounded-lg overflow-hidden">
+                    <thead>
+                        <tr class="border-b border-gray-700">
+                            <th class="py-3 px-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Username</th>
+                            <th class="py-3 px-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Email</th>
+                            <th class="py-3 px-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Role</th>
+                            <th class="py-3 px-4 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Joined</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for member in existing_team_members %}
+                        <tr class="border-b border-gray-700 hover:bg-gray-700/50 transition-colors">
+                            <td class="py-3 px-4 font-medium">{{ member.username }}</td>
+                            <td class="py-3 px-4 text-gray-400">{{ member.email }}</td>
+                            <td class="py-3 px-4">
+                                <span class="px-2 py-1 text-xs rounded-full 
+                                    {% if member.role == 'admin' %}bg-purple-900/50 text-purple-300
+                                    {% elif member.role == 'manager' %}bg-blue-900/50 text-blue-300
+                                    {% else %}bg-green-900/50 text-green-300{% endif %}">
+                                    {{ member.role|title }}
+                                </span>
+                            </td>
+                            <td class="py-3 px-4 text-gray-400">{{ member.registration_date.strftime('%Y-%m-%d') }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-sm text-gray-400">These team members can access and manage products in your inventory based on their role.</p>
+            {% else %}
+            <div class="text-center p-6 bg-gray-800/30 rounded-lg">
+                <i class="fas fa-users text-4xl text-gray-600 mb-2"></i>
+                <p class="text-gray-400">You haven't added any team members yet.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Product Sharing Information -->
+        <div class="glass-card p-6 mb-8 border-l-4 border-blue-500">
+            <div class="flex items-start">
+                <div class="bg-blue-900/30 p-3 rounded-full mr-4">
+                    <i class="fas fa-info-circle text-blue-400 text-xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-medium mb-2">Product Sharing</h3>
+                    <p class="text-gray-300 mb-2">Team members will have access to your product inventory ({{ total_products }} products) based on their assigned role:</p>
+                    <ul class="space-y-1 list-disc pl-5 text-gray-400">
+                        <li>Staff members can view and sell products</li>
+                        <li>Managers can additionally add and edit products</li>
+                        <li>Administrators have full access to all features</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         
         <!-- Add User Form -->
         {% if current_user_count < plan_details.users %}
@@ -214,29 +306,67 @@
                     </p>
                 </div>
                 
+                <!-- Enhanced team permissions UI -->
                 <div class="mb-6">
-                    <label for="permissions" class="block text-sm font-medium mb-2">Permissions</label>
-                    <div class="space-y-2">
-                        <div class="flex items-center">
-                            <input type="checkbox" id="perm_view" name="permissions[]" value="view" checked 
-                                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
-                            <label for="perm_view" class="ml-2">View Products & Sales</label>
+                    <label for="permissions" class="block text-sm font-medium mb-2">Team Member Permissions</label>
+                    <p class="text-sm text-gray-400 mb-2">
+                        <i class="fas fa-info-circle"></i> Select the permissions for this team member. Each permission grants access to different features.
+                    </p>
+                    
+                    <!-- Enhanced permissions selector with better UI -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-800/40 p-4 rounded-lg hover:bg-gray-800/60 transition-colors border border-gray-700">
+                            <div class="flex items-center mb-2">
+                                <input type="checkbox" id="perm_view" name="permissions[]" value="view" checked 
+                                       class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
+                                <label for="perm_view" class="ml-2 text-lg text-white">View Products & Inventory</label>
+                            </div>
+                            <p class="text-sm text-gray-400 pl-7">
+                                Allows team member to see all products and inventory levels. This is a basic permission that all team members should have.
+                            </p>
                         </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="perm_sell" name="permissions[]" value="sell" checked 
-                                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
-                            <label for="perm_sell" class="ml-2">Record Sales</label>
+                        
+                        <div class="bg-gray-800/40 p-4 rounded-lg hover:bg-gray-800/60 transition-colors border border-gray-700">
+                            <div class="flex items-center mb-2">
+                                <input type="checkbox" id="perm_sell" name="permissions[]" value="sell" checked 
+                                       class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
+                                <label for="perm_sell" class="ml-2 text-lg text-white">Record Sales & Billing</label>
+                            </div>
+                            <p class="text-sm text-gray-400 pl-7">
+                                Allows team member to record product sales and generate bills for customers.
+                            </p>
                         </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="perm_add" name="permissions[]" value="add" 
-                                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
-                            <label for="perm_add" class="ml-2">Add/Edit Products</label>
+                        
+                        <div class="bg-gray-800/40 p-4 rounded-lg hover:bg-gray-800/60 transition-colors border border-gray-700">
+                            <div class="flex items-center mb-2">
+                                <input type="checkbox" id="perm_add" name="permissions[]" value="add" 
+                                       class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
+                                <label for="perm_add" class="ml-2 text-lg text-white">Add/Edit Products</label>
+                            </div>
+                            <p class="text-sm text-gray-400 pl-7">
+                                Allows team member to add new products, update existing ones and manage inventory levels.
+                            </p>
                         </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="perm_reports" name="permissions[]" value="reports" 
-                                   class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
-                            <label for="perm_reports" class="ml-2">Generate Reports</label>
+                        
+                        <div class="bg-gray-800/40 p-4 rounded-lg hover:bg-gray-800/60 transition-colors border border-gray-700">
+                            <div class="flex items-center mb-2">
+                                <input type="checkbox" id="perm_reports" name="permissions[]" value="reports" 
+                                       class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 bg-gray-700 border-gray-600">
+                                <label for="perm_reports" class="ml-2 text-lg text-white">View Reports & Analytics</label>
+                            </div>
+                            <p class="text-sm text-gray-400 pl-7">
+                                Allows team member to view sales reports, analytics and export data.
+                            </p>
                         </div>
+                    </div>
+                    
+                    <div class="mt-4 p-4 bg-blue-900/20 border border-blue-500/30 rounded-lg text-sm">
+                        <h4 class="font-medium text-blue-400 mb-2">How permissions work with roles:</h4>
+                        <ul class="space-y-1 text-gray-300 list-disc pl-6">
+                            <li><span class="font-medium">Staff</span>: Automatically granted basic view and sell permissions</li>
+                            <li><span class="font-medium">Manager</span>: All staff permissions plus product management and reports</li>
+                            <li><span class="font-medium">Admin</span>: All permissions plus ability to manage other team members</li>
+                        </ul>
                     </div>
                 </div>
                 
