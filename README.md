@@ -1,20 +1,45 @@
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-View%20on%20GitHub-blue?logo=github)](https://github.com/shaswat2031/small-busniess-invenrtry-management)
 
-# Small Business Inventory Management
+# 📦 Small Business Inventory Management
 
-A modern, full-featured inventory management system for small businesses. Manage products, sales, team members, and analytics with a beautiful, responsive dashboard and robust role-based access control.
+A modern, full-featured inventory management system built for small businesses and startups. Streamline your operations with our elegant and powerful platform that helps you manage products, track sales, handle team permissions, and visualize business analytics—all with a beautiful, responsive dashboard and robust role-based access control.
+
+<div align="center">
+  <img src="logo.png" alt="Inventory Management Logo" width="180">
+</div>
 
 ---
 
 ## 🌟 Live Demo & Screenshots
-- **GitHub Repository:** [https://github.com/shaswat2031/small-busniess-invenrtry-management](https://github.com/shaswat2031/small-busniess-invenrtry-management)
-- *(Add your live demo link here if deployed)*
 
-<!--
-![Dashboard Screenshot](static/screenshots/dashboard.png)
-![Product Management](static/screenshots/products.png)
--->
+- **GitHub Repository:** [https://github.com/shaswat2031/small-busniess-invenrtry-management](https://github.com/shaswat2031/small-busniess-invenrtry-management)
+- **Live Demo:** [https://inventory-manager-demo.vercel.app](https://inventory-manager-demo.vercel.app) *(Coming Soon)*
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <strong>Modern Dashboard</strong><br>
+        <img src="static/screenshots/dashboard.png" alt="Dashboard Screenshot" width="350">
+      </td>
+      <td align="center">
+        <strong>Product Management</strong><br>
+        <img src="static/screenshots/products.png" alt="Product Management" width="350">
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <strong>Sales Analytics</strong><br>
+        <img src="static/screenshots/analytics.png" alt="Analytics Screenshot" width="350">
+      </td>
+      <td align="center">
+        <strong>Team Management</strong><br>
+        <img src="static/screenshots/team.png" alt="Team Management" width="350">
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
@@ -37,6 +62,19 @@ A modern, full-featured inventory management system for small businesses. Manage
 - **Database:** MongoDB (local or cloud)
 - **Frontend:** Jinja2 templates, Tailwind CSS, FontAwesome
 - **Other:** ReportLab (PDF reports), Flask-Mail (email), Vercel (optional deployment)
+
+---
+
+## 🎨 UI Features & Design
+- **Responsive Dashboard:** Beautiful dark-mode interface with animated cards and gradients
+- **Interactive Charts:** Real-time data visualization with hover effects and tooltips
+- **Smooth Transitions:** Subtle animations for page transitions and state changes
+- **Accessibility:** WCAG-compliant design with keyboard navigation and screen reader support
+- **Customizable Themes:** Choose between light/dark mode and customize accent colors
+- **Mobile-First Design:** Optimized for all device sizes with adaptive layouts
+- **Modern Components:** Custom buttons, cards, forms, tables with consistent styling
+- **Loading States:** Skeleton screens and loading indicators for better UX
+- **Notification System:** Toast messages for actions with animated transitions
 
 ---
 
