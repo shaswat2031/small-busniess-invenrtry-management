@@ -232,7 +232,10 @@
                     <h3 class="text-lg font-medium text-blue-400 mb-4 flex items-center">
                         <i class="fas fa-shopping-cart mr-2"></i> Select Products
                     </h3>
-                    
+                    <!-- Product Search -->
+                    <div class="mb-4">
+                        <input type="text" id="product-search" placeholder="Search products..." class="form-input" oninput="filterProducts()">
+                    </div>
                     <!-- Product Grid View -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                         {% for product in products %}
@@ -259,7 +262,7 @@
                                 </div>
                             </div>
                             
-                            <div class="quantity-control flex items-center mt-3" id="quantity-control-{{ product._id }}" style="display: none;">
+                            <div class="quantity-control hidden flex items-center mt-3" id="quantity-control-{{ product._id }}">
                                 <button type="button" class="btn bg-gray-700 hover:bg-gray-600 text-white h-8 w-8 rounded-l-lg flex items-center justify-center" onclick="decrementQuantity(this)">
                                     <i class="fas fa-minus text-sm"></i>
                                 </button>
@@ -274,18 +277,39 @@
                     </div>
                     
                     <!-- Total Price Display -->
-                    <div class="bg-gray-900 bg-opacity-70 p-4 rounded-lg flex justify-between items-center">
-                        <div class="text-lg">Total Amount:</div>
-                        <div id="total-price" class="text-2xl font-bold text-gradient">₹0.00</div>
+                    <div class="bg-gray-900 bg-opacity-70 p-4 rounded-lg">
+                        <div class="flex justify-between items-center">
+                            <div class="text-lg">Subtotal:</div>
+                            <div id="subtotal-price" class="text-xl font-bold">₹0.00</div>
+                        </div>
+                        
+                        <!-- Discount Section - Hidden by default -->
+                        <div id="discount-section" class="mt-2 border-t border-gray-700 pt-2 hidden">
+                            <div class="flex justify-between items-center text-green-400">
+                                <div class="flex items-center">
+                                    <i class="fas fa-ticket-alt mr-2"></i>
+                                    <span id="coupon-name">Coupon Applied</span>
+                                </div>
+                                <div id="discount-amount" class="font-medium">-₹0.00</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-3 pt-3 border-t border-gray-700">
+                            <div class="text-lg">Total Amount:</div>
+                            <div class="flex flex-col items-end">
+                                <div id="original-price" class="line-through text-gray-500 hidden">₹0.00</div>
+                                <div id="total-price" class="text-2xl font-bold text-gradient">₹0.00</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
-                    <button type="submit" class="btn btn-success py-3 px-6 flex-1 flex items-center justify-center">
+                    <button type="submit" id="generate-invoice-btn" class="btn btn-success py-3 px-6 flex-1 flex items-center justify-center opacity-50 cursor-not-allowed" disabled>
                         <i class="fas fa-file-invoice mr-2"></i> Generate Invoice
                     </button>
-                    <button type="button" class="btn btn-primary py-3 px-6 flex-1 flex items-center justify-center" onclick="location.href='{{ url_for('dashboard') }}'">
+                    <button type="button" class="btn btn-primary py-3 px-6 flex-1 flex items-center justify-center" onclick="location.href='{{ url_for('dashboard') }}';">
                         <i class="fas fa-times mr-2"></i> Cancel
                     </button>
                 </div>
@@ -314,6 +338,16 @@
             
             greeting.innerHTML = `<span>${icon} ${greetingText}</span>`;
         });
+
+        // Filter Products by Name
+        function filterProducts() {
+            const term = document.getElementById('product-search').value.toLowerCase();
+            document.querySelectorAll('.product-card').forEach(card => {
+                const name = card.querySelector('h4').textContent.toLowerCase();
+                card.style.display = name.includes(term) ? 'block' : 'none';
+            });
+            updateTotalPrice();
+        }
         
         // Toggle Product Selection
         function toggleProduct(checkbox, productId) {
@@ -351,25 +385,100 @@
             }
         }
         
-        // Update Total Price
+        // Update Total Price Function
         function updateTotalPrice() {
-            let totalPrice = 0;
+            let subtotal = 0;
             const checkboxes = document.querySelectorAll('input[type="checkbox"][name="selected_items"]');
             
             checkboxes.forEach(checkbox => {
                 if (checkbox.checked) {
-                    const productCard = checkbox.closest('.product-card');
-                    const quantityInput = productCard.querySelector('input[type="number"]');
-                    const price = parseFloat(quantityInput.dataset.price);
-                    const quantity = parseInt(quantityInput.value);
+                    const productId = checkbox.value;
+                    const productCard = document.querySelector(`.product-card[data-id="${productId}"]`);
+                    const quantityInput = document.querySelector(`#quantity-control-${productId} input[type="number"]`);
                     
-                    totalPrice += price * quantity;
+                    if (quantityInput) {
+                        const price = parseFloat(quantityInput.dataset.price);
+                        const quantity = parseInt(quantityInput.value);
+                        
+                        if (!isNaN(price) && !isNaN(quantity)) {
+                            subtotal += price * quantity;
+                        }
+                    }
                 }
             });
             
-            document.getElementById('total-price').textContent = `₹${totalPrice.toFixed(2)}`;
+            // Display subtotal
+            document.getElementById('subtotal-price').textContent = `₹${subtotal.toFixed(2)}`;
+            
+            // Set initial total (without coupon)
+            document.getElementById('total-price').textContent = `₹${subtotal.toFixed(2)}`;
+            
+            // Update generate invoice button state
+            const generateBtn = document.getElementById('generate-invoice-btn');
+            if (subtotal > 0) {
+                generateBtn.disabled = false;
+                generateBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                generateBtn.disabled = true;
+                generateBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            
+            // If there's a coupon code, validate it
+            const couponCode = document.getElementById('coupon_code').value.trim();
+            if (couponCode) {
+                applyCoupon(couponCode, subtotal);
+            } else {
+                document.getElementById('discount-section').classList.add('hidden');
+                document.getElementById('original-price').classList.add('hidden');
+                document.getElementById('total-price').classList.remove('pulse');
+            }
         }
         
+        // Apply coupon and update totals
+        function applyCoupon(couponCode, subtotal) {
+            fetch('/validate_coupon', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ coupon_code: couponCode })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let discountAmount = 0;
+                let finalTotal = subtotal;
+                if (data.valid) {
+                    if (data.type === 'percentage') {
+                        discountAmount = subtotal * (data.value / 100);
+                    } else {
+                        discountAmount = Math.min(data.value, subtotal);
+                    }
+                    finalTotal = subtotal - discountAmount;
+                    document.getElementById('discount-section').classList.remove('hidden');
+                    document.getElementById('coupon-name').textContent = `Coupon Applied (${couponCode.toUpperCase()})`;
+                    document.getElementById('discount-amount').textContent = `-₹${discountAmount.toFixed(2)}`;
+                    document.getElementById('original-price').textContent = `₹${subtotal.toFixed(2)}`;
+                    document.getElementById('original-price').classList.remove('hidden');
+                    document.getElementById('total-price').classList.add('pulse');
+                } else {
+                    document.getElementById('discount-section').classList.add('hidden');
+                    document.getElementById('original-price').classList.add('hidden');
+                    document.getElementById('total-price').classList.remove('pulse');
+                }
+                document.getElementById('total-price').textContent = `₹${finalTotal.toFixed(2)}`;
+            })
+            .catch(() => {
+                document.getElementById('discount-section').classList.add('hidden');
+                document.getElementById('original-price').classList.add('hidden');
+                document.getElementById('total-price').classList.remove('pulse');
+            });
+        }
+        
+        // Coupon code input event
+        document.getElementById('coupon_code').addEventListener('input', function() {
+            updateTotalPrice();
+        });
+
         // Form Validation
         function validateForm() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"][name="selected_items"]:checked');

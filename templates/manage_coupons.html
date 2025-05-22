@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Coupons - Inventory Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #e0e0e0;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        /* Glass Effect */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                        0 1px 2px rgba(0, 0, 0, 0.2),
+                        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+        }
+        
+        /* Form Controls */
+        .form-input {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 10px 15px;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-input:focus {
+            border-color: rgba(59, 130, 246, 0.7);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+            background: rgba(15, 23, 42, 0.8);
+            outline: none;
+        }
+        
+        /* Buttons */
+        .btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            font-weight: 500;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::after {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        /* Coupon Preview */
+        .coupon-preview {
+            background: linear-gradient(45deg, #1e293b, #334155);
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coupon-preview::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 20px;
+            background: #0f172a;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .coupon-preview::after {
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 20px;
+            background: #0f172a;
+            border-radius: 10px 0 0 10px;
+        }
+        
+        /* Status Indicators */
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        .status-expired {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        
+        /* Table Styling */
+        .coupon-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .coupon-table thead tr {
+            background: rgba(15, 23, 42, 0.5);
+        }
+        
+        .coupon-table tbody tr:hover {
+            background: rgba(15, 23, 42, 0.5);
+        }
+        
+        /* Action Buttons */
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .action-btn-delete {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+        
+        .action-btn-delete:hover {
+            background: rgba(239, 68, 68, 0.2);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+    <div class="container mx-auto max-w-5xl fade-in">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+            <div>
+                <h1 class="text-3xl sm:text-4xl font-bold text-gradient">Coupon Management</h1>
+                <p class="text-gray-400 mt-1">Create and manage discount coupons for your customers</p>
+            </div>
+            <a href="{{ url_for('dashboard') }}" class="text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-2 hover:-translate-x-1 duration-200">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="lg:col-span-2 glass-card p-6">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-ticket-alt text-blue-400 mr-2"></i> Create New Coupon
+                </h2>
+                <form action="{{ url_for('add_coupon') }}" method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6" id="couponForm">
+                    <div>
+                        <label for="code" class="block text-gray-400 mb-2 text-sm">Coupon Code</label>
+                        <div class="relative">
+                            <input type="text" id="code" name="code" class="form-input pl-10 uppercase" placeholder="e.g., SAVE20" required>
+                            <i class="fas fa-tags absolute left-3 top-3 text-gray-500"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="type" class="block text-gray-400 mb-2 text-sm">Discount Type</label>
+                        <div class="relative">
+                            <select id="type" name="type" class="form-input pl-10" onchange="updatePreview()">
+                                <option value="percentage">Percentage Discount</option>
+                                <option value="fixed">Fixed Amount Discount</option>
+                            </select>
+                            <i class="fas fa-percent absolute left-3 top-3 text-gray-500" id="typeIcon"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="value" class="block text-gray-400 mb-2 text-sm">Discount Value</label>
+                        <div class="relative">
+                            <input type="number" id="value" name="value" class="form-input pl-10" placeholder="e.g., 20" step="0.01" min="0" required onchange="updatePreview()">
+                            <span class="absolute left-3 top-3 text-gray-500" id="valuePrefix">%</span>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="expiration_date" class="block text-gray-400 mb-2 text-sm">Expiration Date (Optional)</label>
+                        <div class="relative">
+                            <input type="date" id="expiration_date" name="expiration_date" class="form-input pl-10">
+                            <i class="fas fa-calendar-alt absolute left-3 top-3 text-gray-500"></i>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2">
+                        <button type="submit" class="btn btn-primary py-3 px-4 w-full flex items-center justify-center gap-2">
+                            <i class="fas fa-plus-circle"></i> Add Coupon
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Coupon Preview Card -->
+            <div class="glass-card p-6">
+                <h2 class="text-xl font-semibold mb-4 flex items-center">
+                    <i class="fas fa-eye text-blue-400 mr-2"></i> Preview
+                </h2>
+                <div class="coupon-preview p-4 mb-6">
+                    <div class="text-center">
+                        <div class="text-xs text-gray-400 mb-1">SPECIAL OFFER</div>
+                        <div class="text-lg font-bold" id="preview-code">SAVE20</div>
+                        <div class="text-3xl font-bold text-gradient my-2" id="preview-value">20% OFF</div>
+                        <div class="text-sm">on your purchase</div>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 bg-opacity-50 p-4 rounded-lg">
+                    <h3 class="text-sm font-medium text-gray-400 mb-3">How it works:</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>Enter coupon code at checkout</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>Discount is automatically applied</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+                            <span>Save instantly on customer purchases</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-card overflow-hidden rounded-xl">
+            <div class="p-4 sm:p-6 border-b border-gray-700">
+                <h2 class="text-xl font-semibold flex items-center">
+                    <i class="fas fa-list text-blue-400 mr-2"></i> Active Coupons
+                </h2>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-left coupon-table">
+                    <thead>
+                        <tr class="text-gray-400 uppercase text-xs font-medium">
+                            <th class="px-6 py-4">Code</th>
+                            <th class="px-6 py-4">Type</th>
+                            <th class="px-6 py-4">Value</th>
+                            <th class="px-6 py-4">Status</th>
+                            <th class="px-6 py-4">Usage</th>
+                            <th class="px-6 py-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for coupon in coupons %}
+                        <tr class="border-t border-gray-700 transition-colors">
+                            <td class="px-6 py-4 font-medium">{{ coupon.code }}</td>
+                            <td class="px-6 py-4">
+                                <span class="flex items-center">
+                                    <i class="fas fa-{{ 'percent' if coupon.type=='percentage' else 'tag' }} text-blue-400 mr-2"></i>
+                                    {{ 'Percentage' if coupon.type=='percentage' else 'Fixed Amount' }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 font-medium">
+                                {% if coupon.type == 'percentage' %}
+                                    <span class="text-green-400">{{ coupon.value }}%</span>
+                                {% else %}
+                                    <span class="text-green-400">₹{{ coupon.value }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4">
+                                {% set is_expired = coupon.expiration_date and coupon.expiration_date < now() %}
+                                <span class="status-badge {{ 'status-expired' if is_expired else 'status-active' }}">
+                                    {{ 'Expired' if is_expired else 'Active' }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user-check text-gray-500 mr-2"></i>
+                                    {{ coupon.usage_count }} uses
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <form action="{{ url_for('delete_coupon', coupon_id=coupon._id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete the coupon {{ coupon.code }}?');" class="inline-block">
+                                    <button type="submit" class="action-btn action-btn-delete" title="Delete Coupon">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                        {% if coupons|length == 0 %}
+                        <tr>
+                            <td colspan="6" class="px-6 py-8 text-center text-gray-500">
+                                <i class="fas fa-ticket-alt text-gray-600 text-4xl mb-3 block"></i>
+                                <p>No coupons created yet</p>
+                                <p class="text-sm mt-1">Create your first coupon to offer discounts to your customers</p>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update type icon when discount type changes
+        document.getElementById('type').addEventListener('change', function() {
+            const typeIcon = document.getElementById('typeIcon');
+            const valuePrefix = document.getElementById('valuePrefix');
+            
+            if (this.value === 'percentage') {
+                typeIcon.className = 'fas fa-percent absolute left-3 top-3 text-gray-500';
+                valuePrefix.textContent = '%';
+            } else {
+                typeIcon.className = 'fas fa-rupee-sign absolute left-3 top-3 text-gray-500';
+                valuePrefix.textContent = '₹';
+            }
+            
+            updatePreview();
+        });
+        
+        // Update preview when form values change
+        function updatePreview() {
+            const code = document.getElementById('code').value.toUpperCase() || 'SAVE20';
+            const type = document.getElementById('type').value;
+            const value = document.getElementById('value').value || '20';
+            
+            document.getElementById('preview-code').textContent = code;
+            
+            if (type === 'percentage') {
+                document.getElementById('preview-value').textContent = `${value}% OFF`;
+            } else {
+                document.getElementById('preview-value').textContent = `₹${value} OFF`;
+            }
+        }
+        
+        // Initialize preview
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePreview();
+            
+            // Add event listener to code input
+            document.getElementById('code').addEventListener('input', function() {
+                document.getElementById('preview-code').textContent = this.value.toUpperCase() || 'SAVE20';
+            });
+            
+            // Add event listener to value input
+            document.getElementById('value').addEventListener('input', updatePreview);
+        });
+    </script>
+</body>
+</html>

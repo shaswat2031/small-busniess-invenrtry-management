@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, Response, send_file, session
+from flask import Flask, render_template, request, redirect, url_for, flash, Response, send_file, session, jsonify
 from flask_pymongo import PyMongo
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
@@ -48,6 +48,7 @@ login_manager.login_view = 'login'
 user_collection = mongo.db.users
 product_collection = mongo.db.products
 sales_collection = mongo.db.sales
+coupon_collection = mongo.db.coupons  # Collection for managing coupons
 
 logging.basicConfig(
     level=logging.INFO,
@@ -253,6 +254,8 @@ def profile():
         total_active_users=total_active_users
     )
 
+from ai_predictions import predict_restock_time, identify_non_selling_products
+
 @app.route("/dashboard")
 @login_required
 def dashboard():
@@ -277,6 +280,43 @@ def dashboard():
             "limit": plan_details['users']
         }
     recent_sales = list(sales_collection.find({"owner_id": owner_id}).sort("date_sold", -1).limit(10))
+    
+    # Get all products for AI analysis
+    all_products = list(product_collection.find({"owner_id": owner_id}))
+    
+    # Get all sales data for these products
+    all_sales = list(sales_collection.find({"owner_id": owner_id}))
+    
+    # Organize sales data by product_id for faster lookup
+    sales_by_product = {}
+    for sale in all_sales:
+        product_id = sale.get('product_id')
+        if product_id:
+            if product_id not in sales_by_product:
+                sales_by_product[product_id] = []
+            sales_by_product[product_id].append(sale)
+    
+    # AI Predictions for restocking
+    restock_predictions = []
+    for product in all_products:
+        product_id = str(product.get('_id'))
+        product_sales = sales_by_product.get(product_id, [])
+        if product['stock'] > 0:  # Only predict for products that have stock
+            prediction = predict_restock_time(product, product_sales)
+            if prediction['prediction_possible']:
+                restock_predictions.append({
+                    'product': product,
+                    'prediction': prediction
+                })
+    
+    # Sort predictions by urgency (days until restock needed)
+    restock_predictions.sort(key=lambda x: x['prediction']['days_until_restock'])
+    restock_predictions = restock_predictions[:5]  # Only show top 5
+    
+    # Identify non-selling products
+    non_selling_products = identify_non_selling_products(all_products, sales_by_product)
+    non_selling_products = non_selling_products[:5]  # Only show top 5
+    
     return render_template("dashboard.html", 
                         total_products=total_products, 
                         low_stock_count=low_stock_count, 
@@ -290,7 +330,9 @@ def dashboard():
                         is_team_member=current_user.is_team_member,
                         plan_name=current_user.get_effective_plan(),
                         recent_sales=recent_sales,
-                        total_active_users=total_active_users)
+                        total_active_users=total_active_users,
+                        restock_predictions=restock_predictions,
+                        non_selling_products=non_selling_products)
 
 @app.route("/add_product", methods=["GET", "POST"])
 @login_required
@@ -606,15 +648,55 @@ def billing():
             except Exception as e:
                 flash(f"An error occurred: {str(e)}", "danger")
                 return redirect(url_for("billing"))
+        # Handle coupon code
+        coupon_code = request.form.get("coupon_code")
+        discount = 0
+        original_total = total_price
+        if coupon_code:
+            coupon = coupon_collection.find_one({"code": coupon_code, "owner_id": owner_id})
+            if coupon:
+                if coupon.get("expiration_date") and coupon["expiration_date"] < datetime.utcnow():
+                    flash("Coupon code has expired!", "danger")
+                    return redirect(url_for("billing"))
+                if coupon.get("type") == "percentage":
+                    discount = total_price * (coupon.get("value", 0) / 100)
+                else:
+                    discount = coupon.get("value", 0)
+                total_price -= discount
+                coupon_collection.update_one({"_id": coupon["_id"]}, {"$inc": {"usage_count": 1}})
+                flash(f"Coupon {coupon_code} applied: saved ₹{discount:.2f}", "success")
+            else:
+                flash("Invalid coupon code!", "danger")
+                return redirect(url_for("billing"))
         business_info = {
             "name": current_user.business_name,
             "seller": current_user.username,
             "role": current_user.role if current_user.is_team_member else "Owner"
         }
-        pdf_buffer = generate_pdf_bill(customer_name, items, total_price, business_info)
+        pdf_buffer = generate_pdf_bill(customer_name, items, original_total, business_info, coupon_code, discount, total_price)
         return send_file(pdf_buffer, as_attachment=True, download_name="bill.pdf", mimetype="application/pdf")
     products = list(mongo.db.products.find({"owner_id": owner_id}))
     return render_template("billing.html", products=products)
+
+@app.route("/validate_coupon", methods=["POST"])
+@login_required
+def validate_coupon():
+    data = request.get_json()
+    coupon_code = data.get("coupon_code")
+    owner_id = current_user.get_owner_id()
+    coupon = coupon_collection.find_one({"code": coupon_code, "owner_id": owner_id})
+    if not coupon:
+        return jsonify({"valid": False, "message": "Invalid coupon code."}), 200
+    if coupon.get("expiration_date") and coupon["expiration_date"] < datetime.utcnow():
+        return jsonify({"valid": False, "message": "Coupon expired."}), 200
+    discount_type = coupon.get("type")
+    value = coupon.get("value", 0)
+    return jsonify({
+        "valid": True,
+        "type": discount_type,
+        "value": value,
+        "message": "Coupon valid."
+    }), 200
 
 def add_page_number(canvas, doc):
     canvas.saveState()
@@ -623,7 +705,7 @@ def add_page_number(canvas, doc):
     canvas.drawRightString(letter[0] - 72, 30, f"Page {page_num}")
     canvas.restoreState()
 
-def generate_pdf_bill(customer_name, items, total_price, business_info):
+def generate_pdf_bill(customer_name, items, original_total, business_info, coupon_code=None, discount=0, final_total=0):
     buffer = BytesIO()
     doc = SimpleDocTemplate(
         buffer,
@@ -699,8 +781,8 @@ def generate_pdf_bill(customer_name, items, total_price, business_info):
         row = [
             Paragraph(item["product_name"], styles['TableCell']),
             Paragraph(str(item["quantity"]), styles['TableCell']),
-            Paragraph(f"${item['price']:.2f}", styles['TableCell']),
-            Paragraph(f"${item['total']:.2f}", styles['TableCell'])
+            Paragraph(f"₹{item['price']:.2f}", styles['TableCell']),
+            Paragraph(f"₹{item['total']:.2f}", styles['TableCell'])
         ]
         table_data.append(row)
     table = Table(table_data, colWidths=[3 * inch, 1 * inch, 1 * inch, 1 * inch])
@@ -716,7 +798,10 @@ def generate_pdf_bill(customer_name, items, total_price, business_info):
     ]))
     content.append(table)
     content.append(Spacer(1, 24))
-    content.append(Paragraph(f"<b>Total Price:</b> ${total_price:.2f}", styles['InvoiceSubHeader']))
+    content.append(Paragraph(f"<b>Original Total:</b> ₹{original_total:.2f}", styles['InvoiceSubHeader']))
+    if discount and coupon_code:
+        content.append(Paragraph(f"<b>Coupon ({coupon_code}):</b> -₹{discount:.2f}", styles['Normal']))
+    content.append(Paragraph(f"<b>Final Total:</b> ₹{final_total:.2f}", styles['InvoiceSubHeader']))
     content.append(Spacer(1, 24))
     content.append(Paragraph("Payment Instructions:", styles['InvoiceSubHeader']))
     for detail in [
@@ -959,6 +1044,54 @@ def edit_team_member(user_id):
         current_user_count=current_user_count,
         owner_info=owner_info
     )
+
+@app.route("/manage_coupons")
+@login_required
+def manage_coupons():
+    if current_user.is_team_member:
+        flash("Only business owners can manage coupons.", "warning")
+        return redirect(url_for("dashboard"))
+    owner_id = current_user.get_owner_id()
+    coupons = list(coupon_collection.find({"owner_id": owner_id}))
+    return render_template("manage_coupons.html", coupons=coupons, now=datetime.utcnow)
+
+@app.route("/manage_coupons/add", methods=["POST"])
+@login_required
+def add_coupon():
+    if current_user.is_team_member:
+        flash("Only business owners can manage coupons.", "warning")
+        return redirect(url_for("dashboard"))
+    owner_id = current_user.get_owner_id()
+    code = request.form.get("code")
+    ctype = request.form.get("type")
+    value = request.form.get("value")
+    expiration_date = request.form.get("expiration_date")
+    if not code or not ctype or not value:
+        flash("Please fill in all coupon fields!", "danger")
+        return redirect(url_for("manage_coupons"))
+    try:
+        value = float(value)
+    except ValueError:
+        flash("Invalid discount value!", "danger")
+        return redirect(url_for("manage_coupons"))
+    exp_date = datetime.strptime(expiration_date, "%Y-%m-%d") if expiration_date else None
+    coupon = {"code": code, "type": ctype, "value": value, "expiration_date": exp_date, "usage_count": 0, "owner_id": owner_id}
+    coupon_collection.insert_one(coupon)
+    flash("Coupon added successfully!", "success")
+    return redirect(url_for("manage_coupons"))
+
+@app.route("/manage_coupons/delete/<coupon_id>", methods=["POST"])
+@login_required
+def delete_coupon(coupon_id):
+    if current_user.is_team_member:
+        flash("Only business owners can manage coupons.", "warning")
+        return redirect(url_for("dashboard"))
+    result = coupon_collection.delete_one({"_id": ObjectId(coupon_id), "owner_id": current_user.get_owner_id()} )
+    if result.deleted_count == 0:
+        flash("Coupon not found!", "danger")
+    else:
+        flash("Coupon deleted successfully!", "success")
+    return redirect(url_for("manage_coupons"))
 
 if __name__ == "__main__":
     logger.info("Starting Inventory Manager application")

@@ -1170,3 +1170,763 @@
 2025-05-21 09:56:17,462 [INFO] 127.0.0.1 - - [21/May/2025 09:56:17] "[32mPOST /edit_team_member/682d43947385924ffc9b3c76 HTTP/1.1[0m" 302 -
 2025-05-21 09:56:17,479 [INFO] 127.0.0.1 - - [21/May/2025 09:56:17] "GET /manage_team HTTP/1.1" 200 -
 2025-05-21 09:56:19,492 [INFO] 127.0.0.1 - - [21/May/2025 09:56:19] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:46:50,666 [INFO] Starting Inventory Manager application
+2025-05-21 15:46:50,732 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 15:46:50,734 [INFO] [33mPress CTRL+C to quit[0m
+2025-05-21 15:46:50,768 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 15:46:51,737 [INFO] Starting Inventory Manager application
+2025-05-21 15:46:51,758 [WARNING]  * Debugger is active!
+2025-05-21 15:46:51,766 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 15:47:01,532 [INFO] 127.0.0.1 - - [21/May/2025 15:47:01] "GET / HTTP/1.1" 200 -
+2025-05-21 15:47:03,988 [INFO] 127.0.0.1 - - [21/May/2025 15:47:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 15:47:57,993 [INFO] 127.0.0.1 - - [21/May/2025 15:47:57] "GET /login HTTP/1.1" 200 -
+2025-05-21 15:48:03,832 [INFO] 127.0.0.1 - - [21/May/2025 15:48:03] "POST /login HTTP/1.1" 200 -
+2025-05-21 15:48:23,327 [INFO] 127.0.0.1 - - [21/May/2025 15:48:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 15:48:27,479 [INFO] 127.0.0.1 - - [21/May/2025 15:48:27] "[32mGET /profile HTTP/1.1[0m" 302 -
+2025-05-21 15:48:27,512 [INFO] 127.0.0.1 - - [21/May/2025 15:48:27] "GET /login?next=/profile HTTP/1.1" 200 -
+2025-05-21 15:48:34,547 [INFO] 127.0.0.1 - - [21/May/2025 15:48:34] "POST /login?next=/profile HTTP/1.1" 200 -
+2025-05-21 15:48:37,805 [INFO] 127.0.0.1 - - [21/May/2025 15:48:37] "POST /login?next=/profile HTTP/1.1" 200 -
+2025-05-21 15:48:47,110 [INFO] 127.0.0.1 - - [21/May/2025 15:48:47] "POST /login?next=/profile HTTP/1.1" 200 -
+2025-05-21 15:48:51,214 [INFO] 127.0.0.1 - - [21/May/2025 15:48:51] "GET /register HTTP/1.1" 200 -
+2025-05-21 15:49:05,040 [INFO] 127.0.0.1 - - [21/May/2025 15:49:05] "[32mPOST /register HTTP/1.1[0m" 302 -
+2025-05-21 15:49:05,065 [INFO] 127.0.0.1 - - [21/May/2025 15:49:05] "GET /login HTTP/1.1" 200 -
+2025-05-21 15:49:08,757 [INFO] 127.0.0.1 - - [21/May/2025 15:49:08] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-21 15:49:08,953 [INFO] 127.0.0.1 - - [21/May/2025 15:49:08] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:49:17,827 [INFO] 127.0.0.1 - - [21/May/2025 15:49:17] "GET /profile HTTP/1.1" 200 -
+2025-05-21 15:49:20,099 [INFO] Processing payment for user Vaibhav: 200 -> 400
+2025-05-21 15:49:20,123 [INFO] 127.0.0.1 - - [21/May/2025 15:49:20] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-21 15:49:20,186 [INFO] 127.0.0.1 - - [21/May/2025 15:49:20] "GET /profile HTTP/1.1" 200 -
+2025-05-21 15:49:22,392 [INFO] 127.0.0.1 - - [21/May/2025 15:49:22] "GET /dashboard HTTP/1.1" 200 -
+2025-05-21 15:49:24,837 [INFO] 127.0.0.1 - - [21/May/2025 15:49:24] "GET /add_product HTTP/1.1" 200 -
+2025-05-21 15:49:38,333 [INFO] 127.0.0.1 - - [21/May/2025 15:49:38] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-21 15:49:38,357 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-21 15:49:38,376 [INFO] Found 1 products
+2025-05-21 15:49:38,399 [INFO] 127.0.0.1 - - [21/May/2025 15:49:38] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 15:49:42,596 [INFO] 127.0.0.1 - - [21/May/2025 15:49:42] "GET /product_sales/682da8ba1657ea53fbb1da10 HTTP/1.1" 200 -
+2025-05-21 15:49:48,986 [INFO] 127.0.0.1 - - [21/May/2025 15:49:48] "GET /billing HTTP/1.1" 200 -
+2025-05-21 15:49:59,378 [INFO] 127.0.0.1 - - [21/May/2025 15:49:59] "POST /billing HTTP/1.1" 200 -
+2025-05-21 15:50:09,862 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-21 15:50:09,883 [INFO] Found 1 products
+2025-05-21 15:50:09,885 [INFO] 127.0.0.1 - - [21/May/2025 15:50:09] "GET /view_products HTTP/1.1" 200 -
+2025-05-21 15:50:13,934 [INFO] 127.0.0.1 - - [21/May/2025 15:50:13] "GET /product_sales/682da8ba1657ea53fbb1da10 HTTP/1.1" 200 -
+2025-05-21 15:50:21,353 [INFO] 127.0.0.1 - - [21/May/2025 15:50:21] "GET /manage_team HTTP/1.1" 200 -
+2025-05-21 15:50:24,653 [INFO] 127.0.0.1 - - [21/May/2025 15:50:24] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-21 15:50:48,929 [INFO] 127.0.0.1 - - [21/May/2025 15:50:48] "GET /sales HTTP/1.1" 200 -
+2025-05-21 15:51:03,890 [INFO] 127.0.0.1 - - [21/May/2025 15:51:03] "GET /export_sales HTTP/1.1" 200 -
+2025-05-21 15:51:25,562 [INFO] 127.0.0.1 - - [21/May/2025 15:51:25] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-05-21 15:51:25,570 [INFO] 127.0.0.1 - - [21/May/2025 15:51:25] "GET / HTTP/1.1" 200 -
+2025-05-21 18:17:00,483 [INFO] Starting Inventory Manager application
+2025-05-21 18:17:00,673 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 18:17:00,675 [INFO] [33mPress CTRL+C to quit[0m
+2025-05-21 18:17:00,714 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 18:17:02,848 [INFO] Starting Inventory Manager application
+2025-05-21 18:17:02,874 [WARNING]  * Debugger is active!
+2025-05-21 18:17:02,883 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 18:17:03,284 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\config.py', reloading
+2025-05-21 18:17:03,285 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\boss.py', reloading
+2025-05-21 18:17:03,388 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\core\\arrayprint.py', reloading
+2025-05-21 18:17:03,409 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\core\\defchararray.py', reloading
+2025-05-21 18:17:03,412 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\dtypes.py', reloading
+2025-05-21 18:17:03,413 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\_distutils_hack\\override.py', reloading
+2025-05-21 18:17:03,431 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\distutils\\armccompiler.py', reloading
+2025-05-21 18:17:03,433 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\_distutils_hack\\__init__.py', reloading
+2025-05-21 18:17:03,435 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\doc\\ufuncs.py', reloading
+2025-05-21 18:17:03,443 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\core\\fromnumeric.py', reloading
+2025-05-21 18:17:03,447 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\core\\einsumfunc.py', reloading
+2025-05-21 18:17:03,476 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\werkzeug\\datastructures\\accept.py', reloading
+2025-05-21 18:17:03,485 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\core\\getlimits.py', reloading
+2025-05-21 18:17:03,617 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\_configtool.py', reloading
+2025-05-21 18:17:03,784 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\distutils\\misc_util.py', reloading
+2025-05-21 18:17:03,791 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\werkzeug\\datastructures\\__init__.py', reloading
+2025-05-21 18:17:03,895 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\distutils\\pathccompiler.py', reloading
+2025-05-21 18:17:03,897 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\__init__.py', reloading
+2025-05-21 18:17:03,906 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\numpy\\distutils\\numpy_distribution.py', reloading
+2025-05-21 18:17:03,912 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\werkzeug\\__init__.py', reloading
+2025-05-21 18:17:04,517 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 18:17:23,580 [INFO] Starting Inventory Manager application
+2025-05-21 18:17:23,776 [WARNING]  * Debugger is active!
+2025-05-21 18:17:23,792 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 18:17:23,960 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\odr\\_odrpack.py', reloading
+2025-05-21 18:17:24,167 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\stats\\tests\\test_tukeylambda_stats.py', reloading
+2025-05-21 18:17:24,183 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_splines.py', reloading
+2025-05-21 18:17:24,214 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\__init__.py', reloading
+2025-05-21 18:17:24,250 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_ni_support.py', reloading
+2025-05-21 18:17:24,282 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_morphology.py', reloading
+2025-05-21 18:17:24,338 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\stats\\tests\\test_survival.py', reloading
+2025-05-21 18:17:24,359 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\sparse\\csgraph\\__init__.py', reloading
+2025-05-21 18:17:24,384 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\_delegators.py', reloading
+2025-05-21 18:17:24,409 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_measurements.py', reloading
+2025-05-21 18:17:24,430 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_interpolation.py', reloading
+2025-05-21 18:17:24,435 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\stats\\tests\\test_stats.py', reloading
+2025-05-21 18:17:24,467 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_fourier.py', reloading
+2025-05-21 18:17:24,500 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\sparse\\csgraph\\_validation.py', reloading
+2025-05-21 18:17:24,568 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_filters.py', reloading
+2025-05-21 18:17:24,584 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_datatypes.py', reloading
+2025-05-21 18:17:24,642 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\tests\\test_c_api.py', reloading
+2025-05-21 18:17:24,670 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\odr\\__init__.py', reloading
+2025-05-21 18:17:24,726 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\morphology.py', reloading
+2025-05-21 18:17:24,750 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\stats\\tests\\test_sensitivity_analysis.py', reloading
+2025-05-21 18:17:24,782 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\measurements.py', reloading
+2025-05-21 18:17:24,828 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\stats\\tests\\test_sampling.py', reloading
+2025-05-21 18:17:24,844 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\odr\\_models.py', reloading
+2025-05-21 18:17:24,858 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\stats\\tests\\test_variation.py', reloading
+2025-05-21 18:17:24,865 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\interpolation.py', reloading
+2025-05-21 18:17:24,877 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\stats\\tests\\test_resampling.py', reloading
+2025-05-21 18:17:24,882 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\odr\\_add_newdocs.py', reloading
+2025-05-21 18:17:24,883 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\odr\\tests\\test_odr.py', reloading
+2025-05-21 18:17:24,930 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\scipy\\ndimage\\fourier.py', reloading
+2025-05-21 18:17:25,365 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 18:17:33,783 [INFO] Starting Inventory Manager application
+2025-05-21 18:17:33,823 [WARNING]  * Debugger is active!
+2025-05-21 18:17:33,831 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 20:29:54,261 [INFO] Starting Inventory Manager application
+2025-05-21 20:29:54,304 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 20:29:54,305 [INFO] [33mPress CTRL+C to quit[0m
+2025-05-21 20:29:54,322 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-21 20:29:55,721 [INFO] Starting Inventory Manager application
+2025-05-21 20:29:55,744 [WARNING]  * Debugger is active!
+2025-05-21 20:29:55,751 [INFO]  * Debugger PIN: 993-324-545
+2025-05-21 20:30:07,787 [INFO] 127.0.0.1 - - [21/May/2025 20:30:07] "GET / HTTP/1.1" 200 -
+2025-05-21 20:30:09,134 [INFO] 127.0.0.1 - - [21/May/2025 20:30:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-21 20:30:13,866 [INFO] 127.0.0.1 - - [21/May/2025 20:30:13] "GET / HTTP/1.1" 200 -
+2025-05-22 08:51:52,478 [INFO] Starting Inventory Manager application
+2025-05-22 08:51:52,536 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-22 08:51:52,536 [INFO] [33mPress CTRL+C to quit[0m
+2025-05-22 08:51:52,555 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 08:51:54,533 [INFO] Starting Inventory Manager application
+2025-05-22 08:51:54,574 [WARNING]  * Debugger is active!
+2025-05-22 08:51:54,583 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 08:52:00,412 [INFO] 127.0.0.1 - - [22/May/2025 08:52:00] "GET / HTTP/1.1" 200 -
+2025-05-22 08:52:03,668 [INFO] 127.0.0.1 - - [22/May/2025 08:52:03] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-22 08:53:04,549 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\config.py', reloading
+2025-05-22 08:53:05,437 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 08:53:07,063 [INFO] Starting Inventory Manager application
+2025-05-22 08:53:07,092 [WARNING]  * Debugger is active!
+2025-05-22 08:53:07,099 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 09:03:58,987 [INFO] 127.0.0.1 - - [22/May/2025 09:03:58] "GET / HTTP/1.1" 200 -
+2025-05-22 09:05:55,846 [INFO] 127.0.0.1 - - [22/May/2025 09:05:55] "GET / HTTP/1.1" 200 -
+2025-05-22 09:05:58,351 [INFO] 127.0.0.1 - - [22/May/2025 09:05:58] "GET / HTTP/1.1" 200 -
+2025-05-22 09:05:58,889 [INFO] 127.0.0.1 - - [22/May/2025 09:05:58] "GET / HTTP/1.1" 200 -
+2025-05-22 09:05:59,302 [INFO] 127.0.0.1 - - [22/May/2025 09:05:59] "GET / HTTP/1.1" 200 -
+2025-05-22 09:05:59,572 [INFO] 127.0.0.1 - - [22/May/2025 09:05:59] "GET / HTTP/1.1" 200 -
+2025-05-22 09:06:00,125 [INFO] 127.0.0.1 - - [22/May/2025 09:06:00] "GET / HTTP/1.1" 200 -
+2025-05-22 09:06:00,384 [INFO] 127.0.0.1 - - [22/May/2025 09:06:00] "GET / HTTP/1.1" 200 -
+2025-05-22 09:06:00,635 [INFO] 127.0.0.1 - - [22/May/2025 09:06:00] "GET / HTTP/1.1" 200 -
+2025-05-22 09:06:02,201 [INFO] 127.0.0.1 - - [22/May/2025 09:06:02] "GET / HTTP/1.1" 200 -
+2025-05-22 09:09:02,707 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\ai_predictions.py', reloading
+2025-05-22 09:09:03,031 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 09:09:05,403 [INFO] Starting Inventory Manager application
+2025-05-22 09:09:05,432 [WARNING]  * Debugger is active!
+2025-05-22 09:09:05,438 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 09:10:05,397 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 09:10:05,412 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 09:10:06,180 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 09:12:47,179 [INFO] Starting Inventory Manager application
+2025-05-22 09:12:47,209 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-22 09:12:47,209 [INFO] [33mPress CTRL+C to quit[0m
+2025-05-22 09:12:47,221 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 09:12:48,424 [INFO] Starting Inventory Manager application
+2025-05-22 09:12:48,442 [WARNING]  * Debugger is active!
+2025-05-22 09:12:48,446 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 09:12:50,556 [INFO] 127.0.0.1 - - [22/May/2025 09:12:50] "GET / HTTP/1.1" 200 -
+2025-05-22 09:12:52,989 [INFO] 127.0.0.1 - - [22/May/2025 09:12:52] "GET /login HTTP/1.1" 200 -
+2025-05-22 09:12:56,227 [INFO] 127.0.0.1 - - [22/May/2025 09:12:56] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-22 09:12:56,257 [INFO] 127.0.0.1 - - [22/May/2025 09:12:56] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-22 09:12:56,447 [INFO] 127.0.0.1 - - [22/May/2025 09:12:56] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:15:53,904 [INFO] 127.0.0.1 - - [22/May/2025 09:15:53] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:16:04,997 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:16:05,016 [INFO] Found 1 products
+2025-05-22 09:16:05,030 [INFO] 127.0.0.1 - - [22/May/2025 09:16:05] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:16:09,198 [INFO] Processing sell for product ID: 682da8ba1657ea53fbb1da10, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:16:09,215 [INFO] Selling 10 units of 'sdd'
+2025-05-22 09:16:09,281 [INFO] 127.0.0.1 - - [22/May/2025 09:16:09] "[32mPOST /sell_product/682da8ba1657ea53fbb1da10 HTTP/1.1[0m" 302 -
+2025-05-22 09:16:09,303 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:16:09,337 [INFO] Found 1 products
+2025-05-22 09:16:09,338 [INFO] 127.0.0.1 - - [22/May/2025 09:16:09] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:16:17,900 [INFO] Processing sell for product ID: 682da8ba1657ea53fbb1da10, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:16:17,915 [INFO] Selling 40 units of 'sdd'
+2025-05-22 09:16:17,953 [INFO] 127.0.0.1 - - [22/May/2025 09:16:17] "[32mPOST /sell_product/682da8ba1657ea53fbb1da10 HTTP/1.1[0m" 302 -
+2025-05-22 09:16:17,977 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:16:17,992 [INFO] Found 1 products
+2025-05-22 09:16:17,996 [INFO] 127.0.0.1 - - [22/May/2025 09:16:17] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:16:18,654 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:16:18,670 [INFO] Found 1 products
+2025-05-22 09:16:18,671 [INFO] 127.0.0.1 - - [22/May/2025 09:16:18] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:16:20,985 [INFO] 127.0.0.1 - - [22/May/2025 09:16:20] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:17:23,129 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\ai_predictions.py', reloading
+2025-05-22 09:17:23,130 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\ai_predictions.py', reloading
+2025-05-22 09:17:23,130 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\ai_predictions.py', reloading
+2025-05-22 09:17:23,132 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 09:17:23,133 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 09:17:24,122 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 09:17:25,781 [INFO] Starting Inventory Manager application
+2025-05-22 09:17:25,802 [WARNING]  * Debugger is active!
+2025-05-22 09:17:25,807 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 09:17:26,884 [INFO] 127.0.0.1 - - [22/May/2025 09:17:26] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:17:30,650 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:17:30,671 [INFO] Found 1 products
+2025-05-22 09:17:30,686 [INFO] 127.0.0.1 - - [22/May/2025 09:17:30] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:17:33,274 [INFO] 127.0.0.1 - - [22/May/2025 09:17:33] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:17:48,209 [INFO] 127.0.0.1 - - [22/May/2025 09:17:48] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:17:48,239 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:17:48,262 [INFO] Found 2 products
+2025-05-22 09:17:48,263 [INFO] 127.0.0.1 - - [22/May/2025 09:17:48] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:17:51,853 [INFO] 127.0.0.1 - - [22/May/2025 09:17:51] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:18:10,107 [INFO] 127.0.0.1 - - [22/May/2025 09:18:10] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:18:10,132 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:18:10,156 [INFO] Found 3 products
+2025-05-22 09:18:10,158 [INFO] 127.0.0.1 - - [22/May/2025 09:18:10] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:18:18,700 [INFO] Processing sell for product ID: 682e9e64e00599a9b82ab126, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:18:18,720 [INFO] Selling 30 units of 'Apple'
+2025-05-22 09:18:18,768 [INFO] 127.0.0.1 - - [22/May/2025 09:18:18] "[32mPOST /sell_product/682e9e64e00599a9b82ab126 HTTP/1.1[0m" 302 -
+2025-05-22 09:18:18,800 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:18:18,821 [INFO] Found 3 products
+2025-05-22 09:18:18,822 [INFO] 127.0.0.1 - - [22/May/2025 09:18:18] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:18:20,864 [INFO] 127.0.0.1 - - [22/May/2025 09:18:20] "GET /product_sales/682da8ba1657ea53fbb1da10 HTTP/1.1" 200 -
+2025-05-22 09:18:28,492 [INFO] 127.0.0.1 - - [22/May/2025 09:18:28] "GET /product_sales/682e9e64e00599a9b82ab126 HTTP/1.1" 200 -
+2025-05-22 09:18:37,384 [INFO] 127.0.0.1 - - [22/May/2025 09:18:37] "GET /product_sales/682e9e7ae00599a9b82ab127 HTTP/1.1" 200 -
+2025-05-22 09:18:42,757 [INFO] 127.0.0.1 - - [22/May/2025 09:18:42] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:19:14,815 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:19:14,837 [INFO] Found 3 products
+2025-05-22 09:19:14,839 [INFO] 127.0.0.1 - - [22/May/2025 09:19:14] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:19:17,100 [INFO] 127.0.0.1 - - [22/May/2025 09:19:17] "[32mGET /delete_product/682da8ba1657ea53fbb1da10 HTTP/1.1[0m" 302 -
+2025-05-22 09:19:17,125 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:19:17,146 [INFO] Found 2 products
+2025-05-22 09:19:17,148 [INFO] 127.0.0.1 - - [22/May/2025 09:19:17] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:19:19,528 [INFO] 127.0.0.1 - - [22/May/2025 09:19:19] "[32mGET /delete_product/682e9e64e00599a9b82ab126 HTTP/1.1[0m" 302 -
+2025-05-22 09:19:19,562 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:19:19,594 [INFO] Found 1 products
+2025-05-22 09:19:19,596 [INFO] 127.0.0.1 - - [22/May/2025 09:19:19] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:19:21,961 [INFO] 127.0.0.1 - - [22/May/2025 09:19:21] "[32mGET /delete_product/682e9e7ae00599a9b82ab127 HTTP/1.1[0m" 302 -
+2025-05-22 09:19:21,996 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:19:22,016 [INFO] Found 0 products
+2025-05-22 09:19:22,018 [INFO] 127.0.0.1 - - [22/May/2025 09:19:22] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:20:27,681 [INFO] 127.0.0.1 - - [22/May/2025 09:20:27] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:21:07,308 [INFO] 127.0.0.1 - - [22/May/2025 09:21:07] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:21:07,334 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:21:07,359 [INFO] Found 1 products
+2025-05-22 09:21:07,361 [INFO] 127.0.0.1 - - [22/May/2025 09:21:07] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:21:09,050 [INFO] 127.0.0.1 - - [22/May/2025 09:21:09] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:21:35,859 [INFO] 127.0.0.1 - - [22/May/2025 09:21:35] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:21:35,890 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:21:35,917 [INFO] Found 2 products
+2025-05-22 09:21:35,918 [INFO] 127.0.0.1 - - [22/May/2025 09:21:35] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:21:38,613 [INFO] 127.0.0.1 - - [22/May/2025 09:21:38] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:21:55,124 [INFO] 127.0.0.1 - - [22/May/2025 09:21:55] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:21:55,152 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:21:55,171 [INFO] Found 3 products
+2025-05-22 09:21:55,172 [INFO] 127.0.0.1 - - [22/May/2025 09:21:55] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:22:00,438 [INFO] 127.0.0.1 - - [22/May/2025 09:22:00] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:23:41,931 [INFO] 127.0.0.1 - - [22/May/2025 09:23:41] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:23:49,171 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:23:49,190 [INFO] Found 3 products
+2025-05-22 09:23:49,192 [INFO] 127.0.0.1 - - [22/May/2025 09:23:49] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:23:52,832 [INFO] 127.0.0.1 - - [22/May/2025 09:23:52] "[32mGET /delete_product/682e9f2be00599a9b82ab129 HTTP/1.1[0m" 302 -
+2025-05-22 09:23:52,863 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:23:52,888 [INFO] Found 2 products
+2025-05-22 09:23:52,891 [INFO] 127.0.0.1 - - [22/May/2025 09:23:52] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:23:56,025 [INFO] 127.0.0.1 - - [22/May/2025 09:23:56] "[32mGET /delete_product/682e9f47e00599a9b82ab12a HTTP/1.1[0m" 302 -
+2025-05-22 09:23:56,057 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:23:56,085 [INFO] Found 1 products
+2025-05-22 09:23:56,086 [INFO] 127.0.0.1 - - [22/May/2025 09:23:56] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:23:59,779 [INFO] 127.0.0.1 - - [22/May/2025 09:23:59] "[32mGET /delete_product/682e9f5be00599a9b82ab12b HTTP/1.1[0m" 302 -
+2025-05-22 09:23:59,805 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:23:59,825 [INFO] Found 0 products
+2025-05-22 09:23:59,826 [INFO] 127.0.0.1 - - [22/May/2025 09:23:59] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:24:53,425 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\add_mock_data.py', reloading
+2025-05-22 09:24:54,400 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 09:24:56,081 [INFO] Starting Inventory Manager application
+2025-05-22 09:24:56,104 [WARNING]  * Debugger is active!
+2025-05-22 09:24:56,112 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 09:28:00,312 [INFO] 127.0.0.1 - - [22/May/2025 09:28:00] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:29:36,410 [INFO] 127.0.0.1 - - [22/May/2025 09:29:36] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:29:36,433 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:29:36,449 [INFO] Found 1 products
+2025-05-22 09:29:36,465 [INFO] 127.0.0.1 - - [22/May/2025 09:29:36] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:29:38,076 [INFO] 127.0.0.1 - - [22/May/2025 09:29:38] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:29:53,094 [INFO] 127.0.0.1 - - [22/May/2025 09:29:53] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:29:53,119 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:29:53,142 [INFO] Found 2 products
+2025-05-22 09:29:53,144 [INFO] 127.0.0.1 - - [22/May/2025 09:29:53] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:29:55,085 [INFO] 127.0.0.1 - - [22/May/2025 09:29:55] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:30:12,587 [INFO] 127.0.0.1 - - [22/May/2025 09:30:12] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:30:12,760 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:30:12,887 [INFO] Found 3 products
+2025-05-22 09:30:12,888 [INFO] 127.0.0.1 - - [22/May/2025 09:30:12] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:30:18,434 [INFO] 127.0.0.1 - - [22/May/2025 09:30:18] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:30:34,343 [INFO] 127.0.0.1 - - [22/May/2025 09:30:34] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:30:34,373 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:30:34,393 [INFO] Found 4 products
+2025-05-22 09:30:34,395 [INFO] 127.0.0.1 - - [22/May/2025 09:30:34] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:30:40,111 [INFO] 127.0.0.1 - - [22/May/2025 09:30:40] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:30:55,209 [INFO] 127.0.0.1 - - [22/May/2025 09:30:55] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:30:55,241 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:30:55,258 [INFO] Found 5 products
+2025-05-22 09:30:55,259 [INFO] 127.0.0.1 - - [22/May/2025 09:30:55] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:31:01,430 [INFO] 127.0.0.1 - - [22/May/2025 09:31:01] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:31:14,644 [INFO] 127.0.0.1 - - [22/May/2025 09:31:14] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:31:14,668 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:31:14,689 [INFO] Found 6 products
+2025-05-22 09:31:14,691 [INFO] 127.0.0.1 - - [22/May/2025 09:31:14] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:31:20,372 [INFO] 127.0.0.1 - - [22/May/2025 09:31:20] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:31:39,087 [INFO] 127.0.0.1 - - [22/May/2025 09:31:39] "GET /billing HTTP/1.1" 200 -
+2025-05-22 09:31:45,574 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:31:45,591 [INFO] Found 6 products
+2025-05-22 09:31:45,593 [INFO] 127.0.0.1 - - [22/May/2025 09:31:45] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:31:50,111 [INFO] Processing sell for product ID: 682ea139bd07396492a37ae6, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:31:50,129 [INFO] Selling 1 units of 'Oreo Biscuits 120g'
+2025-05-22 09:31:50,178 [INFO] 127.0.0.1 - - [22/May/2025 09:31:50] "[32mPOST /sell_product/682ea139bd07396492a37ae6 HTTP/1.1[0m" 302 -
+2025-05-22 09:31:50,205 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:31:50,225 [INFO] Found 6 products
+2025-05-22 09:31:50,226 [INFO] 127.0.0.1 - - [22/May/2025 09:31:50] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:31:51,073 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:31:51,091 [INFO] Found 6 products
+2025-05-22 09:31:51,092 [INFO] 127.0.0.1 - - [22/May/2025 09:31:51] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:31:52,844 [INFO] 127.0.0.1 - - [22/May/2025 09:31:52] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:37:41,155 [INFO] 127.0.0.1 - - [22/May/2025 09:37:41] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:38:19,455 [INFO] 127.0.0.1 - - [22/May/2025 09:38:19] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:38:40,854 [INFO] 127.0.0.1 - - [22/May/2025 09:38:40] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:38:40,877 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:38:40,893 [INFO] Found 7 products
+2025-05-22 09:38:40,895 [INFO] 127.0.0.1 - - [22/May/2025 09:38:40] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:38:43,353 [INFO] 127.0.0.1 - - [22/May/2025 09:38:43] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:39:03,136 [INFO] 127.0.0.1 - - [22/May/2025 09:39:03] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:39:03,159 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:39:03,175 [INFO] Found 8 products
+2025-05-22 09:39:03,177 [INFO] 127.0.0.1 - - [22/May/2025 09:39:03] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:39:07,867 [INFO] 127.0.0.1 - - [22/May/2025 09:39:07] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:39:25,555 [INFO] 127.0.0.1 - - [22/May/2025 09:39:25] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:39:25,584 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:39:25,605 [INFO] Found 9 products
+2025-05-22 09:39:25,607 [INFO] 127.0.0.1 - - [22/May/2025 09:39:25] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:39:28,220 [INFO] 127.0.0.1 - - [22/May/2025 09:39:28] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:39:29,704 [INFO] 127.0.0.1 - - [22/May/2025 09:39:29] "GET /billing HTTP/1.1" 200 -
+2025-05-22 09:40:21,838 [INFO] 127.0.0.1 - - [22/May/2025 09:40:21] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:40:24,651 [INFO] 127.0.0.1 - - [22/May/2025 09:40:24] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-22 09:40:24,741 [INFO] 127.0.0.1 - - [22/May/2025 09:40:24] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:40:26,940 [INFO] 127.0.0.1 - - [22/May/2025 09:40:26] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:40:29,626 [INFO] 127.0.0.1 - - [22/May/2025 09:40:29] "GET /sales HTTP/1.1" 200 -
+2025-05-22 09:40:35,081 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:40:35,099 [INFO] Found 9 products
+2025-05-22 09:40:35,101 [INFO] 127.0.0.1 - - [22/May/2025 09:40:35] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:40:37,780 [INFO] 127.0.0.1 - - [22/May/2025 09:40:37] "GET /product_sales/682ea162bd07396492a37ae8 HTTP/1.1" 200 -
+2025-05-22 09:40:44,362 [INFO] 127.0.0.1 - - [22/May/2025 09:40:44] "GET /product_sales/682ea128bd07396492a37ae5 HTTP/1.1" 200 -
+2025-05-22 09:40:49,670 [INFO] 127.0.0.1 - - [22/May/2025 09:40:49] "GET /product_sales/682ea139bd07396492a37ae6 HTTP/1.1" 200 -
+2025-05-22 09:40:52,291 [INFO] 127.0.0.1 - - [22/May/2025 09:40:52] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:40:53,473 [INFO] Processing payment for user Vaibhav: 200 -> 400
+2025-05-22 09:40:53,514 [INFO] 127.0.0.1 - - [22/May/2025 09:40:53] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-22 09:40:53,640 [INFO] 127.0.0.1 - - [22/May/2025 09:40:53] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:40:56,891 [INFO] 127.0.0.1 - - [22/May/2025 09:40:56] "GET /product_sales/682ea139bd07396492a37ae6 HTTP/1.1" 200 -
+2025-05-22 09:41:04,252 [INFO] 127.0.0.1 - - [22/May/2025 09:41:04] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:41:17,445 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:41:17,465 [INFO] Found 9 products
+2025-05-22 09:41:17,467 [INFO] 127.0.0.1 - - [22/May/2025 09:41:17] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:41:23,131 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:41:23,149 [INFO] Found 9 products
+2025-05-22 09:41:23,151 [INFO] 127.0.0.1 - - [22/May/2025 09:41:23] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:41:34,073 [INFO] 127.0.0.1 - - [22/May/2025 09:41:34] "GET /billing HTTP/1.1" 200 -
+2025-05-22 09:42:16,036 [INFO] 127.0.0.1 - - [22/May/2025 09:42:16] "GET /billing HTTP/1.1" 200 -
+2025-05-22 09:42:43,586 [INFO] 127.0.0.1 - - [22/May/2025 09:42:43] "POST /billing HTTP/1.1" 200 -
+2025-05-22 09:42:55,782 [INFO] 127.0.0.1 - - [22/May/2025 09:42:55] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:43:26,319 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:43:26,343 [INFO] Found 9 products
+2025-05-22 09:43:26,345 [INFO] 127.0.0.1 - - [22/May/2025 09:43:26] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:43:28,442 [INFO] 127.0.0.1 - - [22/May/2025 09:43:28] "GET /sales HTTP/1.1" 200 -
+2025-05-22 09:43:33,379 [INFO] 127.0.0.1 - - [22/May/2025 09:43:33] "[32mPOST /delete_all_sales HTTP/1.1[0m" 302 -
+2025-05-22 09:43:33,435 [INFO] 127.0.0.1 - - [22/May/2025 09:43:33] "GET /sales HTTP/1.1" 200 -
+2025-05-22 09:43:38,036 [INFO] 127.0.0.1 - - [22/May/2025 09:43:38] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:43:41,670 [INFO] 127.0.0.1 - - [22/May/2025 09:43:41] "GET /manage_team HTTP/1.1" 200 -
+2025-05-22 09:43:43,358 [INFO] 127.0.0.1 - - [22/May/2025 09:43:43] "GET /add_team_member HTTP/1.1" 200 -
+2025-05-22 09:43:48,491 [INFO] 127.0.0.1 - - [22/May/2025 09:43:48] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:43:50,256 [INFO] 127.0.0.1 - - [22/May/2025 09:43:50] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-22 09:43:50,328 [INFO] 127.0.0.1 - - [22/May/2025 09:43:50] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:43:53,513 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:43:53,532 [INFO] Found 9 products
+2025-05-22 09:43:53,533 [INFO] 127.0.0.1 - - [22/May/2025 09:43:53] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:43:56,073 [INFO] 127.0.0.1 - - [22/May/2025 09:43:56] "GET /product_sales/682ea128bd07396492a37ae5 HTTP/1.1" 200 -
+2025-05-22 09:44:00,726 [INFO] 127.0.0.1 - - [22/May/2025 09:44:00] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:44:01,955 [INFO] Processing payment for user Vaibhav: 200 -> 400
+2025-05-22 09:44:01,976 [INFO] 127.0.0.1 - - [22/May/2025 09:44:01] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-22 09:44:02,032 [INFO] 127.0.0.1 - - [22/May/2025 09:44:02] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:44:05,411 [INFO] 127.0.0.1 - - [22/May/2025 09:44:05] "GET /product_sales/682ea128bd07396492a37ae5 HTTP/1.1" 200 -
+2025-05-22 09:44:10,025 [INFO] 127.0.0.1 - - [22/May/2025 09:44:10] "[32mPOST /change_plan/starter HTTP/1.1[0m" 302 -
+2025-05-22 09:44:10,080 [INFO] 127.0.0.1 - - [22/May/2025 09:44:10] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:44:17,887 [INFO] Processing payment for user Vaibhav: 200 -> 400
+2025-05-22 09:44:17,915 [INFO] 127.0.0.1 - - [22/May/2025 09:44:17] "[32mPOST /change_plan/professional HTTP/1.1[0m" 302 -
+2025-05-22 09:44:17,973 [INFO] 127.0.0.1 - - [22/May/2025 09:44:17] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:44:22,120 [INFO] Processing payment for user Vaibhav: 400 -> 800
+2025-05-22 09:44:22,146 [INFO] 127.0.0.1 - - [22/May/2025 09:44:22] "[32mPOST /change_plan/enterprise HTTP/1.1[0m" 302 -
+2025-05-22 09:44:22,204 [INFO] 127.0.0.1 - - [22/May/2025 09:44:22] "GET /profile HTTP/1.1" 200 -
+2025-05-22 09:44:34,675 [INFO] 127.0.0.1 - - [22/May/2025 09:44:34] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:44:38,880 [INFO] 127.0.0.1 - - [22/May/2025 09:44:38] "[32mGET /logout HTTP/1.1[0m" 302 -
+2025-05-22 09:44:38,898 [INFO] 127.0.0.1 - - [22/May/2025 09:44:38] "GET / HTTP/1.1" 200 -
+2025-05-22 09:45:30,431 [INFO] 127.0.0.1 - - [22/May/2025 09:45:30] "GET /login HTTP/1.1" 200 -
+2025-05-22 09:45:32,187 [INFO] 127.0.0.1 - - [22/May/2025 09:45:32] "GET /login HTTP/1.1" 200 -
+2025-05-22 09:45:37,900 [INFO] 127.0.0.1 - - [22/May/2025 09:45:37] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-05-22 09:45:38,093 [INFO] 127.0.0.1 - - [22/May/2025 09:45:38] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:45:40,982 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:45:41,003 [INFO] Found 9 products
+2025-05-22 09:45:41,005 [INFO] 127.0.0.1 - - [22/May/2025 09:45:41] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:45:45,881 [INFO] 127.0.0.1 - - [22/May/2025 09:45:45] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:46:09,063 [INFO] 127.0.0.1 - - [22/May/2025 09:46:09] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:46:09,090 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:46:09,111 [INFO] Found 10 products
+2025-05-22 09:46:09,112 [INFO] 127.0.0.1 - - [22/May/2025 09:46:09] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:46:13,451 [INFO] 127.0.0.1 - - [22/May/2025 09:46:13] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:46:19,877 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:46:19,897 [INFO] Found 10 products
+2025-05-22 09:46:19,899 [INFO] 127.0.0.1 - - [22/May/2025 09:46:19] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:46:28,791 [INFO] Processing sell for product ID: 682ea14cbd07396492a37ae7, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:46:28,807 [INFO] Selling 6 units of 'Perk 30g'
+2025-05-22 09:46:28,843 [INFO] 127.0.0.1 - - [22/May/2025 09:46:28] "[32mPOST /sell_product/682ea14cbd07396492a37ae7 HTTP/1.1[0m" 302 -
+2025-05-22 09:46:28,866 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:46:28,883 [INFO] Found 10 products
+2025-05-22 09:46:28,885 [INFO] 127.0.0.1 - - [22/May/2025 09:46:28] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:46:31,916 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:46:31,932 [INFO] Found 10 products
+2025-05-22 09:46:31,934 [INFO] 127.0.0.1 - - [22/May/2025 09:46:31] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:46:34,183 [INFO] 127.0.0.1 - - [22/May/2025 09:46:34] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:46:53,635 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:46:53,651 [INFO] Found 10 products
+2025-05-22 09:46:53,653 [INFO] 127.0.0.1 - - [22/May/2025 09:46:53] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:47:01,427 [INFO] Processing sell for product ID: 682ea139bd07396492a37ae6, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:01,447 [INFO] Selling 5 units of 'Oreo Biscuits 120g'
+2025-05-22 09:47:01,489 [INFO] 127.0.0.1 - - [22/May/2025 09:47:01] "[32mPOST /sell_product/682ea139bd07396492a37ae6 HTTP/1.1[0m" 302 -
+2025-05-22 09:47:01,516 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:01,535 [INFO] Found 10 products
+2025-05-22 09:47:01,537 [INFO] 127.0.0.1 - - [22/May/2025 09:47:01] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:47:06,708 [INFO] Processing sell for product ID: 682ea177bd07396492a37ae9, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:06,726 [INFO] Selling 10 units of 'Kwality Ice Cream 1L'
+2025-05-22 09:47:06,766 [INFO] 127.0.0.1 - - [22/May/2025 09:47:06] "[32mPOST /sell_product/682ea177bd07396492a37ae9 HTTP/1.1[0m" 302 -
+2025-05-22 09:47:06,786 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:06,803 [INFO] Found 10 products
+2025-05-22 09:47:06,804 [INFO] 127.0.0.1 - - [22/May/2025 09:47:06] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:47:07,500 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:07,522 [INFO] Found 10 products
+2025-05-22 09:47:07,524 [INFO] 127.0.0.1 - - [22/May/2025 09:47:07] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:47:09,311 [INFO] 127.0.0.1 - - [22/May/2025 09:47:09] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:47:23,724 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:23,744 [INFO] Found 10 products
+2025-05-22 09:47:23,745 [INFO] 127.0.0.1 - - [22/May/2025 09:47:23] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:47:31,120 [INFO] Processing sell for product ID: 682ea177bd07396492a37ae9, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:31,136 [INFO] Selling 2 units of 'Kwality Ice Cream 1L'
+2025-05-22 09:47:31,176 [INFO] 127.0.0.1 - - [22/May/2025 09:47:31] "[32mPOST /sell_product/682ea177bd07396492a37ae9 HTTP/1.1[0m" 302 -
+2025-05-22 09:47:31,199 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:31,215 [INFO] Found 10 products
+2025-05-22 09:47:31,217 [INFO] 127.0.0.1 - - [22/May/2025 09:47:31] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:47:41,130 [INFO] Processing sell for product ID: 682ea348bd07396492a37aec, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:41,150 [INFO] Selling 10 units of 'MTR Upma Mix 500g'
+2025-05-22 09:47:41,188 [INFO] 127.0.0.1 - - [22/May/2025 09:47:41] "[32mPOST /sell_product/682ea348bd07396492a37aec HTTP/1.1[0m" 302 -
+2025-05-22 09:47:41,221 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:41,245 [INFO] Found 10 products
+2025-05-22 09:47:41,247 [INFO] 127.0.0.1 - - [22/May/2025 09:47:41] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:47:55,439 [INFO] Processing sell for product ID: 682ea509bd07396492a37af8, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:55,455 [INFO] Selling 20 units of 'Yogurt Cup 100g'
+2025-05-22 09:47:55,498 [INFO] 127.0.0.1 - - [22/May/2025 09:47:55] "[32mPOST /sell_product/682ea509bd07396492a37af8 HTTP/1.1[0m" 302 -
+2025-05-22 09:47:55,520 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:47:55,542 [INFO] Found 10 products
+2025-05-22 09:47:55,544 [INFO] 127.0.0.1 - - [22/May/2025 09:47:55] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:48:01,734 [INFO] Processing sell for product ID: 682ea509bd07396492a37af8, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:48:01,752 [INFO] Selling 10 units of 'Yogurt Cup 100g'
+2025-05-22 09:48:01,791 [INFO] 127.0.0.1 - - [22/May/2025 09:48:01] "[32mPOST /sell_product/682ea509bd07396492a37af8 HTTP/1.1[0m" 302 -
+2025-05-22 09:48:01,818 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:48:01,835 [INFO] Found 10 products
+2025-05-22 09:48:01,836 [INFO] 127.0.0.1 - - [22/May/2025 09:48:01] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:48:03,164 [INFO] 127.0.0.1 - - [22/May/2025 09:48:03] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:48:37,831 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:48:37,848 [INFO] Found 10 products
+2025-05-22 09:48:37,849 [INFO] 127.0.0.1 - - [22/May/2025 09:48:37] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:48:46,504 [INFO] Processing sell for product ID: 682ea177bd07396492a37ae9, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:48:46,528 [INFO] Selling 20 units of 'Kwality Ice Cream 1L'
+2025-05-22 09:48:46,575 [INFO] 127.0.0.1 - - [22/May/2025 09:48:46] "[32mPOST /sell_product/682ea177bd07396492a37ae9 HTTP/1.1[0m" 302 -
+2025-05-22 09:48:46,616 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:48:46,633 [INFO] Found 10 products
+2025-05-22 09:48:46,634 [INFO] 127.0.0.1 - - [22/May/2025 09:48:46] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:48:47,485 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:48:47,502 [INFO] Found 10 products
+2025-05-22 09:48:47,503 [INFO] 127.0.0.1 - - [22/May/2025 09:48:47] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:48:49,508 [INFO] 127.0.0.1 - - [22/May/2025 09:48:49] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:48:57,321 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:48:57,339 [INFO] Found 10 products
+2025-05-22 09:48:57,341 [INFO] 127.0.0.1 - - [22/May/2025 09:48:57] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:48:59,036 [INFO] 127.0.0.1 - - [22/May/2025 09:48:59] "GET /billing HTTP/1.1" 200 -
+2025-05-22 09:49:45,127 [INFO] 127.0.0.1 - - [22/May/2025 09:49:45] "POST /billing HTTP/1.1" 200 -
+2025-05-22 09:50:19,933 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:50:19,954 [INFO] Found 10 products
+2025-05-22 09:50:19,957 [INFO] 127.0.0.1 - - [22/May/2025 09:50:19] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:50:43,021 [INFO] Processing sell for product ID: 682ea177bd07396492a37ae9, owner ID: 682da8981657ea53fbb1da0f
+2025-05-22 09:50:43,044 [INFO] Selling 1 units of 'Kwality Ice Cream 1L'
+2025-05-22 09:50:43,093 [INFO] 127.0.0.1 - - [22/May/2025 09:50:43] "[32mPOST /sell_product/682ea177bd07396492a37ae9 HTTP/1.1[0m" 302 -
+2025-05-22 09:50:43,121 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:50:43,166 [INFO] Found 10 products
+2025-05-22 09:50:43,168 [INFO] 127.0.0.1 - - [22/May/2025 09:50:43] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:50:49,122 [INFO] 127.0.0.1 - - [22/May/2025 09:50:49] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:51:03,656 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:51:03,672 [INFO] Found 10 products
+2025-05-22 09:51:03,674 [INFO] 127.0.0.1 - - [22/May/2025 09:51:03] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:52:05,031 [INFO] 127.0.0.1 - - [22/May/2025 09:52:05] "GET /add_product HTTP/1.1" 200 -
+2025-05-22 09:52:15,800 [INFO] 127.0.0.1 - - [22/May/2025 09:52:15] "[32mPOST /add_product HTTP/1.1[0m" 302 -
+2025-05-22 09:52:15,823 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:52:15,840 [INFO] Found 11 products
+2025-05-22 09:52:15,841 [INFO] 127.0.0.1 - - [22/May/2025 09:52:15] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:52:26,299 [INFO] 127.0.0.1 - - [22/May/2025 09:52:26] "[32mGET /delete_product/682ea677bd07396492a37b0b HTTP/1.1[0m" 302 -
+2025-05-22 09:52:26,321 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:52:26,344 [INFO] Found 10 products
+2025-05-22 09:52:26,347 [INFO] 127.0.0.1 - - [22/May/2025 09:52:26] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:52:30,162 [INFO] 127.0.0.1 - - [22/May/2025 09:52:30] "GET /edit_product/682ea177bd07396492a37ae9 HTTP/1.1" 200 -
+2025-05-22 09:52:34,659 [INFO] 127.0.0.1 - - [22/May/2025 09:52:34] "[32mPOST /edit_product/682ea177bd07396492a37ae9 HTTP/1.1[0m" 302 -
+2025-05-22 09:52:34,684 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 09:52:34,702 [INFO] Found 10 products
+2025-05-22 09:52:34,704 [INFO] 127.0.0.1 - - [22/May/2025 09:52:34] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 09:52:37,877 [INFO] 127.0.0.1 - - [22/May/2025 09:52:37] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 09:53:04,533 [INFO] 127.0.0.1 - - [22/May/2025 09:53:04] "GET /manage_team HTTP/1.1" 200 -
+2025-05-22 09:53:06,117 [INFO] 127.0.0.1 - - [22/May/2025 09:53:06] "GET /billing HTTP/1.1" 200 -
+2025-05-22 09:53:58,432 [INFO] 127.0.0.1 - - [22/May/2025 09:53:58] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:00:55,354 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:00:55,355 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:00:56,530 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:00:59,570 [INFO] Starting Inventory Manager application
+2025-05-22 10:00:59,597 [WARNING]  * Debugger is active!
+2025-05-22 10:00:59,603 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:02:06,637 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:02:06,639 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:02:07,642 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:02:13,774 [INFO] Starting Inventory Manager application
+2025-05-22 10:02:13,833 [WARNING]  * Debugger is active!
+2025-05-22 10:02:13,843 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:03:58,207 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:03:58,208 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:03:59,316 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:04:01,386 [INFO] Starting Inventory Manager application
+2025-05-22 10:04:01,416 [WARNING]  * Debugger is active!
+2025-05-22 10:04:01,419 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:04:03,559 [INFO] 127.0.0.1 - - [22/May/2025 10:04:03] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:04:08,663 [INFO] 127.0.0.1 - - [22/May/2025 10:04:08] "GET /profile HTTP/1.1" 200 -
+2025-05-22 10:04:12,735 [INFO] 127.0.0.1 - - [22/May/2025 10:04:12] "GET /manage_team HTTP/1.1" 200 -
+2025-05-22 10:04:26,441 [INFO] 127.0.0.1 - - [22/May/2025 10:04:26] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:06:56,536 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:06:56,538 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:06:58,790 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:07:00,467 [INFO] Starting Inventory Manager application
+2025-05-22 10:07:00,492 [WARNING]  * Debugger is active!
+2025-05-22 10:07:00,497 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:09:00,352 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:09:00,353 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:09:00,354 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:09:01,007 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:09:02,618 [INFO] Starting Inventory Manager application
+2025-05-22 10:09:02,642 [WARNING]  * Debugger is active!
+2025-05-22 10:09:02,646 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:10:27,497 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\config.py', reloading
+2025-05-22 10:10:27,796 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:10:29,454 [INFO] Starting Inventory Manager application
+2025-05-22 10:10:29,476 [WARNING]  * Debugger is active!
+2025-05-22 10:10:29,480 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:10:39,117 [INFO] 127.0.0.1 - - [22/May/2025 10:10:39] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:10:41,171 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask\\app.py', reloading
+2025-05-22 10:10:41,203 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask_login\\utils.py', reloading
+2025-05-22 10:10:41,206 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\flask\\templating.py', reloading
+2025-05-22 10:10:41,237 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\jinja2\\environment.py', reloading
+2025-05-22 10:10:41,260 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\jinja2\\loaders.py', reloading
+2025-05-22 10:10:41,298 [INFO] 127.0.0.1 - - [22/May/2025 10:10:41] "[35m[1mGET /manage_coupons HTTP/1.1[0m" 500 -
+2025-05-22 10:10:41,469 [INFO] 127.0.0.1 - - [22/May/2025 10:10:41] "GET /manage_coupons?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-05-22 10:10:41,471 [INFO] 127.0.0.1 - - [22/May/2025 10:10:41] "GET /manage_coupons?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-05-22 10:10:41,516 [INFO] 127.0.0.1 - - [22/May/2025 10:10:41] "GET /manage_coupons?__debugger__=yes&cmd=resource&f=console.png&s=BJCMXGf4CmH3g3iaLp1G HTTP/1.1" 200 -
+2025-05-22 10:10:41,534 [INFO] 127.0.0.1 - - [22/May/2025 10:10:41] "GET /manage_coupons?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-05-22 10:10:42,934 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:10:44,513 [INFO] Starting Inventory Manager application
+2025-05-22 10:10:44,566 [WARNING]  * Debugger is active!
+2025-05-22 10:10:44,574 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:11:33,328 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:11:33,329 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:11:34,287 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:11:36,606 [INFO] Starting Inventory Manager application
+2025-05-22 10:11:36,635 [WARNING]  * Debugger is active!
+2025-05-22 10:11:36,642 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:11:38,952 [INFO] 127.0.0.1 - - [22/May/2025 10:11:38] "GET /edit_product/682ea348bd07396492a37aec HTTP/1.1" 200 -
+2025-05-22 10:11:46,320 [INFO] 127.0.0.1 - - [22/May/2025 10:11:46] "[32mPOST /edit_product/682ea348bd07396492a37aec HTTP/1.1[0m" 302 -
+2025-05-22 10:11:46,376 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 10:11:46,397 [INFO] Found 10 products
+2025-05-22 10:11:46,414 [INFO] 127.0.0.1 - - [22/May/2025 10:11:46] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 10:11:52,480 [INFO] 127.0.0.1 - - [22/May/2025 10:11:52] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:12:04,475 [INFO] 127.0.0.1 - - [22/May/2025 10:12:04] "GET /edit_product/682ea509bd07396492a37af8 HTTP/1.1" 200 -
+2025-05-22 10:12:09,778 [INFO] 127.0.0.1 - - [22/May/2025 10:12:09] "[32mPOST /edit_product/682ea509bd07396492a37af8 HTTP/1.1[0m" 302 -
+2025-05-22 10:12:09,806 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 10:12:09,824 [INFO] Found 10 products
+2025-05-22 10:12:09,827 [INFO] 127.0.0.1 - - [22/May/2025 10:12:09] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 10:12:18,350 [INFO] 127.0.0.1 - - [22/May/2025 10:12:18] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:12:31,993 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:12:31,994 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:12:31,995 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:12:32,850 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:12:34,587 [INFO] Starting Inventory Manager application
+2025-05-22 10:12:34,628 [WARNING]  * Debugger is active!
+2025-05-22 10:12:34,637 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:12:38,034 [INFO] 127.0.0.1 - - [22/May/2025 10:12:38] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:12:59,792 [INFO] 127.0.0.1 - - [22/May/2025 10:12:59] "[32mPOST /manage_coupons/add HTTP/1.1[0m" 302 -
+2025-05-22 10:12:59,848 [INFO] 127.0.0.1 - - [22/May/2025 10:12:59] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:13:05,328 [INFO] 127.0.0.1 - - [22/May/2025 10:13:05] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:13:07,043 [INFO] 127.0.0.1 - - [22/May/2025 10:13:07] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:13:35,625 [INFO] 127.0.0.1 - - [22/May/2025 10:13:35] "POST /billing HTTP/1.1" 200 -
+2025-05-22 10:14:08,407 [INFO] 127.0.0.1 - - [22/May/2025 10:14:08] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:14:10,789 [INFO] 127.0.0.1 - - [22/May/2025 10:14:10] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:14:34,083 [INFO] 127.0.0.1 - - [22/May/2025 10:14:34] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:14:40,113 [INFO] 127.0.0.1 - - [22/May/2025 10:14:40] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:14:44,649 [INFO] Fetching products for owner_id: 682da8981657ea53fbb1da0f
+2025-05-22 10:14:44,665 [INFO] Found 10 products
+2025-05-22 10:14:44,685 [INFO] 127.0.0.1 - - [22/May/2025 10:14:44] "GET /view_products HTTP/1.1" 200 -
+2025-05-22 10:14:48,443 [INFO] 127.0.0.1 - - [22/May/2025 10:14:48] "GET /product_sales/682ea375bd07396492a37aee HTTP/1.1" 200 -
+2025-05-22 10:14:52,832 [INFO] 127.0.0.1 - - [22/May/2025 10:14:52] "GET /product_sales/682ea18abd07396492a37aea HTTP/1.1" 200 -
+2025-05-22 10:14:57,053 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:14:57,055 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:14:58,012 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:14:59,801 [INFO] Starting Inventory Manager application
+2025-05-22 10:14:59,823 [WARNING]  * Debugger is active!
+2025-05-22 10:14:59,827 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:15:12,246 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:15:12,247 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:15:12,247 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:15:13,102 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:15:14,468 [INFO] Starting Inventory Manager application
+2025-05-22 10:15:14,489 [WARNING]  * Debugger is active!
+2025-05-22 10:15:14,493 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:17:18,903 [INFO] 127.0.0.1 - - [22/May/2025 10:17:18] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:17:27,174 [INFO] 127.0.0.1 - - [22/May/2025 10:17:27] "POST /billing HTTP/1.1" 200 -
+2025-05-22 10:17:35,776 [INFO] 127.0.0.1 - - [22/May/2025 10:17:35] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:17:38,278 [INFO] 127.0.0.1 - - [22/May/2025 10:17:38] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:17:40,943 [INFO] 127.0.0.1 - - [22/May/2025 10:17:40] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:17:53,491 [INFO] 127.0.0.1 - - [22/May/2025 10:17:53] "POST /billing HTTP/1.1" 200 -
+2025-05-22 10:17:58,363 [INFO] 127.0.0.1 - - [22/May/2025 10:17:58] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:18:09,406 [INFO] 127.0.0.1 - - [22/May/2025 10:18:09] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:19:29,627 [INFO] 127.0.0.1 - - [22/May/2025 10:19:29] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:19:57,010 [INFO] 127.0.0.1 - - [22/May/2025 10:19:57] "[32mPOST /manage_coupons/add HTTP/1.1[0m" 302 -
+2025-05-22 10:19:57,094 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\jinja2\\utils.py', reloading
+2025-05-22 10:19:57,111 [INFO] 127.0.0.1 - - [22/May/2025 10:19:57] "[35m[1mGET /manage_coupons HTTP/1.1[0m" 500 -
+2025-05-22 10:19:57,235 [INFO] 127.0.0.1 - - [22/May/2025 10:19:57] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-22 10:19:57,237 [INFO] 127.0.0.1 - - [22/May/2025 10:19:57] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-22 10:19:57,263 [INFO] 127.0.0.1 - - [22/May/2025 10:19:57] "GET /manage_coupons?__debugger__=yes&cmd=resource&f=console.png&s=M0oDAtuPmd3C4hL6hBmm HTTP/1.1" 200 -
+2025-05-22 10:19:57,276 [INFO] 127.0.0.1 - - [22/May/2025 10:19:57] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-22 10:19:58,136 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:19:59,594 [INFO] Starting Inventory Manager application
+2025-05-22 10:19:59,622 [WARNING]  * Debugger is active!
+2025-05-22 10:19:59,627 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:20:18,550 [INFO] 127.0.0.1 - - [22/May/2025 10:20:18] "[35m[1mGET /manage_coupons HTTP/1.1[0m" 500 -
+2025-05-22 10:20:18,641 [INFO] 127.0.0.1 - - [22/May/2025 10:20:18] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-22 10:20:18,642 [INFO] 127.0.0.1 - - [22/May/2025 10:20:18] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-22 10:20:18,658 [INFO] 127.0.0.1 - - [22/May/2025 10:20:18] "GET /manage_coupons?__debugger__=yes&cmd=resource&f=console.png&s=HIs9qP8qgp0Hch6q08GL HTTP/1.1" 200 -
+2025-05-22 10:20:31,263 [INFO] 127.0.0.1 - - [22/May/2025 10:20:31] "[35m[1mGET /manage_coupons HTTP/1.1[0m" 500 -
+2025-05-22 10:20:31,307 [INFO] 127.0.0.1 - - [22/May/2025 10:20:31] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-05-22 10:20:31,311 [INFO] 127.0.0.1 - - [22/May/2025 10:20:31] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-05-22 10:20:31,336 [INFO] 127.0.0.1 - - [22/May/2025 10:20:31] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=console.png&s=HIs9qP8qgp0Hch6q08GL HTTP/1.1[0m" 304 -
+2025-05-22 10:20:31,360 [INFO] 127.0.0.1 - - [22/May/2025 10:20:31] "[36mGET /manage_coupons?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-05-22 10:20:36,126 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:20:36,131 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:20:37,681 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:20:40,086 [INFO] Starting Inventory Manager application
+2025-05-22 10:20:40,114 [WARNING]  * Debugger is active!
+2025-05-22 10:20:40,120 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:20:40,980 [INFO] 127.0.0.1 - - [22/May/2025 10:20:40] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:20:53,571 [INFO] 127.0.0.1 - - [22/May/2025 10:20:53] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:20:58,903 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:20:58,904 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:20:58,905 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:20:59,913 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:21:01,449 [INFO] Starting Inventory Manager application
+2025-05-22 10:21:01,477 [WARNING]  * Debugger is active!
+2025-05-22 10:21:01,484 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:21:40,789 [INFO] 127.0.0.1 - - [22/May/2025 10:21:40] "GET /dashboard HTTP/1.1" 200 -
+2025-05-22 10:21:42,766 [INFO] 127.0.0.1 - - [22/May/2025 10:21:42] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:21:46,948 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:21:46,951 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:21:47,834 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:21:50,863 [INFO] Starting Inventory Manager application
+2025-05-22 10:21:50,899 [WARNING]  * Debugger is active!
+2025-05-22 10:21:50,906 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:22:37,278 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:22:37,279 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:22:37,280 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:22:37,635 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:22:39,694 [INFO] Starting Inventory Manager application
+2025-05-22 10:22:39,717 [WARNING]  * Debugger is active!
+2025-05-22 10:22:39,722 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:22:40,026 [INFO] 127.0.0.1 - - [22/May/2025 10:22:40] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:22:57,390 [INFO] 127.0.0.1 - - [22/May/2025 10:22:57] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:23:12,880 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:23:12,881 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:23:12,881 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:23:13,688 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:23:15,333 [INFO] Starting Inventory Manager application
+2025-05-22 10:23:15,353 [WARNING]  * Debugger is active!
+2025-05-22 10:23:15,358 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:23:15,784 [INFO] 127.0.0.1 - - [22/May/2025 10:23:15] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:23:18,912 [INFO] 127.0.0.1 - - [22/May/2025 10:23:18] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:23:23,194 [INFO] 127.0.0.1 - - [22/May/2025 10:23:23] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:25:03,383 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\flask\\sansio\\app.py', reloading
+2025-05-22 10:25:03,392 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\venv\\Lib\\site-packages\\flask\\app.py', reloading
+2025-05-22 10:25:04,771 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:25:13,251 [INFO] Starting Inventory Manager application
+2025-05-22 10:25:13,517 [WARNING]  * Debugger is active!
+2025-05-22 10:25:13,557 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:26:20,443 [INFO]  * Detected change in 'C:\\Users\\prasa\\AppData\\Local\\Programs\\Python\\Python310\\Lib\\site-packages\\matplotlib\\pyplot.py', reloading
+2025-05-22 10:26:22,472 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:26:30,468 [INFO] Starting Inventory Manager application
+2025-05-22 10:26:30,631 [WARNING]  * Debugger is active!
+2025-05-22 10:26:30,677 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:26:54,956 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:26:54,957 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:26:55,749 [INFO] 127.0.0.1 - - [22/May/2025 10:26:55] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:26:58,570 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:27:02,285 [INFO] Starting Inventory Manager application
+2025-05-22 10:27:02,325 [WARNING]  * Debugger is active!
+2025-05-22 10:27:02,331 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:27:11,269 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:27:11,270 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:27:11,271 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:27:11,933 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:27:14,779 [INFO] Starting Inventory Manager application
+2025-05-22 10:27:14,827 [WARNING]  * Debugger is active!
+2025-05-22 10:27:14,835 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:27:33,472 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:27:33,472 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:27:33,473 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:27:34,297 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:27:42,286 [INFO] Starting Inventory Manager application
+2025-05-22 10:27:42,333 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-22 10:27:42,334 [INFO] [33mPress CTRL+C to quit[0m
+2025-05-22 10:27:42,349 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:27:43,947 [INFO] Starting Inventory Manager application
+2025-05-22 10:27:43,972 [WARNING]  * Debugger is active!
+2025-05-22 10:27:43,977 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:27:44,305 [INFO] 127.0.0.1 - - [22/May/2025 10:27:44] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:29:50,719 [INFO] 127.0.0.1 - - [22/May/2025 10:29:50] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:30:21,007 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\app.py', reloading
+2025-05-22 10:30:22,271 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:30:23,919 [INFO] Starting Inventory Manager application
+2025-05-22 10:30:23,940 [WARNING]  * Debugger is active!
+2025-05-22 10:30:23,944 [INFO]  * Debugger PIN: 993-324-545
+2025-05-22 10:30:25,209 [INFO] 127.0.0.1 - - [22/May/2025 10:30:25] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:30:30,259 [INFO] 127.0.0.1 - - [22/May/2025 10:30:30] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:30,487 [INFO] 127.0.0.1 - - [22/May/2025 10:30:30] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:30,822 [INFO] 127.0.0.1 - - [22/May/2025 10:30:30] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:31,872 [INFO] 127.0.0.1 - - [22/May/2025 10:30:31] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:33,743 [INFO] 127.0.0.1 - - [22/May/2025 10:30:33] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:34,269 [INFO] 127.0.0.1 - - [22/May/2025 10:30:34] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:34,887 [INFO] 127.0.0.1 - - [22/May/2025 10:30:34] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:35,141 [INFO] 127.0.0.1 - - [22/May/2025 10:30:35] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:41,580 [INFO] 127.0.0.1 - - [22/May/2025 10:30:41] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:44,144 [INFO] 127.0.0.1 - - [22/May/2025 10:30:44] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:51,109 [INFO] 127.0.0.1 - - [22/May/2025 10:30:51] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:51,324 [INFO] 127.0.0.1 - - [22/May/2025 10:30:51] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:51,826 [INFO] 127.0.0.1 - - [22/May/2025 10:30:51] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:52,034 [INFO] 127.0.0.1 - - [22/May/2025 10:30:52] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:30:55,827 [INFO] 127.0.0.1 - - [22/May/2025 10:30:55] "POST /validate_coupon HTTP/1.1" 200 -
+2025-05-22 10:31:44,437 [INFO] 127.0.0.1 - - [22/May/2025 10:31:44] "GET /billing HTTP/1.1" 200 -
+2025-05-22 10:31:48,143 [INFO] 127.0.0.1 - - [22/May/2025 10:31:48] "GET /manage_coupons HTTP/1.1" 200 -
+2025-05-22 10:31:57,905 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\ai_predictions.py', reloading
+2025-05-22 10:31:58,555 [INFO]  * Restarting with watchdog (windowsapi)

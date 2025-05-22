@@ -26,6 +26,12 @@
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
       }
       
+      /* AI Predictions Styling */
+      .confidence-bar {
+        width: 0; /* Will be set by JavaScript */
+        transition: width 1s ease-in-out;
+      }
+      
       /* Advanced sidebar styling */
       .sidebar-link {
         position: relative;
@@ -393,6 +399,13 @@
               <i class="fas fa-receipt"></i> Billing
             </a>
           </li>
+          {% if not current_user.is_team_member %}
+          <li>
+            <a href="{{ url_for('manage_coupons') }}" class="sidebar-link flex items-center gap-3 py-3 px-4 rounded-lg">
+              <i class="fas fa-ticket-alt"></i> Coupons
+            </a>
+          </li>
+          {% endif %}
       
           <!-- View Sales - only if can_view_reports -->
           {% if current_user.can_view_reports() %}
@@ -600,7 +613,7 @@
                 </tr>
               </thead>
               <tbody>
-                {% for product in recent_products %}
+                {% for product in recent_products[:5] %}
                 <tr class="border-t {% if product.stock <= product.low_stock_threshold %}bg-red-900{% else %}bg-gray-900{% endif %} hover:bg-gray-700">
                   <td class="border p-2">{{ product.product_name }}</td>
                   <td class="border p-2">{{ product.stock }}</td>
@@ -635,7 +648,7 @@
                 </tr>
               </thead>
               <tbody>
-                {% for sale in recent_sales %}
+                {% for sale in recent_sales[:5] %}
                 <tr class="table-row">
                   <td class="table-cell">{{ sale.product_name }}</td>
                   <td class="table-cell">{{ sale.quantity_sold }}</td>
@@ -649,6 +662,113 @@
         </div>
         {% else %}
         <p class="text-gray-400">No recent sales to display.</p>
+        {% endif %}
+      </div>
+
+      <!-- AI Restock Predictions Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2 section-header">
+          <i class="fas fa-robot"></i> AI Restock Predictions
+        </h2>
+        {% if restock_predictions %}
+        <div class="glass-card p-4">
+          <div class="mb-4">
+            <p class="text-gray-300"><i class="fas fa-lightbulb text-yellow-400 mr-2"></i>Our AI has analyzed your sales patterns to predict when you should reorder products.</p>
+          </div>
+          <div class="overflow-x-auto scrollable-table">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="table-header">
+                  <th class="table-cell">Product</th>
+                  <th class="table-cell">Current Stock</th>
+                  <th class="table-cell">Sales Velocity</th>
+                  <th class="table-cell">Days Until Restock</th>
+                  <th class="table-cell">Confidence</th>
+                  <th class="table-cell">Suggestion</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in restock_predictions[:5] %}
+                <tr class="table-row {% if item.prediction.days_until_restock <= 7 %}bg-red-900/40{% elif item.prediction.days_until_restock <= 14 %}bg-yellow-900/40{% endif %}">
+                  <td class="table-cell font-medium">{{ item.product.product_name }}</td>
+                  <td class="table-cell">{{ item.product.stock }}</td>
+                  <td class="table-cell">{{ item.prediction.sales_velocity }} units/day</td>
+                  <td class="table-cell">
+                    {% if item.prediction.days_until_restock <= 7 %}
+                      <span class="text-red-400 font-bold">{{ item.prediction.days_until_restock }} days</span>
+                    {% elif item.prediction.days_until_restock <= 14 %}
+                      <span class="text-yellow-400 font-bold">{{ item.prediction.days_until_restock }} days</span>
+                    {% else %}
+                      <span class="text-green-400">{{ item.prediction.days_until_restock }} days</span>
+                    {% endif %}
+                  </td>
+                  <td class="table-cell">
+                    <div class="w-full bg-gray-700 rounded-full h-2.5">
+                      <div class="bg-blue-600 h-2.5 rounded-full confidence-bar" data-confidence="{{ item.prediction.confidence }}"></div>
+                    </div>
+                    <span class="text-xs text-gray-400">{{ item.prediction.confidence }}%</span>
+                  </td>
+                  <td class="table-cell text-blue-400">{{ item.prediction.suggestion }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% else %}
+        <p class="text-gray-400">Not enough sales data for AI predictions. Continue recording sales to enable this feature.</p>
+        {% endif %}
+      </div>
+
+      <!-- AI Non-Selling Products Analysis Section -->
+      <div class="mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-white flex items-center gap-2 section-header">
+          <i class="fas fa-chart-line"></i> Non-Selling Products Analysis
+        </h2>
+        {% if non_selling_products %}
+        <div class="glass-card p-4">
+          <div class="mb-4">
+            <p class="text-gray-300"><i class="fas fa-exclamation-circle text-orange-400 mr-2"></i>These products haven't sold recently. Consider running promotions or adjusting inventory.</p>
+          </div>
+          <div class="overflow-x-auto scrollable-table">
+            <table class="w-full border-collapse">
+              <thead>
+                <tr class="table-header">
+                  <th class="table-cell">Product</th>
+                  <th class="table-cell">Stock</th>
+                  <th class="table-cell">Days Since Last Sale</th>
+                  <th class="table-cell">Total Revenue</th>
+                  <th class="table-cell">Monthly Holding Cost</th>
+                  <th class="table-cell">Suggestion</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in non_selling_products[:5] %}
+                <tr class="table-row">
+                  <td class="table-cell font-medium">{{ item.product.product_name }}</td>
+                  <td class="table-cell">{{ item.product.stock }}</td>
+                  <td class="table-cell">
+                    {% if item.days_since_last_sale == "Never sold" %}
+                      <span class="text-red-400 font-bold">Never sold</span>
+                    {% elif item.days_since_last_sale > 60 %}
+                      <span class="text-red-400 font-bold">{{ item.days_since_last_sale }} days</span>
+                    {% elif item.days_since_last_sale > 30 %}
+                      <span class="text-yellow-400 font-bold">{{ item.days_since_last_sale }} days</span>
+                    {% else %}
+                      <span>{{ item.days_since_last_sale }} days</span>
+                    {% endif %}
+                  </td>
+                  <td class="table-cell text-green-400">₹{{ item.total_revenue }}</td>
+                  <td class="table-cell text-red-400">₹{{ item.monthly_holding_cost }}</td>
+                  <td class="table-cell text-blue-400">{{ item.suggestion }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {% else %}
+        <p class="text-gray-400">All products are selling well. No stagnant inventory detected.</p>
         {% endif %}
       </div>
 
