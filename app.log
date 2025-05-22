@@ -1930,3 +1930,6 @@
 2025-05-22 10:31:48,143 [INFO] 127.0.0.1 - - [22/May/2025 10:31:48] "GET /manage_coupons HTTP/1.1" 200 -
 2025-05-22 10:31:57,905 [INFO]  * Detected change in 'D:\\Proejcts + DSa ( 2025)\\small-busniess-invenrtry-management\\ai_predictions.py', reloading
 2025-05-22 10:31:58,555 [INFO]  * Restarting with watchdog (windowsapi)
+2025-05-22 10:32:00,399 [INFO] Starting Inventory Manager application
+2025-05-22 10:32:00,420 [WARNING]  * Debugger is active!
+2025-05-22 10:32:00,424 [INFO]  * Debugger PIN: 993-324-545
